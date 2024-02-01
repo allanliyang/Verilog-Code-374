@@ -1,0 +1,124 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/ELEC374/Tutorial/simulation/modelsim
+vBDBus
+Z1 !s110 1706547340
+!i10b 1
+!s100 c2mIXiZ_42:]]:mWmagXE1
+I3z6SD^UF570BWfQH5^PDe0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1705949076
+8D:/ELEC374/Tutorial/BDBus.v
+FD:/ELEC374/Tutorial/BDBus.v
+L0 2
+Z4 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z5 !s108 1706547340.000000
+!s107 D:/ELEC374/Tutorial/BDBus.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/ELEC374/Tutorial|D:/ELEC374/Tutorial/BDBus.v|
+!i113 1
+Z6 o-vlog01compat -work work
+Z7 !s92 -vlog01compat -work work +incdir+D:/ELEC374/Tutorial
+Z8 tCvgOpt 0
+n@b@d@bus
+vDatapath
+R1
+!i10b 1
+!s100 z@?@?Sjfd]`N5Gkn__9NY0
+Ij1d[C@nPE_0`zImE7kOUa0
+R2
+R0
+R3
+8D:/ELEC374/Tutorial/Datapath.v
+FD:/ELEC374/Tutorial/Datapath.v
+L0 2
+R4
+r1
+!s85 0
+31
+R5
+!s107 D:/ELEC374/Tutorial/Datapath.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/ELEC374/Tutorial|D:/ELEC374/Tutorial/Datapath.v|
+!i113 1
+R6
+R7
+R8
+n@datapath
+vETRegister
+R1
+!i10b 1
+!s100 Sk`U4o4EUUh:J[fj@im>B3
+IMM9ehg?Mfcl5eh`B=fieH1
+R2
+R0
+R3
+8D:/ELEC374/Tutorial/ETRegister.v
+FD:/ELEC374/Tutorial/ETRegister.v
+L0 2
+R4
+r1
+!s85 0
+31
+R5
+!s107 D:/ELEC374/Tutorial/ETRegister.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/ELEC374/Tutorial|D:/ELEC374/Tutorial/ETRegister.v|
+!i113 1
+R6
+R7
+R8
+n@e@t@register
+vRCAdd
+R1
+!i10b 1
+!s100 FXK2gdPV2eW[YmgVeGPb:3
+I1dXRnlzCK?nSDcd]If0j:1
+R2
+R0
+R3
+8D:/ELEC374/Tutorial/RCAdd.v
+FD:/ELEC374/Tutorial/RCAdd.v
+L0 2
+R4
+r1
+!s85 0
+31
+R5
+!s107 D:/ELEC374/Tutorial/RCAdd.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/ELEC374/Tutorial|D:/ELEC374/Tutorial/RCAdd.v|
+!i113 1
+R6
+R7
+R8
+n@r@c@add
+vtutorial_tb
+!s110 1706547341
+!i10b 1
+!s100 =iX@RHQ3C[T:o7>DBIg<K1
+IeK=PF<ANWi83HT7[Vg>7?3
+R2
+R0
+w1705951606
+8D:/ELEC374/Tutorial/tutorial_tb.v
+FD:/ELEC374/Tutorial/tutorial_tb.v
+L0 2
+R4
+r1
+!s85 0
+31
+!s108 1706547341.000000
+!s107 D:/ELEC374/Tutorial/tutorial_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/ELEC374/Tutorial|D:/ELEC374/Tutorial/tutorial_tb.v|
+!i113 1
+R6
+R7
+R8
