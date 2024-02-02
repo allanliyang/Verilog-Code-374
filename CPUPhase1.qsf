@@ -52,3 +52,6 @@ set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda
 set_global_assignment -name VERILOG_FILE Bus.v
 set_global_assignment -name VERILOG_FILE Register32bit.v
 set_global_assignment -name VERILOG_FILE MDR.v
+set_global_assignment -name VERILOG_FILE ALU_and.v
+set_global_assignment -name VERILOG_FILE ALU_or.v
+set_global_assignment -name VERILOG_FILE ALU_not.v

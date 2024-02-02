@@ -6,7 +6,9 @@ module MDR #(DATA_WDITH_IN = 32, DATA_WIDTH_OUT = 32, INIT = 8'H0000)(
 );
 
 reg [DATA_WIDTH_IN-1:0]q;
+
 initial q = INIT;
+
 always @ (posedge clock)
 		begin
 			if (clear) begin
