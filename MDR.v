@@ -1,8 +1,9 @@
-module MDR #(DATA_WDITH_IN = 32, DATA_WIDTH_OUT = 32, INIT = 8'H0000)(
-	input clear, clock, enable, read,
-	input [DATA_WIDTH_IN-1:0]BusMuxOut, Mdatain
-	output wire [DATA_WIDTH_OUT-1:0]BusMuxIn
+module MDR #(DATA_WIDTH_IN = 32, DATA_WIDTH_OUT = 32, INIT = 8'h00000000)(
 	
+	input [DATA_WIDTH_IN-1:0]BusMuxOut, Mdatain, //MDR register has extra Mdatain input
+	input clear, clock, MDRin, read
+	
+	output wire [DATA_WIDTH_OUT-1:0]BusMuxIn // '02/01', output to memory chip should prob also be here 
 );
 
 reg [DATA_WIDTH_IN-1:0]q;
@@ -14,10 +15,11 @@ always @ (posedge clock)
 			if (clear) begin
 				q <= {DATA_WIDTH_IN{1'b0}};
 			end
-			else if (enable) begin
-				if(read) q <= Mdatain;
-				else q <= BusMuxOut;
+			else if (MDRin) begin
+				if(read) q <= Mdatain; //assuming read=1 means read from mem chip
+				else q <= BusMuxOut; // otherwise set q to data from bus
 			end
 		end
+		
 	assign BusMuxIn = q[DATA_WIDTH_OUT-1:0];
 endmodule

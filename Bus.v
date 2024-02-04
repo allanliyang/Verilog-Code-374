@@ -57,5 +57,5 @@ always @ (*) begin
 	else if (Cout) q = CSignExtended;
 end
 
-assign BusMuxout = q;
+	assign BusMuxOut = q;
 endmodule
