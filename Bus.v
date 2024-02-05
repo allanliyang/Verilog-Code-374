@@ -8,7 +8,7 @@ module Bus (
 				PCout,
 				MDRout,
 				InPortout,
-				Cout,
+				CSEout,
 		input [31:0]BusMuxinR0, [31:0]BusMuxInR1, [31:0]BusMuxInR2, [31:0]BusMuxInR3,
 				[31:0]BusMuxInR4, [31:0]BusMuxInR5, [31:0]BusMuxInR6, [31:0]BusMuxInR7,
 				[31:0]BusMuxInR8, [31:0]BusMuxInR9, [31:0]BusMuxInR10, [31:0]BusMuxInR11,
@@ -18,7 +18,7 @@ module Bus (
 				[31:0]BusMuxInPC,
 				[31:0]BusMuxInMDR,
 				[31:0]BusMuxInInPort,
-				[31:0]CSignExtended
+				[31:0]BusMuxInCSE
 		output wire [31:0]BusMuxOut
 );
 
@@ -54,7 +54,7 @@ always @ (*) begin
 	
 	else if (InPortout) q = BusMuxInInPort;
 	
-	else if (Cout) q = CSignExtended;
+	else if (CSEout) q = BusMuxInCSE;
 end
 
 	assign BusMuxOut = q;

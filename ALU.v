@@ -26,7 +26,7 @@ module ALU (
 	output [31:0]Chigh, Clow //hi reg used only for mul and div
 );
 
-reg [31:0] ALU_Result;
+reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
 
 
 
@@ -96,8 +96,9 @@ always @ (*) begin
 		end
 		
 		else ALU_Result = 8'hCCCCCCCC // shows up in binary as 1010... for 32 bits, may help for debugging, otherwise meaningless
-			
-// commented out for now, unsure of how HI and LO regs work yet
-//assign Clow = ALU_Result;
+	end
+	
+	assign Clow = ALU_Result[31:0];
+	assign Chigh = ALU_Result[63:32];
 
 endmodule

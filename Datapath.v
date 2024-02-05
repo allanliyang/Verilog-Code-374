@@ -1,13 +1,47 @@
 module Datapath(
 	input wire clock, clear,
-	input wire R0out, R1out, R2out, R3out,
+	input wire R0in, R1in, R2in, R3in, 					// GP register in
+	input wire R4in, R5in, R6in, R7in,
+	input wire R8in, R9in, R10in, R11in,
+	input wire R12in, R13in, R14in, R15in,
+	input wire R0out, R1out, R2out, R3out, 			// GP register out
 	input wire R4out, R5out, R6out, R7out,
 	input wire R8out, R9out, R10out, R11out,
 	input wire R12out, R13out, R14out, R15out,
-	input wire HIout, LOout,
-	input wire Zhighout, Zlowout,
-	input wire PCout, MDRout, InPortout, Cout
+	input wire HIin, LOin, HIout, LOout, 				// HI and LO in/out
+	input wire Zhighin, Zlowin, Zhighout, Zlowout, 	// Z high and low
+	input wire PCin, PCout, 								// PC register in/out
+	input wire MDRin, MDRout, MARin, MARout, 			// MDR and MAR in/out
+	input wire InPortin, InPortout, 						// InPort in/out
+	input wire CSEin, CSEout,								// C Sign Extended in/out
+	
+	input wire [31:0] Mdatain,								// data into to MDR from mem. chip
+	input wire MDMuxread										// MDMux select signal
+	
 );
+
+// declarations for bus connections
+// datapaths that output onto the bus
+wire [31:0] BusMuxOut; 															// bus mux out line
+wire [31:0] BusMuxInR0, BusMuxInR1, BusMuxInR2, BusMuxInR3;			// output from GP registers
+wire [31:0] BusMuxInR4, BusMuxInR5, BusMuxInR6, BusMuxInR7;
+wire [31:0] BusMuxInR8, BusMuxInR9, BusMuxInR10, BusMuxInR11;
+wire [31:0] BusMuxInR12, BusMuxInR13, BusMuxInR14, BusMuxInR15;
+
+wire [31:0] BusMuxInHI, BusMuxInLO;											// output from HI and LO regs
+wire [31:0] BusMuxInZhigh, BusMuxInZlow;									// output from Zhign and Zlow regs
+
+wire [31:0] BusMuxInPC;															// output from PC register
+
+wire [31:0] BusMuxInMDR;														// output from MDR register
+wire [31:0] BusMuxInIR;															// output from IR register
+
+wire [31:0] BusMuxInInPort;													// output from InPort
+wire [31:0] BusMuxInCSE;														// output from C Sign Extended
+
+//other datapaths
+wire [31:0] Yout;
+wire [31:0] Chigh, Clow;
 
 
 // REGISTERS
@@ -34,26 +68,26 @@ Register32bit HI(clear, clock, HIin, BusMuxOut, BusMuxInHI);
 Register32bit LO(clear, clock, LOin, BusMuxOut, BusMuxInLO);
 
 // Z registers (using hi and lo 32-bit instead of single 64 bit)
-Register32bit Zhigh(clear, clock, Zhighin, BusMuxOut, BusMuxInZhigh);
-Register32bit Zlow(clear, clock, Zlowin, BusMuxOut, BusMuxInZlow);
+Register32bit Zhigh(clear, clock, Zhighin, Chigh, BusMuxInZhigh);
+Register32bit Zlow(clear, clock, Zlowin, Clow, BusMuxInZlow); //NOTE: check inputs (Chigh/low) to Z registers
 
 // PC register
 Register32bit PC(clear, clock, PCin, BusMuxOut, BusMuxInPC);
 
 // MDR register
-MDR MDR(); // only register that is not standard 32-bit register
+MDR MDR(clock, clear, MDRin, BusMuxOut, Mdatain, MDMuxread, BusMuxInMDR); // only register that is not standard 32-bit register
 
 // MAR register
 Register32bit MAR(clear, clock, MARin, BusMuxOut, MARout);
 
-// InPort register?
+// InPort register
+Register32bit InPort(clear, clock, InPortIn, BusMuxOut, BusMuxInInPort);
 
-
-// C Sign Extended register?
-
+// C Sign Extended register
+Register32bit CSignExtended(clear, clock, CSEin, BusMuxOut, BusMuxInCSE);
 
 // IR register
-Register32bit IR(clear, clock, IRin, BusMuxOut, BusMuxInIR); // NOTE: CHECK HOW THIS REGISTER IS SUPPOSED TO WORK WITH BUS
+Register32bit IR(clear, clock, IRin, BusMuxOut, BusMuxInIR);
 
 // Y register (for ALU)
 Register32bit Y(clear, clock, Yin, BusMuxOut, Yout);
@@ -64,25 +98,25 @@ Register32bit Y(clear, clock, Yin, BusMuxOut, Yout);
 
 // BUS
 Bus BUS	(R0out, R1out, R2out, R3out, R4out, R5out, R6out, R7out,
-			R8out, R9out, R10out, R11out, R12out, R13out, R14out, R15out, // NOTE: CHECK IF INPUTS CAN BE ON MULTIPLE LINES
+			R8out, R9out, R10out, R11out, R12out, R13out, R14out, R15out,
 			HIout, LOout, Zhighout, Zlowout,
-			PCout, MDRout, InPortout, Cout,
+			PCout, MDRout, InPortout, CSEout,
 			BusMuxInR0, BusMuxInR1, BusMuxInR2, BusMuxInR3,
 			BusMuxInR4, BusMuxInR5, BusMuxInR6, BusMuxInR7,
 			BusMuxInR8, BusMuxInR9, BusMuxInR10, BusMuxInR11,
 			BusMuxInR12, BusMuxInR13, BusMuxInR14, BusMuxInR15,
 			BusMuxInHI, BusMuxInLO, BusMuxInZhigh, BusMuxInZlow,
-			BusMuxInPC, BusMuxInMDR, BusMuxInInPort, CSignExtended,
+			BusMuxInPC, BusMuxInMDR, BusMuxInInPort, BusMuxInCSE,
 			BusMuxOut); // BusMuxOut is only output from BUS
 //BW: END OF BUS DECLARATION, CHECK THAT ALL VARIABLES WERE USED CORRECTLY
 			
 			
 // ALU
 // TEMPORARILY USING IN-PROGRESS ALU TO JUST TEST AND FUNCTIONALITY
-ALU ALU_AND	(A, B,
+ALU ALU_AND	(Yout, BusMuxOut,
 				ADD, SUB, MUL, DIV,
 				AND, OR, SHR, SHRA,
 				SHL, ROR, ROL, NEG, NOT,
-				Chigh,Clow); // NOTE: WILL NEED TO FIX ALU LATER
+				Chigh, Clow); // NOTE: WILL NEED TO FIX ALU LATER
 				
 endmodule

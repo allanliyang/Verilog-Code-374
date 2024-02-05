@@ -14,8 +14,11 @@ parameter 	Default = 4'b0000, Reg_load1a = 4'b0001, Reg_load1b = 4'b0010, Reg_lo
 
 reg [3:0] Present_State = Default;
 
-Datapath DUT(PCout,  Zlowout, MDRout, R2out, R3out, MARin, Zin, PCin, MDRin, IRin, Yin, IncPC, Read, AND, R1in, R2in, R3in, Clock, Mdatain); // NOTE: NEED TO FIX INPUTS HERE
 
+// NOTE: fix inputs
+Datapath DUT	(PCout,  Zlowout, MDRout, R2out, R3out,
+					MARin, Zin, PCin, MDRin, IRin, Yin, IncPC,
+					Read, AND, R1in, R2in, R3in, Clock, Mdatain);
 // add test logic here
 
 intial begin
