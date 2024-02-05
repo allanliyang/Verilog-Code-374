@@ -1,0 +1,41 @@
+module CSA_32bit (
+	input a, b, c
+	output sum, carry
+	
+);
+
+fulladder fa0()
+fulladder fa1()
+fulladder fa2()
+fulladder fa3()
+fulladder fa4()
+fulladder fa5()
+fulladder fa6()
+fulladder fa7()
+fulladder fa8()
+fulladder fa9()
+fulladder fa10()
+fulladder fa11()
+fulladder fa12()
+fulladder fa13()
+fulladder fa14()
+fulladder fa15()
+fulladder fa16()
+fulladder fa17()
+fulladder fa18()
+fulladder fa19()
+fulladder fa20()
+fulladder fa21()
+fulladder fa22()
+fulladder fa23()
+fulladder fa24()
+fulladder fa25()
+fulladder fa26()
+fulladder fa27()
+fulladder fa28()
+fulladder fa29()
+fulladder fa30()
+fulladder fa31()
+
+
+endmodule
