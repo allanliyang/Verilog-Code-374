@@ -2,11 +2,12 @@
 `timescale 1ns/10ps // means timescale is in increments of 1ns with a 10ps accuracy
 module datapath_tb();
 
+// NOTE: FIx regs to match DUT variable declarations
 reg PCout, Zlowout, MDRout, R2out, R3out;
 reg MARin, Zin, PCin, MDRin, IRin, Yin;
 reg IncPC, Read, AND, R1in, R2in, R3in;
 reg Clock;
-reg [31:0] Mdatain;
+reg [31:0] Mdatain; //only 32 bit value, don't need to fix this one
 
 parameter 	Default = 4'b0000, Reg_load1a = 4'b0001, Reg_load1b = 4'b0010, Reg_load2a = 4'b0011,
 				Reg_laod2b = 4'b0100, Reg_load3a = 4'b0101, Reg_load3b = 4'b0110, T0 = 4'b0111,
@@ -16,9 +17,26 @@ reg [3:0] Present_State = Default;
 
 
 // NOTE: fix inputs
-Datapath DUT	(PCout,  Zlowout, MDRout, R2out, R3out,
-					MARin, Zin, PCin, MDRin, IRin, Yin, IncPC,
-					Read, AND, R1in, R2in, R3in, Clock, Mdatain);
+Datapath DUT	(clock, clear,
+					R0in, R1in, R2in, R3in,
+					R4in, R5in, R6in, R7in,
+					R8in, R9in, R10in, R11in,
+					R12in, R13in, R14in, R15in,
+					R0out, R1out, R2out, R3out,
+					R4out, R5out, R6out, R7out,
+					R8out, R9out, R10out, R11out,
+					R12out, R13out, R14out, R15out,
+					HIin, LOin, HIout, LOout,
+					Zhighin, Zlowin, Zhighout, Zlowout,
+					PCin, PCout,
+					MDRin, MDRout, MARin, MARout,
+					InPortin, InPortout,
+					CSEin, CSEout,
+					IncPC,
+					Mdatain,
+					MDMuxread);
+
+
 // add test logic here
 
 intial begin
@@ -58,7 +76,7 @@ always @ (Present_state)
 				Reg_load1a: begin
 						Mdatain <= 32'h00000012;
 						Read = 0; MDRin = 0;
-						#10 Read <= 1; MDRin <= 1;
+						#10 Read <= 1; MDRin <= 1; //GET RID OF #10
 						#15 Read <=0; MDRin <= 0;
 				end
 				

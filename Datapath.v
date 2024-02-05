@@ -9,7 +9,7 @@ module Datapath(
 	input wire R8out, R9out, R10out, R11out,
 	input wire R12out, R13out, R14out, R15out,
 	input wire HIin, LOin, HIout, LOout, 				// HI and LO in/out
-	input wire Zhighin, Zlowin, Zhighout, Zlowout, 	// Z high and low
+	input wire Zhighin, Zlowin, Zhighout, Zlowout, 	// Z high and low in/out NOTE: check if single Zin signal can be used fro both Zhigh/low regs
 	input wire PCin, PCout, 								// PC register in/out
 	input wire MDRin, MDRout, MARin, MARout, 			// MDR and MAR in/out
 	input wire InPortin, InPortout, 						// InPort in/out
