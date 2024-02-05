@@ -14,6 +14,7 @@ module Datapath(
 	input wire MDRin, MDRout, MARin, MARout, 			// MDR and MAR in/out
 	input wire InPortin, InPortout, 						// InPort in/out
 	input wire CSEin, CSEout,								// C Sign Extended in/out
+	input wire IncPC,											// signal to PC++
 	
 	input wire [31:0] Mdatain,								// data into to MDR from mem. chip
 	input wire MDMuxread										// MDMux select signal
@@ -116,7 +117,7 @@ Bus BUS	(R0out, R1out, R2out, R3out, R4out, R5out, R6out, R7out,
 ALU ALU_AND	(Yout, BusMuxOut,
 				ADD, SUB, MUL, DIV,
 				AND, OR, SHR, SHRA,
-				SHL, ROR, ROL, NEG, NOT,
+				SHL, ROR, ROL, NEG, NOT, IncPC,
 				Chigh, Clow); // NOTE: WILL NEED TO FIX ALU LATER
 				
 endmodule

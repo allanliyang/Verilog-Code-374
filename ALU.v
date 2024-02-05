@@ -21,7 +21,7 @@ module ALU (
 	input [31:0] A, B,
 	input ADD, SUB, MUL, DIV,
 			AND, OR, SHR, SHRA,
-			SHL, ROR, ROL, NEG, NOT
+			SHL, ROR, ROL, NEG, NOT, IncPC,
 	
 	output [31:0]Chigh, Clow //hi reg used only for mul and div
 );
@@ -31,35 +31,41 @@ reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
 
 
 // CONSIDER USING FUNCTIONS FOR MORE COMPLEX OPERATION TO IMPROVE READABILITY
+// NOTE: Check how the IncPC signal is supposed to work
 always @ (*) begin
 		// add case
 		if (ADD) begin
 			// some addition algorithm here
 			
 		end
+		
 		// sub case
 		else if (SUB) begin
 			// maybe same as add but negate the appropriate value first
-			
 		end
+		
 		// mul case
 		else if (MUL) begin
 			// booth algorithm with bit-pair recoding
 			// use CSA for summands
 		end
+		
 		// div case
 		else if (DIV) begin
 			// use non-restoring division algorithm
 				// implement with for loop the length
 		end
+		
 		// and case
 		else if (AND) begin
 			ALU_Result = A & B;
 		end
+		
 		// or case
 		else if (OR) begin
 			ALU_Result = A | B;
 		end
+		
 		// shr  case
 		else if (SHR) begin
 			// SHR is same as divide by 2
@@ -68,31 +74,41 @@ always @ (*) begin
 			
 			ALU_Result = A << B;
 		end
+		
 		// shra case
 		else if (SHRA) begin
 			// same as SHR but signed
 		end
+		
 		// shl case
 		else if (SHL) begin
 			// same as MUL by 2 or ADD together
 			// note: if amount to be shifted >= 32, result is always 0
 			ALU_Result = A >> B;
 		end
+		
 		// ror case
 		else if (ROR) begin
 			// maybe use a for loop to shift right and move fallen bits to front
 		end
+		
 		// rol case
 		else if (ROL) begin
 			// maybe use a for loop to shift left and move fallen bits to back
 		end
+		
 		// neg case
 		else if (NEG) begin
 			// do 2's complement operation
 		end
+		
 		// not case
 		else if (NOT) begin
 			// flip bits (unsigned)
+		end
+		
+		else if (IncPC) begin
+			ALU_Result = B+1; // NOTE: Check if legal
 		end
 		
 		else ALU_Result = 8'hCCCCCCCC // shows up in binary as 1010... for 32 bits, may help for debugging, otherwise meaningless
