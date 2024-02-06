@@ -118,6 +118,6 @@ ALU ALU_AND	(Yout, BusMuxOut,
 				ADD, SUB, MUL, DIV,
 				AND, OR, SHR, SHRA,
 				SHL, ROR, ROL, NEG, NOT, IncPC,
-				Chigh, Clow); // NOTE: WILL NEED TO FIX ALU LATER
+		 Chigh, Clow); // NOTE: might need to fix later
 				
 endmodule
