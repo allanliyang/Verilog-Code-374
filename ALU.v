@@ -102,14 +102,14 @@ always @ (*) begin
 		// neg case
 		else if (NEG) begin
 			// do 2's complement operation
-			ALU_Result = !B; // flip bits
+			ALU_Result = ~B; // flip bits
 			ALU_Result = ALU_Result + 1; // add 1
 		end
 		
 		// not case
 		else if (NOT) begin
 			// flip bits (unsigned)
-			ALU_Result = !B;
+			ALU_Result = ~B; // '~' operator is used for flipping bits, '!' evaluates to either '0' or '1'
 		end
 		
 		else if (IncPC) begin
