@@ -76,8 +76,9 @@ always @ (*) begin
 		
 		// shra case
 		else if (SHRA) begin
-			// NOTE: if amount to be shifted >= 32, result is always 0
-			// can add if case with bit masking for this functionality 
+			// NOTE: if amount to be shifted >= 32, result is always 0? (check for case of max neg number)
+			// can add if case with bit masking for this functionality
+			// WIP
 			ALU_Result = A >>> B;
 			// NOTE: '>>>' is the operator for arithmetic shifting, but A may need to initially be sign extended
 		end
@@ -92,11 +93,20 @@ always @ (*) begin
 		// ror case
 		else if (ROR) begin
 			// maybe use a for loop to shift right and move fallen bits to front
+			// WIP
+
+			// rotate by 32 is same as rotate by 0 (no action)
+			// rotating by more than 32 is pointless work, ie ROR 33 is as ROR 1, etc...
+			// possible solution:
+				// modulus by 32
+				// check if zero, else rotate amount of mod result
 		end
 		
 		// rol case
 		else if (ROL) begin
 			// maybe use a for loop to shift left and move fallen bits to back
+			// WIP
+			// possible solution: same thought process as ROR instruction
 		end
 		
 		// neg case
