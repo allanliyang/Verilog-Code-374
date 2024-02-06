@@ -71,20 +71,22 @@ always @ (*) begin
 			// SHR is same as divide by 2
 			// note: if amount to be shifted >= 32, result is always 0
 			// helpful code: https://kaneriadhaval.blogspot.com/2014/02/32-bit-barrel-shifter-in-verilog.html
-			
-			ALU_Result = A << B;
+			ALU_Result = A >> B;
 		end
 		
 		// shra case
 		else if (SHRA) begin
-			// same as SHR but signed
+			// NOTE: if amount to be shifted >= 32, result is always 0
+			// can add if case with bit masking for this functionality 
+			ALU_Result = A >>> B;
+			// NOTE: '>>>' is the operator for arithmetic shifting, but A may need to initially be sign extended
 		end
 		
 		// shl case
 		else if (SHL) begin
-			// same as MUL by 2 or ADD together
-			// note: if amount to be shifted >= 32, result is always 0
-			ALU_Result = A >> B;
+			// NOTE: if amount to be shifted >= 32, result is always 0
+			// can add if case with bit masking for this functionality
+			ALU_Result = A << B;
 		end
 		
 		// ror case
@@ -100,6 +102,8 @@ always @ (*) begin
 		// neg case
 		else if (NEG) begin
 			// do 2's complement operation
+			ALU_Result = !B; // flip bits
+			ALU_Result = ALU_Result + 1; // add 1
 		end
 		
 		// not case
@@ -111,10 +115,12 @@ always @ (*) begin
 			ALU_Result = B+1; // NOTE: Check if legal
 		end
 		
-		else ALU_Result = 8'hCCCCCCCC // shows up in binary as 1010... for 32 bits, may help for debugging, otherwise meaningless
+		else begin
+			ALU_Result = 8'hCCCCCCCC // shows up in binary as 1010... for 32 bits, may help for debugging, otherwise meaningless
+		end
 	end
-	
-	assign Clow = ALU_Result[31:0];
+	// low 32 bits go to low reg, high 32 bits go to high reg
+	assign Clow = ALU_Result[31:0];	
 	assign Chigh = ALU_Result[63:32];
 
 endmodule
