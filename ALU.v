@@ -29,25 +29,45 @@ module ALU (
 reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
 
 
-
-// CONSIDER USING FUNCTIONS FOR MORE COMPLEX OPERATION TO IMPROVE READABILITY
-// NOTE: Check how the IncPC signal is supposed to work
 always @ (*) begin
 		// add case
 		if (ADD) begin
 			// some addition algorithm here
+			// make add a function
 			
 		end
 		
 		// sub case
 		else if (SUB) begin
 			// maybe same as add but negate the appropriate value first
+			// possible solution:
+			// use addition function from above but negate appropriate parameters first
 		end
 		
 		// mul case
 		else if (MUL) begin
-			// booth algorithm with bit-pair recoding
-			// use CSA for summands
+			// use booth algorithm with bit-pair recoding
+			// use CSA for summands?
+			// WIP
+			// A is multiplicand(M), B is multiplier(Q)
+			// possible solution:
+			// clear result reg
+			// for loop that start at index 0, ends at index 31, increments by 2 each time {
+				// consider 3 digits at time (other than init 2 bits, use separate case)
+				// use function to determine bit-pair recoded result
+				// store result of function into 3-bit 2's complement register
+				// based on value in 3-bit reg, (add or subtract (left-shifted M by index)) from ALU_Result
+				// eg:
+				// case (3-bit)
+				// 3'b000 : ALU_Result = ALU_Result; // do nothing
+				// 3'b001 : ALU_Result = ALU_Result + (A << index); // 001 = +1, left shift A to index and add to ALU_Result
+				// 3'b101 : ALU_Result = ALU_Result - (A << index) - (A << (index + 1)); 
+				// ^^: 101 = -3, left shift A to index and subtract from ALU_Result(sub A), then also subtract A left shifted by index plus 1 (sub 2A)
+				// ^^: total sub 3A
+				// and so on for other cases
+				// maybe use a function for repetitive code
+			//}
+				
 		end
 		
 		// div case
