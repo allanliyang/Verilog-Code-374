@@ -109,10 +109,11 @@ always @ (*) begin
 		// not case
 		else if (NOT) begin
 			// flip bits (unsigned)
+			ALU_Result = !B;
 		end
 		
 		else if (IncPC) begin
-			ALU_Result = B+1; // NOTE: Check if legal
+			ALU_Result = B + 1; // PC increments by 1 each time
 		end
 		
 		else begin
