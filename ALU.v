@@ -27,7 +27,7 @@ module ALU (
 );
 
 reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
-
+reg [32:0]Div_a_temp; // temp 33 bit reg a for div 
 
 always @ (*) begin
 		// add case
