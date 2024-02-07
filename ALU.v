@@ -73,7 +73,20 @@ always @ (*) begin
 		// div case
 		else if (DIV) begin
 			// use non-restoring division algorithm
-				// implement with for loop the length
+			// assume A is divident(D), B is divisor(Q)
+			// use two separate registers for A and Q
+			// start with A = 0, Q = B
+			// WIP
+			// possible solution:
+			// clear result reg
+			// implement with for loop that ends at 31 (for 32-bit value){
+				// shift A and Q left by 1, replace A[0] with Q[n]
+				// if A([n] == 1) then A = A+M
+				// else A = A-M
+				// if (A[n] == 1) then Q[0] = 0
+				// else Q[0] = 1
+			// }
+			// QUESTION: which registers to use for A and Q registers?
 		end
 		
 		// and case
