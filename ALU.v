@@ -160,7 +160,7 @@ always @ (*) begin
 		end
 		
 		else begin
-			ALU_Result = 8'hCCCCCCCC // shows up in binary as 1010... for 32 bits, may help for debugging, otherwise meaningless
+			ALU_Result = 8'hCCCCCCCC; // shows up in binary as 1010... for 32 bits, may help for debugging, otherwise meaningless
 		end
 	end
 	// low 32 bits go to low reg, high 32 bits go to high reg

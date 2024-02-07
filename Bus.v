@@ -9,16 +9,16 @@ module Bus (
 				MDRout,
 				InPortout,
 				CSEout,
-		input [31:0]BusMuxinR0, [31:0]BusMuxInR1, [31:0]BusMuxInR2, [31:0]BusMuxInR3,
-				[31:0]BusMuxInR4, [31:0]BusMuxInR5, [31:0]BusMuxInR6, [31:0]BusMuxInR7,
-				[31:0]BusMuxInR8, [31:0]BusMuxInR9, [31:0]BusMuxInR10, [31:0]BusMuxInR11,
-				[31:0]BusMuxInR12, [31:0]BusMuxInR13, [31:0]BusMuxInR14, [31:0]BusMuxInR15,
-				[31:0]BusMuxInHI, [31:0]BusMuxInLO,
-				[31:0]BusMuxInZhigh, [31:0]BusMuxInZlow,
-				[31:0]BusMuxInPC,
-				[31:0]BusMuxInMDR,
-				[31:0]BusMuxInInPort,
-				[31:0]BusMuxInCSE
+		input [31:0]BusMuxInR0, BusMuxInR1, BusMuxInR2, BusMuxInR3,
+				BusMuxInR4, BusMuxInR5, BusMuxInR6, BusMuxInR7,
+				BusMuxInR8, BusMuxInR9, BusMuxInR10, BusMuxInR11,
+				BusMuxInR12, BusMuxInR13, BusMuxInR14, BusMuxInR15,
+				BusMuxInHI, BusMuxInLO,
+				BusMuxInZhigh, BusMuxInZlow,
+				BusMuxInPC,
+				BusMuxInMDR,
+				BusMuxInInPort,
+				BusMuxInCSE,
 		output wire [31:0]BusMuxOut
 );
 
@@ -37,7 +37,7 @@ always @ (*) begin
 	else if (R9out) q = BusMuxInR9;
 	else if (R10out) q = BusMuxInR10;
 	else if (R11out) q = BusMuxInR11;
-	else if (R12Out) q = BusMuxInR12;
+	else if (R12out) q = BusMuxInR12;
 	else if (R13out) q = BusMuxInR13;
 	else if (R14out) q = BusMuxInR14;
 	else if (R15out) q = BusMuxInR15;

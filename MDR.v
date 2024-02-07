@@ -1,6 +1,6 @@
 // only used for MDR register due to extra inputs
 
-module MDR #(DATA_WIDTH_IN = 32, DATA_WIDTH_OUT = 32, INIT = 8'h00000000)(
+module MDR #(parameter DATA_WIDTH_IN = 32, DATA_WIDTH_OUT = 32, INIT = 8'h00000000)(
 	
 	input clear, clock, MDRin,
 	input [DATA_WIDTH_IN-1:0]BusMuxOut, Mdatain, //MDR register has extra Mdatain input
