@@ -27,8 +27,10 @@ module ALU (
 );
 
 reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
-reg [32:0]Div_a_temp; // temp 33 bit reg a for div 
-
+reg [32:0] DIV_A; // temp 33 bit reg a for div
+reg [2:0] BPRecode;
+integer i; // temp int used for for loop
+	
 always @ (*) begin
 		// add case
 		if (ADD) begin
@@ -67,7 +69,32 @@ always @ (*) begin
 				// and so on for other cases
 				// maybe use a function for repetitive code
 			//}
-				
+
+			// init case for first 2 bits of Q
+			case (B[1:0])
+				2'b00 : BPRecode = 3'b000;
+			      	2'b01 :	BPRecode = ;// FIX
+			      	2'b10 :	BPRecode = ;// FIX
+			      	2'b11 : BPRecode = ;// FIX
+			endcase
+
+			// NOTE: Add code to update ALU_Result value from init case
+
+			// for loop to recode all other bits, 3 at a time
+			for(i = 1; i < 32; i = i + 2) begin
+				case (B[i+2:i])
+					3'b000 : BPRecode = 3'b000;
+					3'b001 : BPRecode = // FIX
+					3'b010 : BPRecode = // FIX
+					3'b011 : BPRecode = // FIX
+					3'b100 : BPRecode = // FIX
+					3'b101 : BPRecode = // FIX
+					3'b110 : BPRecode = // FIX
+					3'b111 : BPRecode = // FIX
+				endcase
+
+				// NOTE: Add logic to update ALU_Result based on BPRecode value
+			end
 		end
 		
 		// div case
@@ -86,7 +113,7 @@ always @ (*) begin
 				// if (A[n] == 1) then Q[0] = 0
 				// else Q[0] = 1
 			// }
-			// QUESTION: which registers to use for A and Q registers?
+			// NOTE: Use new 33-bit DIV_A register to implement A register
 		end
 		
 		// and case
