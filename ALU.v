@@ -28,7 +28,7 @@ module ALU (
 
 reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
 reg [32:0] DIV_A; // temp 33 bit reg a for div
-reg [2:0] BPRecode;
+	reg [2:0] BPRecode; //NOTE: might not need this later
 integer i; // temp int used for for loop
 	
 always @ (*) begin
@@ -71,26 +71,83 @@ always @ (*) begin
 			//}
 
 			// init case for first 2 bits of Q
+			// instead of using BPRecode, implement directly (same shit)
 			case (B[1:0])
-				2'b00 : BPRecode = 3'b000;
-			      	2'b01 :	BPRecode = ;// FIX
-			      	2'b10 :	BPRecode = ;// FIX
-			      	2'b11 : BPRecode = ;// FIX
+				2'b00 : begin
+					// 3 bits to be considered with right padded 0 == 000;
+					// bit-pair recoded result (BPRR) = 0
+				end
+				
+			      	2'b01 :	begin
+					// 3 bits to be considered with right padded 0 == 010;
+					// bit-pair recoded result (BPRR) = +1
+				end
+				
+			      	2'b10 :	begin
+					// 3 bits to be considered with right padded 0 == 100;
+					// bit-pair recoded result (BPRR) = -2
+				end
+				
+			      	2'b11 : begin
+					// 3 bits to be considered with right padded 0 == 110;
+					// bit-pair recoded result (BPRR) = -1
+				end
 			endcase
 
 			// NOTE: Add code to update ALU_Result value from init case
 
 			// for loop to recode all other bits, 3 at a time
+			// instead of using BPRecode, implement directly (same shit)
+			// check if sign-extend works properly
 			for(i = 1; i < 32; i = i + 2) begin
 				case (B[i+2:i])
-					3'b000 : BPRecode = 3'b000;
-					3'b001 : BPRecode = // FIX
-					3'b010 : BPRecode = // FIX
-					3'b011 : BPRecode = // FIX
-					3'b100 : BPRecode = // FIX
-					3'b101 : BPRecode = // FIX
-					3'b110 : BPRecode = // FIX
-					3'b111 : BPRecode = // FIX
+					3'b000 : begin
+						// 3 bits to be considered with right padded 0 == 000
+						// bit-pair recoded result (BPRR) = 0
+						// do nothing
+					end
+					
+					3'b001 : begin
+						// 3 bits to be considered with right padded 0 == 001
+						// bit-pair recoded result (BPRR) = +1
+						// ALU_Result = ALU_Result + (A << i)
+					end
+					
+					3'b010 : begin
+						// 3 bits to be considered with right padded 0 == 010
+						// bit-pair recoded result (BPRR) = +1
+						// ALU_Result = ALU_Result + (A << i)
+					end
+					
+					3'b011 : begin
+						// 3 bits to be considered with right padded 0 == 011
+						// bit-pair recoded result (BPRR) = +2
+						// ALU_Result = ALU_Result + (A << (i+1))
+					end
+					
+					3'b100 : begin
+						// 3 bits to be considered with right padded 0 == 100
+						// bit-pair recoded result (BPRR) = -2
+						// ALU_Result = ALU_Result - (A << (i+1))
+					end
+					
+					3'b101 : begin
+						// 3 bits to be considered with right padded 0 == 101
+						// bit-pair recoded result (BPRR) = -1
+						// ALU_Result = ALU_Result - (A << i)
+					end
+					
+					3'b110 : begin
+						// 3 bits to be considered with right padded 0 == 110
+						// bit-pair recoded result (BPRR) = -1
+						// ALU_Result = ALU_Result - (A << i)
+					end
+					
+					3'b111 : begin
+						// 3 bits to be considered with right padded 0 == 111
+						// bit-pair recoded result (BPRR) = 0
+						// do nothing
+					end
 				endcase
 
 				// NOTE: Add logic to update ALU_Result based on BPRecode value
@@ -104,16 +161,31 @@ always @ (*) begin
 			// use two separate registers for A and Q
 			// start with A = 0, Q = B
 			// WIP
-			// possible solution:
-			// clear result reg
-			// implement with for loop that ends at 31 (for 32-bit value){
-				// shift A and Q left by 1, replace A[0] with Q[n]
-				// if A([n] == 1) then A = A+M
-				// else A = A-M
-				// if (A[n] == 1) then Q[0] = 0
-				// else Q[0] = 1
-			// }
 			// NOTE: Use new 33-bit DIV_A register to implement A register
+			// new possible solution:
+			// set bottom 32 bits to ALU_Result register = to Q
+			// set DIV_A = 0
+			// use for loop for non-restoring div algorithm
+			// for (i = 0; i < 32; i = i + 1){
+				// left shift ALU_Result (Q) and DIV_A (A)
+				// DIV_A[0] = ALU_Result[32] // move bit over
+				// determine whether to add or subtract D from DIV_A
+				// if (DIV_A[32] == 1'b0){
+					// DIV_A = DIV_A - D
+				//}
+				// else {
+					// DIV_A = DIV_A + D
+				//}
+				// determine where to right-pad Q with 1 or 0 after operating on DIV_A
+				// if (DIV_A[32] == 1'b0) {
+					// ALU_Result[0] = 1
+				// } 
+				// else {
+					// ALU_Result[0] = 0
+				// }
+ 			//}
+			// Result of division is stored in bottom 32 bits of ALU_Result reg
+			// Remainder is stored in bottom 32 bits of DIV_A register
 		end
 		
 		// and case
