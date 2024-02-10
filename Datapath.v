@@ -14,13 +14,16 @@ module Datapath(
 	input wire MDRin, MDRout, MARin, MARout, 			// MDR and MAR in/out
 	input wire InPortin, InPortout, 						// InPort in/out
 	input wire CSEin, CSEout,								// C Sign Extended in/out
-	input wire IRin, IRout,									// IR in/out
-	input wire IncPC,											// signal to PC++
+	input wire IRin, IRout,									// IR in/out										
 	input wire [31:0] Mdatain,								// data into to MDR from mem. chip
 	input wire MDMuxread,									// MDMux select signal
 	input wire Yin,
-	input wire AND
-	
+	input wire ADD, SUB, MUL, DIV,
+	input wire AND, OR,
+	input wire SHR, SHRA, SHL,
+	input wire ROR, ROL,
+	input wire NEG, NOT,
+	input wire IncPC											// signal for PC++
 );
 
 // declarations for bus connections
@@ -96,7 +99,7 @@ Register32bit IR(clear, clock, IRin, BusMuxOut, BusMuxInIR);
 Register32bit Y(clear, clock, Yin, BusMuxOut, Yout);
 
 // NOTE: END OF REGISTER DECLARATIONS, CHECK THAT NONE WERE MISSED
-// 4:21 AM, i spent 3 hours trying to figure out why MDR wasn'working when 'clear' and 'clock' were switched
+// 02/10/2024/4:21 AM, i spent 3 hours trying to figure out why MDR wasn't working when 'clear' and 'clock' were switched
 	// ^^ my 13th reason why
 
 
@@ -129,8 +132,11 @@ Bus BUS	(R0out, R1out, R2out, R3out,
 // TEMPORARILY USING IN-PROGRESS ALU TO JUST TEST AND FUNCTIONALITY
 ALU ALU_AND	(Yout, BusMuxOut,
 				ADD, SUB, MUL, DIV,
-				AND, OR, SHR, SHRA,
-				SHL, ROR, ROL, NEG, NOT, IncPC,
+				AND, OR,
+				SHR, SHRA, SHL,
+				ROR, ROL,
+				NEG, NOT, 
+				IncPC,
 				Chigh, Clow); // NOTE: might need to fix later
 				
 endmodule
