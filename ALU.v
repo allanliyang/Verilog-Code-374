@@ -28,7 +28,6 @@ module ALU (
 
 reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
 reg [32:0] DIV_A; // temp 33 bit reg a for div
-reg [2:0] BPRecode; //NOTE: might not need this later
 
 integer i; // temp int used for for loop
 	
@@ -57,21 +56,25 @@ always @ (*) begin
 				2'b00 : begin
 					// 3 bits to be considered with right padded 0 == 000;
 					// bit-pair recoded result (BPRR) = 0
+					// do nothing
 				end
 				
 			      	2'b01 :	begin
 					// 3 bits to be considered with right padded 0 == 010;
 					// bit-pair recoded result (BPRR) = +1
+					ALU_Result = ALU_Result + A;
 				end
 				
 			      	2'b10 :	begin
 					// 3 bits to be considered with right padded 0 == 100;
 					// bit-pair recoded result (BPRR) = -2
+					ALU_Result = ALU+Result - (A << 1);
 				end
 				
 			      	2'b11 : begin
 					// 3 bits to be considered with right padded 0 == 110;
 					// bit-pair recoded result (BPRR) = -1
+					ALU_Result = ALU_Result - A;
 				end
 			endcase
 
@@ -90,37 +93,37 @@ always @ (*) begin
 					3'b001 : begin
 						// 3 bits to be considered with right padded 0 == 001
 						// bit-pair recoded result (BPRR) = +1
-						// ALU_Result = ALU_Result + (A << i)
+						ALU_Result = ALU_Result + (A << i)
 					end
 					
 					3'b010 : begin
 						// 3 bits to be considered with right padded 0 == 010
 						// bit-pair recoded result (BPRR) = +1
-						// ALU_Result = ALU_Result + (A << i)
+						ALU_Result = ALU_Result + (A << i)
 					end
 					
 					3'b011 : begin
 						// 3 bits to be considered with right padded 0 == 011
 						// bit-pair recoded result (BPRR) = +2
-						// ALU_Result = ALU_Result + (A << (i+1))
+						ALU_Result = ALU_Result + (A << (i+1))
 					end
 					
 					3'b100 : begin
 						// 3 bits to be considered with right padded 0 == 100
 						// bit-pair recoded result (BPRR) = -2
-						// ALU_Result = ALU_Result - (A << (i+1))
+						ALU_Result = ALU_Result - (A << (i+1))
 					end
 					
 					3'b101 : begin
 						// 3 bits to be considered with right padded 0 == 101
 						// bit-pair recoded result (BPRR) = -1
-						// ALU_Result = ALU_Result - (A << i)
+						ALU_Result = ALU_Result - (A << i)
 					end
 					
 					3'b110 : begin
 						// 3 bits to be considered with right padded 0 == 110
 						// bit-pair recoded result (BPRR) = -1
-						// ALU_Result = ALU_Result - (A << i)
+						ALU_Result = ALU_Result - (A << i)
 					end
 					
 					3'b111 : begin
@@ -129,8 +132,6 @@ always @ (*) begin
 						// do nothing
 					end
 				endcase
-
-				// NOTE: Add logic to update ALU_Result based on BPRecode value
 			end
 		end
 		
