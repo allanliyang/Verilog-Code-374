@@ -1,28 +1,32 @@
 // only used for MDR register due to extra inputs
 
-module MDR #(parameter DATA_WIDTH_IN = 32, DATA_WIDTH_OUT = 32, INIT = 8'h00000000)(
+
+// shits fucked, Mdatain and Bus values aren't going into q
+// clock, clear, MDRin, read, BusMuxOut, Mdatain, are all correctly seen by MDR as seem from simulation
+// works perfectly fine in MDR_tb, broken asf in datapath_tb
+
+
+module MDR (
 	
-	input clear, clock, MDRin,
-	input [DATA_WIDTH_IN-1:0]BusMuxOut, Mdatain, //MDR register has extra Mdatain input
-	input read,												// extra signal for MDMux select, see Phase 1 documentation
-	
-	output wire [DATA_WIDTH_OUT-1:0]BusMuxIn 		// '02/01', output to memory chip should prob also be here 
+	input clear, clock, MDRin, read, // extra signal for MDMux select, see Phase 1 documentation
+	input [31:0]BusMuxOut,
+	input [31:0]Mdatain, 				//MDR register has extra Mdatain input
+	output wire [31:0]BusMuxIn
 );
 
-reg [DATA_WIDTH_IN-1:0]q;
+reg [31:0]q;
 
-initial q = INIT;
+initial q = 32'h00000000;
 
 always @ (posedge clock)
 		begin
-			if (clear) begin
-				q <= {DATA_WIDTH_IN{1'b0}};
+			if (MDRin) begin
+				if (read) q <= Mdatain;
+				else q <= BusMuxOut;
 			end
-			else if (MDRin) begin
-				if(read) q <= Mdatain; //assuming read=1 means read from mem chip
-				else q <= BusMuxOut; // otherwise set q to data from bus
-			end
+			else if (clear) begin
+				q <= 32'h0000000;
+			end			
 		end
-		
-	assign BusMuxIn = q[DATA_WIDTH_OUT-1:0];
+	assign BusMuxIn = q;
 endmodule

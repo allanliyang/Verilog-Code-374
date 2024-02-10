@@ -1,5 +1,5 @@
 module Datapath(
-	input wire clock, clear,
+	input wire clear, clock,
 	input wire R0in, R1in, R2in, R3in, 					// GP register in
 	input wire R4in, R5in, R6in, R7in,
 	input wire R8in, R9in, R10in, R11in,
@@ -37,6 +37,7 @@ wire [31:0] BusMuxInZhigh, BusMuxInZlow;									// output from Zhign and Zlow r
 wire [31:0] BusMuxInPC;															// output from PC register
 
 wire [31:0] BusMuxInMDR;														// output from MDR register
+wire [31:0] BusMuxInMAR;
 wire [31:0] BusMuxInIR;															// output from IR register
 
 wire [31:0] BusMuxInInPort;													// output from InPort
@@ -45,7 +46,6 @@ wire [31:0] BusMuxInCSE;														// output from C Sign Extended
 //other datapaths
 wire [31:0] Yout;
 wire [31:0] Chigh, Clow;
-
 
 // REGISTERS
 // R0 - R15
@@ -78,10 +78,10 @@ Register32bit Zlow(clear, clock, Zlowin, Clow, BusMuxInZlow); //NOTE: check inpu
 Register32bit PC(clear, clock, PCin, BusMuxOut, BusMuxInPC);
 
 // MDR register
-MDR MDR(clock, clear, MDRin, BusMuxOut, Mdatain, MDMuxread, BusMuxInMDR); // only register that is not standard 32-bit register
+MDR MDR(clear, clock, MDRin, MDMuxread, BusMuxOut, Mdatain, BusMuxInMDR); // only register that is not standard 32-bit register
 
 // MAR register
-Register32bit MAR(clear, clock, MARin, BusMuxOut, MARout);
+Register32bit MAR(clear, clock, MARin, BusMuxOut, BusMuxInMAR);
 
 // InPort register
 Register32bit InPort(clear, clock, InPortIn, BusMuxOut, BusMuxInInPort);
@@ -95,24 +95,35 @@ Register32bit IR(clear, clock, IRin, BusMuxOut, BusMuxInIR);
 // Y register (for ALU)
 Register32bit Y(clear, clock, Yin, BusMuxOut, Yout);
 
-// BW: END OF REGISTER DECLARATIONS, CHECK THAT NONE WERE MISSED
+// NOTE: END OF REGISTER DECLARATIONS, CHECK THAT NONE WERE MISSED
+// 4:21 AM, i spent 3 hours trying to figure out why MDR wasn'working when 'clear' and 'clock' were switched
+	// ^^ my 13th reason why
 
 
 
 // BUS
-Bus BUS	(R0out, R1out, R2out, R3out, R4out, R5out, R6out, R7out,
-			R8out, R9out, R10out, R11out, R12out, R13out, R14out, R15out,
-			HIout, LOout, Zhighout, Zlowout,
-			PCout, MDRout, InPortout, CSEout,
+Bus BUS	(R0out, R1out, R2out, R3out,
+			R4out, R5out, R6out, R7out,
+			R8out, R9out, R10out, R11out,
+			R12out, R13out, R14out, R15out,
+			HIout, LOout,
+			Zhighout, Zlowout,
+			PCout,
+			MDRout,
+			InPortout,
+			CSEout,
 			BusMuxInR0, BusMuxInR1, BusMuxInR2, BusMuxInR3,
 			BusMuxInR4, BusMuxInR5, BusMuxInR6, BusMuxInR7,
 			BusMuxInR8, BusMuxInR9, BusMuxInR10, BusMuxInR11,
 			BusMuxInR12, BusMuxInR13, BusMuxInR14, BusMuxInR15,
-			BusMuxInHI, BusMuxInLO, BusMuxInZhigh, BusMuxInZlow,
-			BusMuxInPC, BusMuxInMDR, BusMuxInInPort, BusMuxInCSE,
+			BusMuxInHI, BusMuxInLO,
+			BusMuxInZhigh, BusMuxInZlow,
+			BusMuxInPC,
+			BusMuxInMDR,
+			BusMuxInInPort,
+			BusMuxInCSE,
 			BusMuxOut); // BusMuxOut is only output from BUS
-//BW: END OF BUS DECLARATION, CHECK THAT ALL VARIABLES WERE USED CORRECTLY
-			
+		
 			
 // ALU
 // TEMPORARILY USING IN-PROGRESS ALU TO JUST TEST AND FUNCTIONALITY
