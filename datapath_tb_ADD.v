@@ -2,10 +2,10 @@
 // T1 : Zlowout, PCin, MDMuxread, Mdatain, MDRin
 // T2 : MDRout, IRin
 // T3 : R2out, Yin
-// T4 : R3out, AND, Zin
+// T4 : R3out, ADD, Zin
 // T5 : Zlowout, R1in
 
-// testbench for AND instruction
+// testbench for ADD instruction
 // NOTE: FIX TESTBENCH SETTINGS BEFORE RUNNING THIS
 
 // functionality:
