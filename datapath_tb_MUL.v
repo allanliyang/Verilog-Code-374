@@ -4,7 +4,7 @@
 // T3 : R4out, Yin
 // T4 : R5out, MUL, Zlowin, Zhighin
 // T5 : Zlowout, LOin
-// T6: Zhighout, HIin
+// T6	: Zhighout, HIin
 
 // testbench for MUL instruction
 // NOTE: FIX TESTBENCH SETTINGS BEFORE RUNNING THIS
