@@ -205,21 +205,68 @@ always @ (*) begin
 		
 		// ror case
 		else if (ROR) begin
-			// maybe use a for loop to shift right and move fallen bits to front
-			// WIP
+			// since bits are recycled:
+			// - ROR A by 32 is same as ROL A by 0
+			// - ROR A by 33 is same as ROL A by 1, and so on
+			B = B % 32;
 
-			// rotate by 32 is same as rotate by 0 (no action)
-			// rotating by more than 32 is pointless work, ie ROR 33 is as ROR 1, etc...
-			// possible solution:
-				// modulus by 32
-				// check if zero, else rotate amount of mod result
+			ALU_Result = A << 32; // put A into top 32 bits of ALU_Result
+			
+			ALU_Result = ALU_Result >> B; // effectively puts overflowed bits into top bits of 'Zlow'
+
+			ALU_Result[31-B:0] = ALU_Result[63-B:32]; // effectively puts unoverflowed bits into bottom bits of 'Zlow'
+			// ROR complete with overflowed bits in top portion and unoverflowed in bottom of 'Zlow'
+			
 		end
 		
 		// rol case
 		else if (ROL) begin
-			// maybe use a for loop to shift left and move fallen bits to back
-			// WIP
-			// possible solution: same thought process as ROR instruction
+			// since bits are recycled:
+			// - ROL A by 32 is same as ROL A by 0
+			// - ROL A by 33 is same as ROL A by 1, and so on
+			B = B % 32;
+			
+			ALU_Result = A << B; // put A left shifted by B ALU_Result
+
+			ALU_Result[B-1:0] = ALU_Result[31+B:32]; // effectively puts overflowed bits into bottom bits of 'Zlow'
+
+			// ROL complete with overflowed bits in bottom portion and unoverflowed in top of 'Zlow'
+
+			// hopefully i don't have to use the bot method
+			// case (B[4:0])
+			// 	case 5'00000 : // do nothing
+			// 	case 5'00001 : ALU_Result[31:0] = {A[30:0],in[31]}; // sets bottom 32 bits of ALU_Result to bottom 31 bits of A concat w/ 32nd bit of A
+			// 	case 5'00010 : ALU_Result[31:0] = {A[30:0],in[31:30]};
+			// 	case 5'00011 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'00100 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'00101 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'00110 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'00111 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'01000 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'01001 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'01010 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'01011 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'01100 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'01101 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'01110 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'01111 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'10000 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'10001 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'10010 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'10011 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'10100 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'10101 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'10110 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'10111 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'11000 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'11001 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'11010 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'11011 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'11100 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'11101 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'11110 : ALU_Result[31:0] = {A[30:0],in[31]};
+			// 	case 5'11111 : ALU_Result[31:0] = {A[30:0],in[31]};	
+			// endcase
 		end
 		
 		// neg case
