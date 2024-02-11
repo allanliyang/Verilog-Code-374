@@ -193,7 +193,7 @@ always @ (*) begin
 			// NOTE: if amount to be shifted >= 32, result is always 0? (check for case of max neg number)
 			// can add if case with bit masking for this functionality
 			// WIP
-			ALU_Result = A >>> B;
+			ALU_Result = $signed(A) >>> B;
 			// NOTE: '>>>' is the operator for arithmetic shifting, but A may need to initially be sign extended
 		end
 		

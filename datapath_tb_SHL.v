@@ -165,7 +165,7 @@ Datapath DUT	(clear, clock,
 				
 				T4: begin // 1100
 						R3out <= 1; SHL <= 1; Zlowin <= 1;
-						#15 R3out <= 0; AND <= 0; Zlowin <= 0;
+						#15 R3out <= 0; SHL <= 0; Zlowin <= 0;
             
 				end
 				
