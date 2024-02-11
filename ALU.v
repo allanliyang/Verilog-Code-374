@@ -70,9 +70,29 @@ always @ (*) begin
 		
 		// sub case
 		else if (SUB) begin
-			// maybe same as add but negate the appropriate value first
-			// possible solution:
-			// use addition function from above but negate appropriate parameters first
+			// Flip the second operand
+			B = ~B + 1;
+
+			// Execute add code
+			C = 32'b0;
+
+			for(j = 0; j < 32; j = j + 1) begin
+				FAs[j] = A[j] ^ B[j] ^ C[j];
+				FAc[j] = (A[j] & B[j]) | (C[j] & B[j]) | (C[j] & A[j]);
+			end
+
+			sum[0] = FAs[0] ^ 1'b0 ^ 1'b0;
+			RCAc[0] = (FAs[0] & 1'b0) | (1'b0 & 1'b0) | (1'b0 & FAs[0]);
+
+			for(i = 1; i < 32; i = i + 1) begin
+				sum[i] = FAs[i] ^ FAc[i-1] ^ RCAc[i-1];
+				RCAc[i] = (FAs[i] & FAc[i-1]) | (RCAc[i-1] & FAc[i-1]) | (RCAc[i-1] & FAs[i]);
+			end
+
+			sum[32] = 1'b0 ^ FAc[31] ^ RCAc[31];
+			cout = (1'b0 & FAc[31]) | (RCAc[31] & FAc[31]) | (RCAc[31] & 1'b0);
+			
+			ALU_Result = sum[31:0];
 		end
 		
 		// mul case
