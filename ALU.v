@@ -35,7 +35,7 @@ reg [4:0] Rotate; // temp 5-bit value used for rotate
 reg [32:0] sum; // temp 33 bit reg a for div
 integer cout; // temp 1 bit carry for add
 wire [31:0] FAc, FAs, RCAc;
-input [31:0] C;
+reg [31:0] C;
 
 
 
