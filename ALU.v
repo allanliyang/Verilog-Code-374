@@ -40,7 +40,7 @@ reg ADD_cout;
 reg [31:0] FAs, FAc, RCAc;
 
 // special values for SUB
-	reg [31:0] SUB_temp;
+reg [31:0] SUB_temp;
 
 
 initial begin
@@ -91,7 +91,7 @@ always @ (*) begin
 
 			for(j = 0; j < 32; j = j + 1) begin
 				FAs[j] = A[j] ^ SUB_temp[j] ^ C[j];
-				FAc[j] = (A[j] & B[j]) | (C[j] & B[j]) | (C[j] & A[j]);
+				FAc[j] = (A[j] & SUB_temp[j]) | (C[j] & SUB_temp[j]) | (C[j] & A[j]);
 			end
 
 			sum[0] = FAs[0] ^ 1'b0 ^ 1'b0;
