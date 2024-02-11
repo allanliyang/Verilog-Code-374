@@ -31,12 +31,13 @@ reg [32:0] DIV_A; // temp 33 bit reg a for div
 reg [4:0] Rotate; // temp 5-bit value used for rotate 
 
 integer i; // temp int used for for loop
+integer j;
 
 // special values used for ADD
 reg [31:0] C;
 reg [32:0] ADD_sum;
 reg ADD_cout;
-reg [31:0] FAs, FAc;
+reg [31:0] FAs, FAc, RCAc;
 
 
 initial begin
@@ -53,8 +54,25 @@ always @ (*) begin
 		if (ADD) begin
 			// some addition algorithm here
 			// make add a function
+			C = 32'b0;
 
-			FAc[0] = (A[0]&B[0]);	
+			for(j = 0; j < 32; j = j + 1) begin
+				FAs[j] = A[j] ^ B[j] ^ C[j];
+				FAc[j] = (A[j] & B[j]) | (C[j] & B[j]) | (C[j] & A[j]);
+			end
+
+			ADD_sum[0] = FAs[0] ^ 1'b0 ^ 1'b0;
+			RCAc[0] = (FAs[0] & 1'b0) | (1'b0 & 1'b0) | (1'b0 & FAs[0]);
+
+			for(i = 1; i < 32; i = i + 1) begin
+				ADD_sum[i] = FAs[i] ^ FAc[i-1] ^ RCAc[i-1];
+				RCAc[i] = (FAs[i] & FAc[i-1]) | (RCAc[i-1] & FAc[i-1]) | (RCAc[i-1] & FAs[i]);
+			end
+
+			ADD_sum[32] = 1'b0 ^ FAc[31] ^ RCAc[31];
+			ADD_cout = (1'b0 & FAc[31]) | (RCAc[31] & FAc[31]) | (RCAc[31] & 1'b0);
+			
+			ALU_Result = ADD_sum[31:0];
 			
 		end
 		
