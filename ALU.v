@@ -39,9 +39,13 @@ reg [32:0] ADD_sum;
 reg ADD_cout;
 reg [31:0] FAs, FAc, RCAc;
 
+// special values for SUB
+	reg [31:0] SUB_Temp;
+
 
 initial begin
 	C = 32'b0; ADD_sum = 32'b0; ADD_cout = 1'b0;
+	
 	
 end
 
@@ -79,7 +83,8 @@ always @ (*) begin
 		// sub case
 		else if (SUB) begin
 			// Flip the second operand
-			B = ~B + 1;
+			SUB_Temp = ~B + 1;
+			B = SUB_Temp + 1;
 
 			// Execute add code
 			C = 32'b0;
