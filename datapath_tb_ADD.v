@@ -1,5 +1,19 @@
-// testbench for ADD instruction from CPU Phase 1 Document
+// T0 : PCout, MARin, IncPC, Zin
+// T1 : Zlowout, PCin, MDMuxread, Mdatain, MDRin
+// T2 : MDRout, IRin
+// T3 : R2out, Yin
+// T4 : R3out, AND, Zin
+// T5 : Zlowout, R1in
+
+// testbench for AND instruction
 // NOTE: FIX TESTBENCH SETTINGS BEFORE RUNNING THIS
+
+// functionality:
+  // this TB performs add R1, R2, R3
+  // with R2 = 0b10010
+  // with R3 = 0b10100
+  // and R1 expected = 0b100110
+
 
 `timescale 1ns/10ps 
 module datapath_tb_ADD();
@@ -133,7 +147,7 @@ always @ (Present_state)
 				
 				T1: begin // 1001
 						Zlowout <= 1; PCin <= 1; MDMuxread <= 1; MDRin <= 1;
-						Mdatain <= 32'h18918000;
+						Mdatain <= 32'h18918000;  // Correct op code for add 
 						#15 Zlowout <= 0; PCin <= 0; MDMuxread <= 0; MDRin <= 0;
 				end
 				
