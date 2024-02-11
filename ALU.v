@@ -31,12 +31,30 @@ reg [32:0] DIV_A; // temp 33 bit reg a for div
 reg [4:0] Rotate; // temp 5-bit value used for rotate 
 
 integer i; // temp int used for for loop
+
+// special values used for ADD
+reg [31:0] C;
+reg [32:0] ADD_sum;
+reg ADD_cout;
+reg [31:0] FAs, FAc;
+
+
+initial begin
+	C = 32'b0; ADD_sum = 32'b0; ADD_cout = 1'b0;
+	
+end
+
 	
 always @ (*) begin
+			
+		
+		
 		// add case
 		if (ADD) begin
 			// some addition algorithm here
 			// make add a function
+
+			FAc[0] = (A[0]&B[0]);	
 			
 		end
 		
@@ -49,6 +67,9 @@ always @ (*) begin
 		
 		// mul case
 		else if (MUL) begin
+		
+			$display("Checking first two bits for multiplication");
+			ALU_Result = 64'b0;
 			// use booth algorithm with bit-pair recoding
 			// A is multiplicand(M), B is multiplier(Q)
 			
@@ -58,28 +79,32 @@ always @ (*) begin
 					// 3 bits to be considered with right padded 0 == 000;
 					// bit-pair recoded result (BPRR) = 0
 					// do nothing
+					$display("Recoded B[1:0] to 0");
 				end
 				
-			      	2'b01 :	begin
+			    2'b01 :	begin
 					// 3 bits to be considered with right padded 0 == 010;
 					// bit-pair recoded result (BPRR) = +1
 					ALU_Result = ALU_Result + A;
+					$display("Recoded B[1:0] to +1");
 				end
 				
-			      	2'b10 :	begin
+			   2'b10 :	begin
 					// 3 bits to be considered with right padded 0 == 100;
 					// bit-pair recoded result (BPRR) = -2
 					ALU_Result = ALU_Result - (A << 1);
+					$display("Recoded B[1:0] to -2");
 				end
 				
-			      	2'b11 : begin
+			   2'b11 : begin
 					// 3 bits to be considered with right padded 0 == 110;
 					// bit-pair recoded result (BPRR) = -1
 					ALU_Result = ALU_Result - A;
+					$display("Recoded B[1:0] to -1");
 				end
 			endcase
 
-			// NOTE: Add code to update ALU_Result value from init case
+			$display("Checking rest of bits for multiplication");
 
 			// for loop to recode all other bits, 3 at a time
 			// check if sign-extend works properly
@@ -89,48 +114,56 @@ always @ (*) begin
 						// 3 bits to be considered with right padded 0 == 000
 						// bit-pair recoded result (BPRR) = 0
 						// do nothing
+						$display("Recoded B[1:0] to 0");
 					end
 					
 					3'b001 : begin
 						// 3 bits to be considered with right padded 0 == 001
 						// bit-pair recoded result (BPRR) = +1
-						ALU_Result = ALU_Result + (A << i);
+						ALU_Result = ALU_Result + (A << (i+1));
+						$display("Recoded B[1:0] to +1");
 					end
 					
 					3'b010 : begin
 						// 3 bits to be considered with right padded 0 == 010
 						// bit-pair recoded result (BPRR) = +1
-						ALU_Result = ALU_Result + (A << i);
+						ALU_Result = ALU_Result + (A << (i+1));
+						$display("Recoded B[1:0] to +1");
 					end
 					
 					3'b011 : begin
 						// 3 bits to be considered with right padded 0 == 011
 						// bit-pair recoded result (BPRR) = +2
-						ALU_Result = ALU_Result + (A << (i+1));
+						ALU_Result = ALU_Result + (A << (i+2));
+						$display("Recoded B[1:0] to +2");
 					end
 					
 					3'b100 : begin
 						// 3 bits to be considered with right padded 0 == 100
 						// bit-pair recoded result (BPRR) = -2
-						ALU_Result = ALU_Result - (A << (i+1));
+						ALU_Result = ALU_Result - (A << (i+2));
+						$display("Recoded B[1:0] to -2");
 					end
 					
 					3'b101 : begin
 						// 3 bits to be considered with right padded 0 == 101
 						// bit-pair recoded result (BPRR) = -1
-						ALU_Result = ALU_Result - (A << i);
+						ALU_Result = ALU_Result - (A << (i+1));
+						$display("Recoded B[1:0] to -1");
 					end
 					
 					3'b110 : begin
 						// 3 bits to be considered with right padded 0 == 110
 						// bit-pair recoded result (BPRR) = -1
-						ALU_Result = ALU_Result - (A << i);
+						ALU_Result = ALU_Result - (A << (i+1));
+						$display("Recoded B[1:0] to -1");
 					end
 					
 					3'b111 : begin
 						// 3 bits to be considered with right padded 0 == 111
 						// bit-pair recoded result (BPRR) = 0
 						// do nothing
+						$display("Recoded B[1:0] to 0");
 					end
 				endcase
 			end
@@ -308,7 +341,7 @@ always @ (*) begin
 		end
 		
 		else begin
-			ALU_Result = 32'hAAAAAAAA; // shows up in binary as 1010... for 32 bits, may help for debugging, otherwise meaningless
+			ALU_Result = ALU_Result; //do nothing
 		end
 	end
 	// low 32 bits go to low reg, high 32 bits go to high reg

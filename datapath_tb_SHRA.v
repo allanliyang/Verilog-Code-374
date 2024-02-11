@@ -138,7 +138,7 @@ Datapath DUT	(clear, clock,
 				// expected result in R1 = 1111 1111 1111 1111 1000 0000 0000 0000
 
 
-        T0: begin // 1000
+				T0: begin // 1000
 						PCout <= 1; MARin <= 1; IncPC <= 1; Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
             
