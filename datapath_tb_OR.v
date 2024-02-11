@@ -1,6 +1,18 @@
-// testbench for OR instruction from CPU Phase 1 Document
+// T0 : PCout, MARin, IncPC, Zin
+// T1 : Zlowout, PCin, MDMuxread, Mdatain, MDRin
+// T2 : MDRout, IRin
+// T3 : R2out, Yin
+// T4 : R3out, OR, Zin
+// T5 : Zlowout, R1in
+
+// testbench for OR instruction
 // NOTE: FIX TESTBENCH SETTINGS BEFORE RUNNING THIS
 
+// functionality:
+  // this TB performs OR R1, R2, R3
+  // with R2 = 10010
+  // with R3 = 10100
+  // and R1 expected = 10110
 `timescale 1ns/10ps // means timescale is in increments of 1ns with a 10ps accuracy
 module datapath_tb_OR();
 

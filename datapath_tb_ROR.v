@@ -2,20 +2,20 @@
 // T1 : Zlowout, PCin, MDMuxread, Mdatain, MDRin
 // T2 : MDRout, IRin
 // T3 : R2out, Yin
-// T4 : SHR, Zin // NOTE: this line prob wrong, where is R3out?
+// T4 : ROR, Zlowin // NOTE: this line prob wrong, where is R3out?
 // T5 : Zlowout, R1in
 
-// testbench for SHR instruction
+// testbench for ROR instruction
 // NOTE: FIX TESTBENCH SETTINGS BEFORE RUNNING THIS
 
 // functionality:
-  // this TB performs SHR R1, R2, R3
-  // with R2 = 1111 1111 0000 0000
-  // with R3 = 1000
-  // and R1 expected = 1111 1111
-
+  // this TB performs ROR R1, R2, R3
+  // with R2 = 0001 1111 1111 (0x000001FF)
+  // with R3 = 1000 (8)
+  // and R1 expected = 1111 1111 0000 0000 0000 0000 0000 0001 (0xFF000001)
+ 
 `timescale 1ns/10ps
-module datapath_tb_SHR();
+module datapath_tb_ROR();
 
 reg clear, clock;
 reg R0in, R1in, R2in, R3in;
@@ -81,7 +81,7 @@ Datapath DUT	(clear, clock,
   always #10 clock = ~clock;
   always @ (negedge clock) Present_state = Present_state + 1;
 
-  always @ (Present_state)
+   always @ (Present_state)
         begin
 
           case (Present_state)
@@ -90,13 +90,13 @@ Datapath DUT	(clear, clock,
 						PCout <= 0; 	Zlowout <= 0; 	MDRout <=0;		R2out <= 0;
 						R3out <= 0; 	MDRout <=0;		Zlowin <= 0;	PCin <= 0;
 						MDRin <= 0; 	IRin <= 0;		Yin <= 0;		IncPC <= 0;
-						MDMuxread <= 0;SHR <= 0;		R1in <= 0;		R2in <= 0;
+						MDMuxread <= 0;ROR <= 0;		R1in <= 0;		R2in <= 0;
 						R3in <= 0;		Mdatain <= 32'h00000000;
 						#15 clear <= 0;
 				end
 				
 				Reg_load1a: begin // 0010
-						Mdatain <= 32'h0000FFFF;
+						Mdatain <= 32'h0x000001FF;
 						MDMuxread = 0; MDRin = 0;
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
@@ -130,12 +130,12 @@ Datapath DUT	(clear, clock,
 				end
 				
 				// At this point:
-					// - 0b1111 1111 0000 0000 is loaded in R2
+					// - 0b0001 1111 1111 is loaded in R2
 					// - 0b1000 is loaded in R3
 					// - 0b10010 is loaded in R1 (idk why tho)
 				
-				// T0 -> T5 performs R1 <= R2 SHR by R3
-				// expected result in R1 = 1111 1111
+				// T0 -> T5 performs R1 <= R2 ROR by R3
+				// expected result in R1 = 1111 1111 0000 0000 0000 0000 0000 0001 (0xFF000001)
 
 
         T0: begin // 1000
@@ -146,7 +146,7 @@ Datapath DUT	(clear, clock,
 				
 				T1: begin // 1001
 						Zlowout <= 1; PCin <= 1; MDMuxread <= 1; MDRin <= 1;
-						Mdatain <= 32'h28918000;
+						Mdatain <= 32'h40918000; // correct op-code for ROR R1, R2, R3
 						#15 Zlowout <= 0; PCin <= 0; MDMuxread <= 0; MDRin <= 0;
             
 				end
@@ -164,8 +164,8 @@ Datapath DUT	(clear, clock,
 				end
 				
 				T4: begin // 1100
-						R3out <= 1; SHR <= 1; Zlowin <= 1;
-						#15 R3out <= 0; SHR <= 0; Zlowin <= 0;
+						R3out <= 1; ROR <= 1; Zlowin <= 1;
+						#15 R3out <= 0; ROR <= 0; Zlowin <= 0;
             
 				end
 				
