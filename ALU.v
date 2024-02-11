@@ -28,6 +28,8 @@ module ALU (
 
 reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
 reg [32:0] DIV_A; // temp 33 bit reg a for div
+reg [32:0] ADD_Sum // temp 33 bit reg for add
+integer carry; // temp bit for carries related to the add
 
 integer i; // temp int used for for loop
 	
@@ -36,6 +38,12 @@ always @ (*) begin
 		if (ADD) begin
 			// some addition algorithm here
 			// make add a function
+			CSA_32bit(A, B, 32'b0, ADD_Sum, carry);  // For now just letting sum overflow
+
+			//Code to check for overflow
+			//Code to handle overflow if present
+
+			// Store transformed ADD_SUM into ALU_RESULT
 			
 		end
 		
@@ -44,6 +52,15 @@ always @ (*) begin
 			// maybe same as add but negate the appropriate value first
 			// possible solution:
 			// use addition function from above but negate appropriate parameters first
+
+			B = ~B + 1;
+			CSA_32bit(A, B, 32'b0, ADD_Sum, carry);  // For now just letting sum overflow
+
+			//Code to check for overflow
+			//Code to handle overflow if present
+
+			// Store transformed ADD_SUM into ALU_RESULT
+			
 		end
 		
 		// mul case
