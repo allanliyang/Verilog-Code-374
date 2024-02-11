@@ -34,7 +34,7 @@ reg [4:0] Rotate; // temp 5-bit value used for rotate
 
 reg [32:0] sum; // temp 33 bit reg a for div
 integer cout; // temp 1 bit carry for add
-wire [31:0] FAc, FAs, RCAc;
+reg [31:0] FAc, FAs, RCAc;
 reg [31:0] C;
 
 
@@ -48,7 +48,7 @@ always @ (*) begin
 			// make add a function
 			C = 32'b0;
 
-			for(integer j = 0; j < 32; j = j + 1) begin
+			for(j = 0; j < 32; j = j + 1) begin
 				FAs[j] = A[j] ^ B[j] ^ C[j];
 				FAc[j] = (A[j] & B[j]) | (C[j] & B[j]) | (C[j] & A[j]);
 			end
@@ -56,7 +56,7 @@ always @ (*) begin
 			sum[0] = FAs[0] ^ 1'b0 ^ 1'b0;
 			RCAc[0] = (FAs[0] & 1'b0) | (1'b0 & 1'b0) | (1'b0 & FAs[0]);
 
-			for(integer i = 1; i < 32; i = i + 1) begin
+			for(i = 1; i < 32; i = i + 1) begin
 				sum[i] = FAs[i] ^ FAc[i-1] ^ RCAc[i-1];
 				RCAc[i] = (FAs[i] & FAc[i-1]) | (RCAc[i-1] & FAc[i-1]) | (RCAc[i-1] & FAs[i]);
 			end
