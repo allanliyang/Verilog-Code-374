@@ -28,6 +28,7 @@ module ALU (
 
 reg [63:0] ALU_Result; // 64 bit temp register to hold result of operations
 reg [32:0] DIV_A; // temp 33 bit reg a for div
+reg [4:0] Rotate; // temp 5-bit value used for rotate 
 
 integer i; // temp int used for for loop
 	
@@ -68,7 +69,7 @@ always @ (*) begin
 			      	2'b10 :	begin
 					// 3 bits to be considered with right padded 0 == 100;
 					// bit-pair recoded result (BPRR) = -2
-					ALU_Result = ALU+Result - (A << 1);
+					ALU_Result = ALU_Result - (A << 1);
 				end
 				
 			      	2'b11 : begin
@@ -93,37 +94,37 @@ always @ (*) begin
 					3'b001 : begin
 						// 3 bits to be considered with right padded 0 == 001
 						// bit-pair recoded result (BPRR) = +1
-						ALU_Result = ALU_Result + (A << i)
+						ALU_Result = ALU_Result + (A << i);
 					end
 					
 					3'b010 : begin
 						// 3 bits to be considered with right padded 0 == 010
 						// bit-pair recoded result (BPRR) = +1
-						ALU_Result = ALU_Result + (A << i)
+						ALU_Result = ALU_Result + (A << i);
 					end
 					
 					3'b011 : begin
 						// 3 bits to be considered with right padded 0 == 011
 						// bit-pair recoded result (BPRR) = +2
-						ALU_Result = ALU_Result + (A << (i+1))
+						ALU_Result = ALU_Result + (A << (i+1));
 					end
 					
 					3'b100 : begin
 						// 3 bits to be considered with right padded 0 == 100
 						// bit-pair recoded result (BPRR) = -2
-						ALU_Result = ALU_Result - (A << (i+1))
+						ALU_Result = ALU_Result - (A << (i+1));
 					end
 					
 					3'b101 : begin
 						// 3 bits to be considered with right padded 0 == 101
 						// bit-pair recoded result (BPRR) = -1
-						ALU_Result = ALU_Result - (A << i)
+						ALU_Result = ALU_Result - (A << i);
 					end
 					
 					3'b110 : begin
 						// 3 bits to be considered with right padded 0 == 110
 						// bit-pair recoded result (BPRR) = -1
-						ALU_Result = ALU_Result - (A << i)
+						ALU_Result = ALU_Result - (A << i);
 					end
 					
 					3'b111 : begin
@@ -208,15 +209,42 @@ always @ (*) begin
 			// since bits are recycled:
 			// - ROR A by 32 is same as ROL A by 0
 			// - ROR A by 33 is same as ROL A by 1, and so on
-			B = B % 32;
-
-			ALU_Result = A << 32; // put A into top 32 bits of ALU_Result
+			Rotate = B % 32;
 			
-			ALU_Result = ALU_Result >> B; // effectively puts overflowed bits into top bits of 'Zlow'
-
-			ALU_Result[31-B:0] = ALU_Result[63-B:32]; // effectively puts unoverflowed bits into bottom bits of 'Zlow'
-			// ROR complete with overflowed bits in top portion and unoverflowed in bottom of 'Zlow'
-			
+			case (Rotate)
+				5'b00001 : ALU_Result[31:0] = {A[0], 		A[31:1]};
+				5'b00010 : ALU_Result[31:0] = {A[1:0],		A[31:2]};
+				5'b00011 : ALU_Result[31:0] = {A[2:0],		A[31:3]};
+				5'b00100 : ALU_Result[31:0] = {A[3:0],		A[31:4]};
+				5'b00101 : ALU_Result[31:0] = {A[4:0],		A[31:5]};
+				5'b00110 : ALU_Result[31:0] = {A[5:0],		A[31:6]};
+				5'b00111 : ALU_Result[31:0] = {A[6:0],		A[31:7]};
+				5'b01000 : ALU_Result[31:0] = {A[7:0],		A[31:8]};
+				5'b01001 : ALU_Result[31:0] = {A[8:0],		A[31:9]};
+				5'b01010 : ALU_Result[31:0] = {A[9:0],		A[31:10]};
+				5'b01011 : ALU_Result[31:0] = {A[10:0],	A[31:11]};
+				5'b01100 : ALU_Result[31:0] = {A[11:0],	A[31:12]};
+				5'b01101 : ALU_Result[31:0] = {A[12:0],	A[31:13]};
+				5'b01110 : ALU_Result[31:0] = {A[13:0],	A[31:14]};
+				5'b01111 : ALU_Result[31:0] = {A[14:0],	A[31:15]};
+				5'b10000 : ALU_Result[31:0] = {A[15:0],	A[31:16]};
+				5'b10001 : ALU_Result[31:0] = {A[16:0],	A[31:17]};
+				5'b10010 : ALU_Result[31:0] = {A[17:0],	A[31:18]};
+				5'b10011 : ALU_Result[31:0] = {A[18:0],	A[31:19]};
+				5'b10100 : ALU_Result[31:0] = {A[19:0],	A[31:20]};
+				5'b10101 : ALU_Result[31:0] = {A[20:0],	A[31:21]};
+				5'b10110 : ALU_Result[31:0] = {A[21:0],	A[31:22]};
+				5'b10111 : ALU_Result[31:0] = {A[22:0],	A[31:23]};
+				5'b11000 : ALU_Result[31:0] = {A[23:0],	A[31:24]};
+				5'b11001 : ALU_Result[31:0] = {A[24:0],	A[31:25]};
+				5'b11010 : ALU_Result[31:0] = {A[25:0],	A[31:26]};
+				5'b11011 : ALU_Result[31:0] = {A[26:0],	A[31:27]};
+				5'b11100 : ALU_Result[31:0] = {A[27:0],	A[31:28]};
+				5'b11101 : ALU_Result[31:0] = {A[28:0],	A[31:29]};
+				5'b11110 : ALU_Result[31:0] = {A[29:0],	A[31:30]};
+				5'b11111 : ALU_Result[31:0] = {A[30:0],	A[31:31]};
+				default 	: ALU_Result[31:0] = A[31:0];
+			endcase
 		end
 		
 		// rol case
@@ -224,49 +252,42 @@ always @ (*) begin
 			// since bits are recycled:
 			// - ROL A by 32 is same as ROL A by 0
 			// - ROL A by 33 is same as ROL A by 1, and so on
-			B = B % 32;
+			Rotate = B % 32;
 			
-			ALU_Result = A << B; // put A left shifted by B ALU_Result
-
-			ALU_Result[B-1:0] = ALU_Result[31+B:32]; // effectively puts overflowed bits into bottom bits of 'Zlow'
-
-			// ROL complete with overflowed bits in bottom portion and unoverflowed in top of 'Zlow'
-
-			// hopefully i don't have to use the bot method
-			// case (B[4:0])
-			// 	case 5'00000 : // do nothing
-			// 	case 5'00001 : ALU_Result[31:0] = {A[30:0],in[31]}; // sets bottom 32 bits of ALU_Result to bottom 31 bits of A concat w/ 32nd bit of A
-			// 	case 5'00010 : ALU_Result[31:0] = {A[30:0],in[31:30]};
-			// 	case 5'00011 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'00100 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'00101 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'00110 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'00111 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'01000 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'01001 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'01010 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'01011 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'01100 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'01101 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'01110 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'01111 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'10000 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'10001 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'10010 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'10011 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'10100 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'10101 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'10110 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'10111 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'11000 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'11001 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'11010 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'11011 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'11100 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'11101 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'11110 : ALU_Result[31:0] = {A[30:0],in[31]};
-			// 	case 5'11111 : ALU_Result[31:0] = {A[30:0],in[31]};	
-			// endcase
+			case (B[4:0])
+				5'b00001 : ALU_Result[31:0] = {A[30:0], 	A[31]};
+				5'b00010 : ALU_Result[31:0] = {A[29:0], 	A[31:30]};
+				5'b00011 : ALU_Result[31:0] = {A[28:0], 	A[31:29]};
+				5'b00100 : ALU_Result[31:0] = {A[27:0], 	A[31:28]};
+				5'b00101 : ALU_Result[31:0] = {A[26:0], 	A[31:27]};
+				5'b00110 : ALU_Result[31:0] = {A[25:0], 	A[31:26]};
+				5'b00111 : ALU_Result[31:0] = {A[24:0], 	A[31:25]};
+				5'b01000 : ALU_Result[31:0] = {A[23:0], 	A[31:24]};
+				5'b01001 : ALU_Result[31:0] = {A[22:0], 	A[31:23]};
+				5'b01010 : ALU_Result[31:0] = {A[21:0], 	A[31:22]};
+				5'b01011 : ALU_Result[31:0] = {A[20:0], 	A[31:21]};
+				5'b01100 : ALU_Result[31:0] = {A[19:0], 	A[31:20]};
+				5'b01101 : ALU_Result[31:0] = {A[18:0], 	A[31:19]};
+				5'b01110 : ALU_Result[31:0] = {A[17:0], 	A[31:18]};
+				5'b01111 : ALU_Result[31:0] = {A[16:0], 	A[31:17]};
+				5'b10000 : ALU_Result[31:0] = {A[15:0],	A[31:16]};
+				5'b10001 : ALU_Result[31:0] = {A[14:0],	A[31:15]};
+				5'b10010 : ALU_Result[31:0] = {A[13:0], 	A[31:14]};
+				5'b10011 : ALU_Result[31:0] = {A[12:0], 	A[31:13]};
+				5'b10100 : ALU_Result[31:0] = {A[11:0], 	A[31:12]};
+				5'b10101 : ALU_Result[31:0] = {A[10:0], 	A[31:11]};
+				5'b10110 : ALU_Result[31:0] = {A[9:0], 	A[31:10]};
+				5'b10111 : ALU_Result[31:0] = {A[8:0], 	A[31:9]};
+				5'b11000 : ALU_Result[31:0] = {A[7:0], 	A[31:8]};
+				5'b11001 : ALU_Result[31:0] = {A[6:0], 	A[31:7]};
+				5'b11010 : ALU_Result[31:0] = {A[5:0], 	A[31:6]};
+				5'b11011 : ALU_Result[31:0] = {A[4:0], 	A[31:5]};
+				5'b11100 : ALU_Result[31:0] = {A[3:0], 	A[31:4]};
+				5'b11101 : ALU_Result[31:0] = {A[2:0], 	A[31:3]};
+				5'b11110 : ALU_Result[31:0] = {A[1:0], 	A[31:2]};
+				5'b11111 : ALU_Result[31:0] = {A[0], 		A[31:1]};
+				default 	: ALU_Result[31:0] = A[31:0];
+			endcase
 		end
 		
 		// neg case
