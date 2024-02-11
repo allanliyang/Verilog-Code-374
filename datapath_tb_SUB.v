@@ -11,7 +11,7 @@
 // functionality:
   // this TB performs SUB R1, R2, R3
   // with R2 = 0b0000 0000 0000 0000 0000 0000 0001 0010 (0x12, or +18)
-  // with R3 = 0b1111 1111 1111 1111 1111 1111 1111 0010 (0xFFFFFFF2, or -20)
+  // with R3 = 0b1111 1111 1111 1111 1111 1111 1110 1100 (0xFFFFFFEC, or -20)
   // and R1 expected = 0b100110 (0x00000026, or +38)
   
  
@@ -110,7 +110,7 @@ always @ (Present_state)
 				end
 				
 				Reg_load2a: begin // 0100
-						Mdatain <= 32'hFFFFFFF2;
+						Mdatain <= 32'hFFFFFFEC;
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
 				end
@@ -133,7 +133,7 @@ always @ (Present_state)
 				
 				// At this point:
 					// - 0b0b0000 0000 0000 0000 0000 0000 0001 0010 (0x00000012) is loaded in R2
-					// - 0b0b1111 1111 1111 1111 1111 1111 1111 0010 (0xFFFFFFF2) is loaded in R3
+					// - 0b0b1111 1111 1111 1111 1111 1111 1110 1100 (0xFFFFFFEC) is loaded in R3
 					// - 0b11000 is loaded in R1 (idk why tho)
 				
 				// T0 -> T5 performs R1 <= R2 - R3  
@@ -146,7 +146,7 @@ always @ (Present_state)
 				
 				T1: begin // 1001
 						Zlowout <= 1; PCin <= 1; MDMuxread <= 1; MDRin <= 1;
-						Mdatain <= 32'h20918000;  // Correct op code for add 
+						Mdatain <= 32'h20918000;  // Correct op code for sub 
 						#15 Zlowout <= 0; PCin <= 0; MDMuxread <= 0; MDRin <= 0;
 				end
 				

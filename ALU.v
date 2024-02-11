@@ -83,7 +83,7 @@ always @ (*) begin
 		// sub case
 		else if (SUB) begin
 			// Flip the second operand
-			SUB_temp = ~B + 1;
+			SUB_temp = ~B;
 			SUB_temp = SUB_temp + 1;
 
 			// Execute add code
@@ -94,18 +94,18 @@ always @ (*) begin
 				FAc[j] = (A[j] & SUB_temp[j]) | (C[j] & SUB_temp[j]) | (C[j] & A[j]);
 			end
 
-			sum[0] = FAs[0] ^ 1'b0 ^ 1'b0;
+			ADD_sum[0] = FAs[0] ^ 1'b0 ^ 1'b0;
 			RCAc[0] = (FAs[0] & 1'b0) | (1'b0 & 1'b0) | (1'b0 & FAs[0]);
 
 			for(i = 1; i < 32; i = i + 1) begin
-				sum[i] = FAs[i] ^ FAc[i-1] ^ RCAc[i-1];
+				ADD_sum[i] = FAs[i] ^ FAc[i-1] ^ RCAc[i-1];
 				RCAc[i] = (FAs[i] & FAc[i-1]) | (RCAc[i-1] & FAc[i-1]) | (RCAc[i-1] & FAs[i]);
 			end
 
-			sum[32] = 1'b0 ^ FAc[31] ^ RCAc[31];
-			cout = (1'b0 & FAc[31]) | (RCAc[31] & FAc[31]) | (RCAc[31] & 1'b0);
+			ADD_sum[32] = 1'b0 ^ FAc[31] ^ RCAc[31];
+			ADD_cout = (1'b0 & FAc[31]) | (RCAc[31] & FAc[31]) | (RCAc[31] & 1'b0);
 			
-			ALU_Result = sum[31:0];
+			ALU_Result = ADD_sum[31:0];
 		end
 		
 		// mul case
