@@ -133,7 +133,7 @@ always @ (Present_state)
 				
 				T1: begin // 1001
 						Zlowout <= 1; PCin <= 1; MDMuxread <= 1; MDRin <= 1;
-						Mdatain <= 32'h28918000;
+						Mdatain <= 32'h28918000; // NOTE: Wrong op code, this acc does SHR R1, R2, R3
 						#15 Zlowout <= 0; PCin <= 0; MDMuxread <= 0; MDRin <= 0;
 				end
 				
