@@ -47,75 +47,24 @@ always @ (*) begin
 			// some addition algorithm here
 			// make add a function
 			C = 32'b0;
-			
-			fulladder fa0(A[0], B[0], C[0], FAs[0], FAc[0]);
-			fulladder fa1(A[1], B[1], C[1], FAs[1], FAc[1]);
-			fulladder fa2(A[2], B[2], C[2], FAs[2], FAc[2]);
-			fulladder fa3(A[3], B[3], C[3], FAs[3], FAc[3]);
-			fulladder fa4(A[4], B[4], C[4], FAs[4], FAc[4]);
-			fulladder fa5(A[5], B[5], C[5], FAs[5], FAc[5]);
-			fulladder fa6(A[6], B[6], C[6], FAs[6], FAc[6]);
-			fulladder fa7(A[7], B[7], C[7], FAs[7], FAc[7]);
-			fulladder fa8(A[8], B[8], C[8], FAs[8], FAc[8]);
-			fulladder fa9(A[9], B[9], C[9], FAs[9], FAc[9]);
-			fulladder fa10(A[10], B[10], C[10], FAs[10], FAc[10]);
-			fulladder fa11(A[11], B[11], C[11], FAs[11], FAc[11]);
-			fulladder fa12(A[12], B[12], C[12], FAs[12], FAc[12]);
-			fulladder fa13(A[13], B[13], C[13], FAs[13], FAc[13]);
-			fulladder fa14(A[14], B[14], C[14], FAs[14], FAc[14]);
-			fulladder fa15(A[15], B[15], C[15], FAs[15], FAc[15]);
-			fulladder fa16(A[16], B[16], C[16], FAs[16], FAc[16]);
-			fulladder fa17(A[17], B[17], C[17], FAs[17], FAc[17]);
-			fulladder fa18(A[18], B[18], C[18], FAs[18], FAc[18]);
-			fulladder fa19(A[19], B[19], C[19], FAs[19], FAc[19]);
-			fulladder fa20(A[20], B[20], C[20], FAs[20], FAc[20]);
-			fulladder fa21(A[21], B[21], C[21], FAs[21], FAc[21]);
-			fulladder fa22(A[22], B[22], C[22], FAs[22], FAc[22]);
-			fulladder fa23(A[23], B[23], C[23], FAs[23], FAc[23]);
-			fulladder fa24(A[24], B[24], C[24], FAs[24], FAc[24]);
-			fulladder fa25(A[25], B[25], C[25], FAs[25], FAc[25]);
-			fulladder fa26(A[26], B[26], C[26], FAs[26], FAc[26]);
-			fulladder fa27(A[27], B[27], C[27], FAs[27], FAc[27]);
-			fulladder fa28(A[28], B[28], C[28], FAs[28], FAc[28]);
-			fulladder fa29(A[29], B[29], C[29], FAs[29], FAc[29]);
-			fulladder fa30(A[30], B[30], C[30], FAs[30], FAc[30]);
-			fulladder fa31(A[31], B[31], C[31], FAs[31], FAc[31]);
 
-			// Connect remaining full adder instances
-			fulladder fa1_0(FAs[0], 1'b0, 1'b0, sum[0], RCAc[0]); // Connect the final stage full adder with carry-in 0
-			fulladder fa1_1(FAs[1], FAc[0], RCAc[0], sum[1], RCAc[1]);
-			fulladder fa1_2(FAs[2], FAc[1], RCAc[1], sum[2], RCAc[2]);
-			fulladder fa1_3(FAs[3], FAc[2], RCAc[2], sum[3], RCAc[3]);
-			fulladder fa1_4(FAs[4], FAc[3], RCAc[3], sum[4], RCAc[4]);
-			fulladder fa1_5(FAs[5], FAc[4], RCAc[4], sum[5], RCAc[5]);
-			fulladder fa1_6(FAs[6], FAc[5], RCAc[5], sum[6], RCAc[6]);
-			fulladder fa1_7(FAs[7], FAc[6], RCAc[6], sum[7], RCAc[7]);
-			fulladder fa1_8(FAs[8], FAc[7], RCAc[7], sum[8], RCAc[8]);
-			fulladder fa1_9(FAs[9], FAc[8], RCAc[8], sum[9], RCAc[9]);
-			fulladder fa1_10(FAs[10], FAc[9], RCAc[9], sum[10], RCAc[10]);
-			fulladder fa1_11(FAs[11], FAc[10], RCAc[10], sum[11], RCAc[11]);
-			fulladder fa1_12(FAs[12], FAc[11], RCAc[11], sum[12], RCAc[12]);
-			fulladder fa1_13(FAs[13], FAc[12], RCAc[12], sum[13], RCAc[13]);
-			fulladder fa1_14(FAs[14], FAc[13], RCAc[13], sum[14], RCAc[14]);
-			fulladder fa1_15(FAs[15], FAc[14], RCAc[14], sum[15], RCAc[15]);
-			fulladder fa1_16(FAs[16], FAc[15], RCAc[15], sum[16], RCAc[16]);
-			fulladder fa1_17(FAs[17], FAc[16], RCAc[16], sum[17], RCAc[17]);
-			fulladder fa1_18(FAs[18], FAc[17], RCAc[17], sum[18], RCAc[18]);
-			fulladder fa1_19(FAs[19], FAc[18], RCAc[18], sum[19], RCAc[19]);
-			fulladder fa1_20(FAs[20], FAc[19], RCAc[19], sum[20], RCAc[20]);
-			fulladder fa1_21(FAs[21], FAc[20], RCAc[20], sum[21], RCAc[21]);
-			fulladder fa1_22(FAs[22], FAc[21], RCAc[21], sum[22], RCAc[22]);
-			fulladder fa1_23(FAs[23], FAc[22], RCAc[22], sum[23], RCAc[23]);
-			fulladder fa1_24(FAs[24], FAc[23], RCAc[23], sum[24], RCAc[24]);
-			fulladder fa1_25(FAs[25], FAc[24], RCAc[24], sum[25], RCAc[25]);
-			fulladder fa1_26(FAs[26], FAc[25], RCAc[25], sum[26], RCAc[26]);
-			fulladder fa1_27(FAs[27], FAc[26], RCAc[26], sum[27], RCAc[27]);
-			fulladder fa1_28(FAs[28], FAc[27], RCAc[27], sum[28], RCAc[28]);
-			fulladder fa1_29(FAs[29], FAc[28], RCAc[28], sum[29], RCAc[29]);
-			fulladder fa1_30(FAs[30], FAc[29], RCAc[29], sum[30], RCAc[30]);
-			fulladder fa1_31(FAs[31], FAc[30], RCAc[30], sum[31], RCAc[31]);
-			fulladder fa1_32(1'b0, FAc[31], RCAc[31], sum[32], cout);
-			ALU_Result = ADD_Sum[31:0];
+			for(integer j = 0; j < 32; j = j + 1) begin
+				FAs[j] = A[j] ^ B[j] ^ C[j];
+				FAc[j] = (A[j] & B[j]) | (C[j] & B[j]) | (C[j] & A[j]);
+			end
+
+			sum[0] = FAs[0] ^ 1'b0 ^ 1'b0;
+			RCAc[0] = (FAs[0] & 1'b0) | (1'b0 & 1'b0) | (1'b0 & FAs[0]);
+
+			for(integer i = 1; i < 32; i = i + 1) begin
+				sum[i] = FAs[i] ^ FAc[i-1] ^ RCAc[i-1];
+				RCAc[i] = (FAs[i] & FAc[i-1]) | (RCAc[i-1] & FAc[i-1]) | (RCAc[i-1] & FAs[i]);
+			end
+
+			sum[32] = 1'b0 ^ FAc[31] ^ RCAc[31];
+			cout = (1'b0 & FAc[31]) | (RCAc[31] & FAc[31]) | (RCAc[31] & 1'b0);
+			
+			ALU_Result = sum[31:0];
 			
 		end
 		
