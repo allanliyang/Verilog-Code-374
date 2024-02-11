@@ -40,7 +40,7 @@ reg ADD_cout;
 reg [31:0] FAs, FAc, RCAc;
 
 // special values for SUB
-	reg [31:0] SUB_Temp;
+	reg [31:0] SUB_temp;
 
 
 initial begin
@@ -83,14 +83,14 @@ always @ (*) begin
 		// sub case
 		else if (SUB) begin
 			// Flip the second operand
-			SUB_Temp = ~B + 1;
-			B = SUB_Temp + 1;
+			SUB_temp = ~B + 1;
+			SUB_temp = SUB_temp + 1;
 
 			// Execute add code
 			C = 32'b0;
 
 			for(j = 0; j < 32; j = j + 1) begin
-				FAs[j] = A[j] ^ B[j] ^ C[j];
+				FAs[j] = A[j] ^ SUB_temp[j] ^ C[j];
 				FAc[j] = (A[j] & B[j]) | (C[j] & B[j]) | (C[j] & A[j]);
 			end
 
