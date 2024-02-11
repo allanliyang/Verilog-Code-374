@@ -96,7 +96,7 @@ Datapath DUT	(clear, clock,
 				end
 				
 				Reg_load1a: begin // 0010
-						Mdatain <= 32'h00000012;
+						Mdatain <= 32'h0000FFFF;
 						MDMuxread = 0; MDRin = 0;
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
@@ -108,7 +108,7 @@ Datapath DUT	(clear, clock,
 				end
 				
 				Reg_load2a: begin // 0100
-						Mdatain <= 32'h0000FF00;
+						Mdatain <= 32'h0000008;
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
 				end
@@ -119,7 +119,7 @@ Datapath DUT	(clear, clock,
 				end
 				
 				Reg_load3a: begin // 0110
-						Mdatain <= 32'h00000008;
+						Mdatain <= 32'h00000012;
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
 				end
@@ -132,7 +132,7 @@ Datapath DUT	(clear, clock,
 				// At this point:
 					// - 0b1111 1111 0000 0000 is loaded in R2
 					// - 0b1000 is loaded in R3
-					// - 0b11000 is loaded in R1 (idk why tho)
+					// - 0b10010 is loaded in R1 (idk why tho)
 				
 				// T0 -> T5 performs R1 <= R2 SHR by R3
 				// expected result in R1 = 1111 1111
