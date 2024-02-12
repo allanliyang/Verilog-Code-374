@@ -130,7 +130,7 @@ Datapath DUT	(clear, clock,
 				end
 				
 				// At this point:
-					// - 0b1111 1111 0000 0000 is loaded in R2
+					// - 0b1111 1111 1111 1111 is loaded in R2
 					// - 0b1000 is loaded in R3
 					// - 0b10010 is loaded in R1 (idk why tho)
 				

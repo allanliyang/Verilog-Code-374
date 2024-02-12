@@ -10,9 +10,9 @@
 
 // functionality:
   // this TB performs SHL R1, R2, R3
-  // with R2 = 1111 1111 0000 0000
+  // with R2 = 1111 1111 1111 1111 (0x0000FFFF)
   // with R3 = 10000 (16)
-  // and R1 expected = 1111 1111 0000 0000 0000 0000 0000 0000
+  // and R1 expected = 1111 1111 0000 0000 0000 0000 0000 0000 (0xFFFF0000)
 
 `timescale 1ns/10ps
 module datapath_tb_SHL();
@@ -130,12 +130,12 @@ Datapath DUT	(clear, clock,
 				end
 				
 				// At this point:
-					// - 0b1111 1111 0000 0000 is loaded in R2
-					// - 0b10000 is loaded in R3
+					// - 0b1111 1111 1111 1111 (0x0000FFFF)is loaded in R2
+					// - 0b10000 (16) is loaded in R3
 					// - 0b10010 is loaded in R1 (idk why tho)
 				
 				// T0 -> T5 performs R1 <= R2 SHL by R3
-				// expected result in R1 = 1111 1111 0000 0000 0000 0000 0000 0000 (FF000000)
+				// expected result in R1 = 1111 1111 0000 0000 0000 0000 0000 0000 (FFFF0000)
 
 
         T0: begin // 1000

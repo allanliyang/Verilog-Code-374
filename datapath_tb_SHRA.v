@@ -10,9 +10,9 @@
 
 // functionality:
   // this TB performs SHRA R1, R2, R3
-  // with R2 = 1000 0000 0000 0000 1111 1111 1111 1111 (0x8000FFFF or -2147418113)
+  // with R2 = 1000 0000 0000 0000 1111 1111 1111 1111 (0x8000FFFF)
   // with R3 = 0001 0000 (16)
-  // and R1 expected = 1111 1111 1111 1111 1000 0000 0000 0000 ( 0xFFFF8000 or -32768)
+  // and R1 expected = 1111 1111 1111 1111 1000 0000 0000 0000 ( 0xFFFF8000)
 
 `timescale 1ns/10ps
 module datapath_tb_SHRA();

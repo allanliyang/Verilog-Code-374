@@ -115,11 +115,11 @@ Datapath DUT	(clear, clock,
 				end
 				
 				// At this point:
-					// - 0b1111 1111 0000 0000 1111 0000 1111 0000 is loaded in R7
+					// - 0b1111 1111 0000 0000 1111 0000 1111 0000 (0xFF00F0F0) is loaded in R7
 					// - 0b10010 is loaded in R6 (idk why tho)
 				
 				// T0 -> T4 performs R6 <= NOT(R7)
-				// expected result in R1 = 0000 0000 1111 1111 0000 1111 0000 1111
+				// expected result in R1 = 0000 0000 1111 1111 0000 1111 0000 1111 (0x00FF0F0F)
 				
 				
 				// start T here

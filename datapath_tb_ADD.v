@@ -99,7 +99,8 @@ always @ (Present_state)
 				end
 				
 				Reg_load1a: begin // 0010
-						Mdatain <= 32'h00000012;
+						//Mdatain <= 32'h00000012;
+						Mdatain <= 32'hFFFFEC78; // -5000
 						MDMuxread = 0; MDRin = 0;
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
@@ -111,7 +112,8 @@ always @ (Present_state)
 				end
 				
 				Reg_load2a: begin // 0100
-						Mdatain <= 32'h00000014;
+						//Mdatain <= 32'h00000014;
+						Mdatain <= 32'h00004E20; // 20000, -5000 + 20000 = 15000 (0x00003A98)
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
 				end

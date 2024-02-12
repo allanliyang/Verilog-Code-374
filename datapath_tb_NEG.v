@@ -93,6 +93,7 @@ Datapath DUT	(clear, clock,
 				
 				Reg_load1a: begin // 0010
 						Mdatain <= 32'hFFFF5BAB;
+						//Mdatain <= 32'h0000A455;
 						MDMuxread = 0; MDRin = 0;
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;

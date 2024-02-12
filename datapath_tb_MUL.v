@@ -103,6 +103,7 @@ Datapath DUT	(clear, clock,
 				
 				Reg_load1a: begin // 0010
 						Mdatain <= 32'hFFFFFFCB;
+						//Mdatain <= 32'hFFFFF936; // -1738
 						MDMuxread = 0; MDRin = 0;
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
@@ -115,6 +116,7 @@ Datapath DUT	(clear, clock,
 				
 				Reg_load2a: begin // 0100
 						Mdatain <= 32'hFFFFFFC2;
+						//Mdatain <= 32'h000007D3; // 2003, -1738*2003 = -3,481,214 (LO = 0xFFCAE182, HI = 0xFFFFFFFF)
 						MDMuxread <= 1; MDRin <= 1;
 						#15 MDMuxread <= 0; MDRin <= 0;
 				end

@@ -46,6 +46,8 @@ reg [31:0] SUB_temp;
 reg [31:0] Q;
 reg [31:0] M;
 
+// special values used for MUL
+reg [63:0] MUL_X;
 
 initial begin
 	C = 32'b0; 
@@ -53,6 +55,8 @@ initial begin
 	ADD_cout = 1'b0;
 	Q = 32'b0;
 	M = 32'b0;
+	MUL_X = 64'b0;
+	ALU_Result = 64'b0;
 end
 
 	
@@ -117,9 +121,16 @@ always @ (*) begin
 		
 		/* --------MUL CODE--------*/
 		else if (MUL) begin
-		
-			$display("Checking first two bits for multiplication");
+			
 			ALU_Result = 64'b0;
+			
+			// let MUL_X = A
+			MUL_X[31:0] = A;
+			if (A[31]) MUL_X[63:32] = 32'hFFFFFFFF; // sign extends if A is negative
+			
+			
+			
+			$display("Checking first two bits for multiplication");
 			// use booth algorithm with bit-pair recoding
 			// A is multiplicand(M), B is multiplier(Q)
 			
@@ -135,87 +146,93 @@ always @ (*) begin
 			    2'b01 :	begin
 					// 3 bits to be considered with right padded 0 == 010;
 					// bit-pair recoded result (BPRR) = +1
-					ALU_Result = ALU_Result + A;
+					ALU_Result = ALU_Result + MUL_X;
 					$display("Recoded B[1:0] to +1");
 				end
 				
 			   2'b10 :	begin
 					// 3 bits to be considered with right padded 0 == 100;
 					// bit-pair recoded result (BPRR) = -2
-					ALU_Result = ALU_Result - (A << 1);
+					ALU_Result = ALU_Result - (MUL_X << 1);
 					$display("Recoded B[1:0] to -2");
 				end
 				
 			   2'b11 : begin
 					// 3 bits to be considered with right padded 0 == 110;
 					// bit-pair recoded result (BPRR) = -1
-					ALU_Result = ALU_Result - A;
+					ALU_Result = ALU_Result - MUL_X;
 					$display("Recoded B[1:0] to -1");
 				end
 			endcase
+			
+			$display("ALU_Result = %b", ALU_Result);
 
 			$display("Checking rest of bits for multiplication");
 
 			// for loop to recode all other bits, 3 at a time
 			// check if sign-extend works properly
 			for(i = 1; i < 30; i = i + 2) begin // just trust it
+				
 				case (B[i+:3]) // some fancing syntax for selecting 3 bits starting at index i
 					3'b000 : begin
 						// 3 bits to be considered with right padded 0 == 000
 						// bit-pair recoded result (BPRR) = 0
 						// do nothing
-						$display("Recoded B[1:0] to 0");
+						$display("Recoded to 0");
 					end
 					
 					3'b001 : begin
 						// 3 bits to be considered with right padded 0 == 001
 						// bit-pair recoded result (BPRR) = +1
-						ALU_Result = ALU_Result + (A << (i+1));
-						$display("Recoded B[1:0] to +1");
+						ALU_Result = ALU_Result + (MUL_X << (i+1));
+						$display("Recoded to +1");
 					end
 					
 					3'b010 : begin
 						// 3 bits to be considered with right padded 0 == 010
 						// bit-pair recoded result (BPRR) = +1
-						ALU_Result = ALU_Result + (A << (i+1));
-						$display("Recoded B[1:0] to +1");
+						ALU_Result = ALU_Result + (MUL_X << (i+1));
+						$display("Recoded to +1");
 					end
 					
 					3'b011 : begin
 						// 3 bits to be considered with right padded 0 == 011
 						// bit-pair recoded result (BPRR) = +2
-						ALU_Result = ALU_Result + (A << (i+2));
-						$display("Recoded B[1:0] to +2");
+						ALU_Result = ALU_Result + (MUL_X << (i+2));
+						$display("Recoded to +2");
 					end
 					
 					3'b100 : begin
 						// 3 bits to be considered with right padded 0 == 100
 						// bit-pair recoded result (BPRR) = -2
-						ALU_Result = ALU_Result - (A << (i+2));
-						$display("Recoded B[1:0] to -2");
+						ALU_Result = ALU_Result - (MUL_X << (i+2));
+						$display("Recoded to -2");
 					end
 					
 					3'b101 : begin
 						// 3 bits to be considered with right padded 0 == 101
 						// bit-pair recoded result (BPRR) = -1
-						ALU_Result = ALU_Result - (A << (i+1));
-						$display("Recoded B[1:0] to -1");
+						ALU_Result = ALU_Result - (MUL_X << (i+1));
+						$display("Recoded to -1");
 					end
 					
 					3'b110 : begin
 						// 3 bits to be considered with right padded 0 == 110
 						// bit-pair recoded result (BPRR) = -1
-						ALU_Result = ALU_Result - (A << (i+1));
-						$display("Recoded B[1:0] to -1");
+						ALU_Result = ALU_Result - (MUL_X << (i+1));
+						$display("Recoded to -1");
 					end
 					
 					3'b111 : begin
 						// 3 bits to be considered with right padded 0 == 111
 						// bit-pair recoded result (BPRR) = 0
 						// do nothing
-						$display("Recoded B[1:0] to 0");
+						$display("Recoded to 0");
 					end
 				endcase
+				
+				$display("ALU_Result = %b, %h", ALU_Result, ALU_Result);
+				
 			end
 		end
 		
