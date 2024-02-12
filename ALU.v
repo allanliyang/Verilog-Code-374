@@ -42,11 +42,17 @@ reg [31:0] FAs, FAc, RCAc;
 // special values for SUB
 reg [31:0] SUB_temp;
 
+// special values for DIV
+reg [31:0] Q;
+reg [31:0] M;
+
 
 initial begin
-	C = 32'b0; ADD_sum = 32'b0; ADD_cout = 1'b0;
-	
-	
+	C = 32'b0; 
+	ADD_sum = 32'b0;
+	ADD_cout = 1'b0;
+	Q = 32'b0;
+	M = 32'b0;
 end
 
 	
@@ -54,7 +60,7 @@ always @ (*) begin
 			
 		
 		
-		// add case
+		/* --------ADD CODE--------*/
 		if (ADD) begin
 			// some addition algorithm here
 			// make add a function
@@ -80,7 +86,8 @@ always @ (*) begin
 			
 		end
 		
-		// sub case
+		
+		/* --------SUB CODE--------*/
 		else if (SUB) begin
 			// Flip the second operand
 			SUB_temp = ~B;
@@ -108,7 +115,7 @@ always @ (*) begin
 			ALU_Result = ADD_sum[31:0];
 		end
 		
-		// mul case
+		/* --------MUL CODE--------*/
 		else if (MUL) begin
 		
 			$display("Checking first two bits for multiplication");
@@ -212,75 +219,128 @@ always @ (*) begin
 			end
 		end
 		
-		// div case
+		
+		/* --------DIV CODE--------*/
 		else if (DIV) begin
 			// use non-restoring division algorithm
-			// assume A is divident(D), B is divisor(Q)
+			// assume A is dividend(Q), B is divisor(M)
 			// use two separate registers for A and Q
-			// start with A = 0, Q = B
-			// WIP
-			// NOTE: Use new 33-bit DIV_A register to implement A register
-			// new possible solution:
-			// set bottom 32 bits to ALU_Result register = to Q
-			// set DIV_A = 0
-			// use for loop for non-restoring div algorithm
-			// for (i = 0; i < 32; i = i + 1){
+			// start with DIV_A = 0, Q = input A
+			
+			// initialize DIV_A and Q values
+			DIV_A = 33'b0;				// DIV_A register used as A register
+			
+			if(A[31]) begin			// check if Q needs to be negated bcz Q < 0
+					Q = ~A; 				// put flipped bits into Q
+					Q = Q + 1; 			// add 1 to complete negation
+			end
+			else begin 					// else case, no negation needed
+					Q = A;				// place input directly into Q
+
+			end
+			
+			// check is M is positive or negative
+			if (B[31]) begin
+				M = ~B;					// negate M as needed
+				M = M + 1;
+			end
+			else begin
+				M = B;					// place B input directly into M
+				$display("M = %b", M);
+				$display("B = %b", B);
+			end
+			
+			
+			// loop for DIV algorithm
+			for (i = 0; i < 32; i = i + 1) begin
 				// left shift ALU_Result (Q) and DIV_A (A)
-				// DIV_A[0] = ALU_Result[32] // move bit over
-				// determine whether to add or subtract D from DIV_A
-				// if (DIV_A[32] == 1'b0){
-					// DIV_A = DIV_A - D
-				//}
-				// else {
-					// DIV_A = DIV_A + D
-				//}
-				// determine where to right-pad Q with 1 or 0 after operating on DIV_A
-				// if (DIV_A[32] == 1'b0) {
-					// ALU_Result[0] = 1
-				// } 
-				// else {
-					// ALU_Result[0] = 0
-				// }
- 			//}
-			// Result of division is stored in bottom 32 bits of ALU_Result reg
-			// Remainder is stored in bottom 32 bits of DIV_A register
+				DIV_A = DIV_A << 1;				// SHL
+				DIV_A[0] = Q[31];					// carry bit over from Q to A
+				Q = Q << 1;							// SHL
+				$display("DIV_A = %b, Q = %b", DIV_A, Q);
+				
+				// determine whether to add or subtract from DIV_A
+				if (DIV_A[32]) begin 			// leftmost bit == 1, ADD
+					DIV_A = DIV_A + M;
+				end			
+				else begin							// leftmost bit == 0, SUB
+					DIV_A = DIV_A - M;			
+				end
+				
+				// determine whether to right-pad Q with 1 or 0 after operating on DIV_A
+				if (DIV_A[32]) begin				// leftmost bit == 1, pad w/ 0
+					Q[0] = 1'b0;
+				end
+				else begin							// leftmost bit == 0, pad w/ 1
+					Q[0] = 1'b1;		
+				end
+			end
+			
+			// check if remainder is negative, restore value as needed
+			if (DIV_A[32]) begin
+				$display("DIV_A_i = %b", DIV_A);
+				DIV_A = DIV_A + M;
+				$display("DIV_A_f = %b", DIV_A);
+			end
+
+			// DIVISION ALGORITHM COMPLETED AT THIS POINT
+			
+			// check to see if quotient needs to be negated bcz of possible negative inputs
+			if (A[31] && (!B[31])) begin 					// case if only A is negative
+				$display("Quotient flipped because A is negative");
+				Q= ~Q; 											// flip bottom 32 bits of Q register
+				Q = Q + 1; 										// add 1 to complete 2's comp
+			end
+			else if ((!A[31]) && B[31]) begin			// case if only B is negative
+				$display("Quotient flipped because B is negative");
+				Q = ~Q; 											// flip bottom 32 bits of Q register
+				Q = Q + 1; 										// add 1 to complete 2's comp
+			end
+			// if both A and B are both +ve or both -ve don't matter
+					
+			ALU_Result[63:32] = DIV_A[31:0]; // store remainder in top 32 bits of ALU_Result
+			ALU_Result[31:0] = Q[31:0];		// store quotient in bottom 32 bits of ALU_Result
 		end
 		
-		// and case
+		
+		/* --------AND CODE--------*/
 		else if (AND) begin
 			ALU_Result = A & B;
 		end
 		
-		// or case
+		
+		/* --------OR CODE--------*/
 		else if (OR) begin
 			ALU_Result = A | B;
 		end
 		
-		// shr  case
+		
+		/* --------SHR CODE--------*/
 		else if (SHR) begin
 			// SHR is same as divide by 2
 			// note: if amount to be shifted >= 32, result is always 0
-			// helpful code: https://kaneriadhaval.blogspot.com/2014/02/32-bit-barrel-shifter-in-verilog.html
 			ALU_Result = A >> B;
 		end
 		
-		// shra case
+		
+		/* --------SHRA CODE--------*/
 		else if (SHRA) begin
 			// NOTE: if amount to be shifted >= 32, result is always 0? (check for case of max neg number)
 			// can add if case with bit masking for this functionality
-			// WIP
 			ALU_Result = $signed(A) >>> B;
 			// NOTE: '>>>' is the operator for arithmetic shifting, but A may need to initially be sign extended
 		end
 		
-		// shl case
+		
+		/* --------SHL CODE--------*/
 		else if (SHL) begin
 			// NOTE: if amount to be shifted >= 32, result is always 0
 			// can add if case with bit masking for this functionality
 			ALU_Result = A << B;
 		end
 		
-		// ror case
+		
+		/* --------ROR CODE--------*/
 		else if (ROR) begin
 			// since bits are recycled:
 			// - ROR A by 32 is same as ROL A by 0
@@ -323,7 +383,8 @@ always @ (*) begin
 			endcase
 		end
 		
-		// rol case
+		
+		/* --------ROL CODE--------*/
 		else if (ROL) begin
 			// since bits are recycled:
 			// - ROL A by 32 is same as ROL A by 0
@@ -366,19 +427,23 @@ always @ (*) begin
 			endcase
 		end
 		
-		// neg case
+		
+		/* --------NEG CODE--------*/
 		else if (NEG) begin
 			// do 2's complement operation
 			ALU_Result = ~B; // flip bits
 			ALU_Result = ALU_Result + 1; // add 1
 		end
 		
-		// not case
+		
+		/* --------NOT CODE--------*/
 		else if (NOT) begin
 			// flip bits (unsigned)
 			ALU_Result = ~B; // '~' operator is used for flipping bits, '!' evaluates to either '0' or '1'
 		end
 		
+		
+		/* --------IncPC CODE--------*/
 		else if (IncPC) begin
 			ALU_Result = B + 1; // PC increments by 1 each time
 		end
@@ -387,6 +452,7 @@ always @ (*) begin
 			ALU_Result = ALU_Result; //do nothing
 		end
 	end
+	
 	// low 32 bits go to low reg, high 32 bits go to high reg
 	assign Clow = ALU_Result[31:0];	
 	assign Chigh = ALU_Result[63:32];

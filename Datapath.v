@@ -129,14 +129,13 @@ Bus BUS	(R0out, R1out, R2out, R3out,
 		
 			
 // ALU
-// TEMPORARILY USING IN-PROGRESS ALU TO JUST TEST AND FUNCTIONALITY
-ALU ALU_AND	(Yout, BusMuxOut,
-				ADD, SUB, MUL, DIV,
-				AND, OR,
-				SHR, SHRA, SHL,
-				ROR, ROL,
-				NEG, NOT, 
-				IncPC,
-				Chigh, Clow); // NOTE: might need to fix later
+ALU ALU	(Yout, BusMuxOut,
+			ADD, SUB, MUL, DIV,
+			AND, OR,
+			SHR, SHRA, SHL,
+			ROR, ROL,
+			NEG, NOT, 
+			IncPC,
+			Chigh, Clow);
 				
 endmodule
