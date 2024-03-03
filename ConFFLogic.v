@@ -51,4 +51,3 @@ always @ (posedge clock)
 	
 	
 endmodule
-bit)
