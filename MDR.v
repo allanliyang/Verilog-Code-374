@@ -1,11 +1,5 @@
 // only used for MDR register due to extra inputs
 
-
-// shits fucked, Mdatain and Bus values aren't going into q
-// clock, clear, MDRin, read, BusMuxOut, Mdatain, are all correctly seen by MDR as seem from simulation
-// works perfectly fine in MDR_tb, broken asf in datapath_tb
-
-
 module MDR (
 	
 	input clear, clock, MDRin, read, // extra signal for MDMux select, see Phase 1 documentation

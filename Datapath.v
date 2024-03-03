@@ -52,7 +52,7 @@ wire [31:0] Chigh, Clow;
 
 // REGISTERS
 // R0 - R15
-Register32bit R0(clear, clock, R0in, BusMuxOut, BusMuxInR0);
+R0 R0(clear, clock, R0in, BAout, BusMuxOut, BusMuxInR0);				// special file for R0 (includes BAout signal)
 Register32bit R1(clear, clock, R1in, BusMuxOut, BusMuxInR1);
 Register32bit R2(clear, clock, R2in, BusMuxOut, BusMuxInR2);
 Register32bit R3(clear, clock, R3in, BusMuxOut, BusMuxInR3);
