@@ -22,10 +22,14 @@ reg [3:0]rc;
 reg [15:0]Rxin;
 reg [15:0]Rxout;
 
+// 32-bit register for BusMuxInCSE
+reg [31:0]q;
+
 initial begin
 	
 	Rxin = 16'h0000;
 	Rxout = 16'h0000;
+	q = 32'h00000000;
 	
 end
 
@@ -35,6 +39,9 @@ always @ (*) begin
 	ra = IR[26:23];
 	rb = IR[22:19];
 	rc = IR[18:15];
+	
+	// get C value from opcode
+	q[18:0] = IR[18:0];
 
 	// non-blocking assignments used that will be overwritten with '1' in proper cases
 	Rxin <= 16'h0000;
@@ -170,6 +177,14 @@ always @ (*) begin
 			endcase	
 		end
 	end
+	
+	if (q[18]) begin
+		q[31:19] = 13'b1111111111111;
+	end
+	else
+		q[31:19] = 13'b0000000000000;
+	end
+	
 end
 
 // assign Rin and Rout signals based on values in Rxin and Rxout registers
@@ -206,5 +221,8 @@ assign R12out = Rxout[12];
 assign R13out = Rxout[13];
 assign R14out = Rxout[14];
 assign R15out = Rxout[15];
+
+// assign output to bus for CSE
+assign BusMuxInCSE = q;
 
 endmodule

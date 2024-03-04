@@ -1,7 +1,7 @@
 module MAR(
 	input clear, clock, MARin,
 	input [31:0]BusMuxOut,
-	output wire [8:0]Address 
+	output wire [8:0]MARAddrOut 
 ); 
 
 reg [8:0] q; 
@@ -15,6 +15,6 @@ always @ (posedge clock)
 				q <= BusMuxOut[8:0];
 			end
 		end
-	assign Address = q;
+	assign MARAddrOut = q;
 endmodule
 
