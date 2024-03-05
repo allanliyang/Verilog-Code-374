@@ -4,17 +4,17 @@ module ConFFLogic (
 	input ConIn,
 	input [31:0]IRout,
 	input [31:0]BusMuxOut,
-	output wire ConFFOut;
+	output wire ConFFOut
 );
 
-parameter	zero = 2'b00, nonZero = 2'b01, positive = 2b'10, negative = 2b'11;
+parameter	zero = 2'b00, nonZero = 2'b01, positive = 2'b10, negative = 2'b11;
 
 reg [1:0]C2;
 reg Q;
 
 initial begin
 
-	C2 = [20:19]IRout;
+	C2 = IRout[20:19];
 	Q = 1'b0; // Initializing q
 	
 end
@@ -30,10 +30,10 @@ always @ (posedge ConIn) begin // NOTE: Check if this is the right input for FF
 			nonZero: 	Q <= (|BusMuxOut); // reduction OR
 								
 			//10 - Branches if BusMuxOut is >= 0
-			positive:	Q <= ~[31]BusMuxOut;
+			positive:	Q <= ~BusMuxOut[31];
 			
 			//11 - Branches if BusMuxOut is < 0
-			negative:	Q <= [31]BusMuxOut;
+			negative:	Q <= BusMuxOut[31];
 		endcase
 		
 	end

@@ -1,29 +1,33 @@
-module RAM(We_b, Re_b, Addrress, IO); 
-	input We_b;					//write enable
-	input Re_b;					//Read enable; 
-	input[8:0] Address; 				// address input 
-	input[31:0]BusMuxIn; 
-	output[31:0]MDRMux; 
+module RAM(
+	input read, write,
+	input [8:0]address,
+	input [31:0]BusMuxOut, 
+	output[31:0]Mdatain
+	);
 
 	
-	reg[8:0] mem[0:511];  // RAM, 2^9 
-	reg[8:0] data; 
+	reg[31:0] mem[0:511];  // 36x512 RAM
+	reg[31:0] data;
 	
+	// output from ram when read == 1 and write == 0
+	always @ (address, write, read) begin 
+			if(read && !write) begin
+				data <= mem[address];
+			end
+			else begin
+				data <= 32'hZZZZZZZZ;
+			end
+	end 
 	
-	//Read to RAM When We = 0 and Re = 1 
-	always @(Address or We_b or Re_b) 
-		begin 
-			if(Re_b && !We_b)
-				data <= mem[Address]; 
-		end 
-	// Write to RAM	
-	always @( Address or IO or We_b) 
-		begin 
-			if(We_b == 1'b1)
-			mem[Address] <= IO; 
-		end 
-	assign MDRMux = data; 
-	endmodule 
-		
-		
-
+	// write to ram when write == 1
+	always @ (address, BusMuxOut, write) begin 
+			if (write) begin 
+				mem[address] <= BusMuxOut; 
+			end
+			
+	end
+	
+assign Mdatain = data;
+	
+endmodule 
+	

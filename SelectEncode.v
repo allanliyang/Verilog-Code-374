@@ -1,5 +1,5 @@
 module SelectEncode (
-	input [31:0] IR,
+	input [31:0]IR,
 	input Gra, Grb, Grc,
 	input Rin, Rout, BAout,
 	output R0in, R1in, R2in, R3in,
@@ -10,7 +10,7 @@ module SelectEncode (
 	output R4out, R5out, R6out, R7out,
 	output R8out, R9out, R10out, R11out,
 	output R12out, R13out, R14out, R15out,
-	output wire[31:0] BusMuxInCSE
+	output wire [31:0]BusMuxInCSE
 );
 
 // addresses of ra, rb, and rc from opcode
@@ -181,7 +181,7 @@ always @ (*) begin
 	if (q[18]) begin
 		q[31:19] = 13'b1111111111111;
 	end
-	else
+	else begin
 		q[31:19] = 13'b0000000000000;
 	end
 	
