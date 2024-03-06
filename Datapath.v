@@ -181,7 +181,7 @@ SelectEncode SELogic 	(IRout, Gra, Grb, Grc,
 // ConFF logic
 ConFFLogic ConFF(ConIn, IRout, BusMuxOut, ConFFOut);
 
-assign OutPortOut = OutPortOut;
+assign OutPortdata = OutPortOut;
 assign ConFFQ = ConFFOut;
 
 
