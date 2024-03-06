@@ -2,7 +2,7 @@
 // T1: Zlowout, PCin, MDMuxread, Mdatain, MDRin
 // T2: MDRout, IRin
 // T3: Grb, BAout, Yin
-// T4: Cout, ADD, Zin
+// T4: Cout, ADD, Zlowin
 // T5: Zlowout, Gra, Rin
 
 // testbench for LD instruction
