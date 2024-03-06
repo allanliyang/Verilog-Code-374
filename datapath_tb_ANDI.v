@@ -2,7 +2,7 @@
 // T1: Zlowout, PCin, MDMuxread, Mdatain, MDRin
 // T2: MDRout, IRin
 // T3: Grb, Rout, Yin
-// T4: Cout, AND, Zin
+// T4: Cout, AND, Zlowin
 // T5: Zlowout, Gra, Rin
 
 // functionality
