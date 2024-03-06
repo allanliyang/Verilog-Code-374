@@ -1,10 +1,10 @@
 module Datapath(
 	input wire clear, clock,
 	input wire HIin, LOin, HIout, LOout, 				// HI and LO in/out
-	input wire Zhighin, Zlowin, Zhighout, Zlowout, 	// Z high and low in/out NOTE: check if single Zin signal can be used fro both Zhigh/low regs
+	input wire Zhighin, Zlowin, Zhighout, Zlowout, 	// Z high and low in/out
 	input wire PCin, PCout, 								// PC register in/out
 	input wire MDRin, MDRout, MARin,			 			// MDR and MAR in/out
-	input wire InPortin, InPortout, 						// InPort in/out
+	input wire InPortout, 								// InPort in/out
 	input wire OutPortin,
 	input wire CSEout,										// C Sign Extended out
 	input wire IRin,											// IR in										
