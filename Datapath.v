@@ -18,11 +18,10 @@ module Datapath(
 	input wire NEG, NOT,
 	input wire IncPC,											// signal for PC++
 	
-	
 	input wire Gra, Grb, Grc,								// signals for SelectEncode in Phase 2
 	input wire Rin, Rout, BAout,
 	
-	input wire [31:0]InputUnitOut,						// simulated signal from input unit
+	input wire [31:0]InPortdata,						// simulated signal from input unit
 	
 	input wire RAMread, RAMwrite,							// control signals for RAM module
 	
@@ -107,7 +106,7 @@ MDR MDR(clear, clock, MDRin, MDMuxread, BusMuxOut, Mdatain, BusMuxInMDR);
 MAR MAR(clear, clock, MARin, BusMuxOut, MARAddrOut);
 
 // InPort register
-InPort InPort(clear, clock, InputUnitOut, BusMuxInInPort);
+InPort InPort(clear, clock, Inportdata, BusMuxInInPort);
 
 //OutPort register
 Register32bit OutPort(clock, clear, OutPortin, BusMuxOut, OutPortOut);
@@ -183,6 +182,5 @@ ConFFLogic ConFF(ConIn, IRout, BusMuxOut, ConFFOut);
 
 assign OutPortdata = OutPortOut;
 assign ConFFQ = ConFFOut;
-
 
 endmodule
