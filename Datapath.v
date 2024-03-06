@@ -25,7 +25,7 @@ module Datapath(
 	
 	input wire RAMread, RAMwrite,							// control signals for RAM module
 	
-	output wire OutPortdata,									// data from OutPort
+	output wire [31:0]OutPortdata,									// data from OutPort
 	output wire ConFFQ											// output from ConFF
 );
 
