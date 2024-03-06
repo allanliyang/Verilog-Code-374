@@ -5,7 +5,6 @@ module RAM(
 	output wire [31:0]Mdatain
 	);
 
-	
 	reg [31:0]mem[0:511];  // 36x512 RAM
 	reg [31:0]data;
 
@@ -38,4 +37,3 @@ module RAM(
 assign Mdatain = data;
 	
 endmodule 
-	
