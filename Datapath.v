@@ -4,7 +4,7 @@ module Datapath(
 	input wire Zhighin, Zlowin, Zhighout, Zlowout, 	// Z high and low in/out
 	input wire PCin, PCout, 								// PC register in/out
 	input wire MDRin, MDRout, MARin,			 			// MDR and MAR in/out
-	input wire InPortout, 								// InPort in/out
+	input wire InPortout, 									// InPort in/out
 	input wire OutPortin,
 	input wire CSEout,										// C Sign Extended out
 	input wire IRin,											// IR in										
@@ -21,12 +21,12 @@ module Datapath(
 	input wire Gra, Grb, Grc,								// signals for SelectEncode in Phase 2
 	input wire Rin, Rout, BAout,
 	
-	input wire [31:0]InPortdata,						// simulated signal from input unit
+	input wire [31:0]InPortdata,							// simulated signal from input unit
 	
 	input wire RAMread, RAMwrite,							// control signals for RAM module
 	
-	output wire [31:0]OutPortdata,									// data from OutPort
-	output wire ConFFQ											// output from ConFF
+	output wire [31:0]OutPortdata,						// data from OutPort
+	output wire ConFFQ										// output from ConFF
 );
 
 // declarations for bus connections
@@ -63,7 +63,9 @@ wire [31:0]Mdatain;								// data into to MDR from mem. chip
 
 wire [31:0]IRout;									// internal signal connecting IR register to SelectEncode
 
-wire MARAddrOut;									// internal signal for address from MAR
+wire [8:0]MARAddrOut;							// internal signal for address from MAR
+
+wire [31:0]OutPortOut;
 
 //other datapaths
 wire [31:0] Yout;
@@ -106,7 +108,7 @@ MDR MDR(clear, clock, MDRin, MDMuxread, BusMuxOut, Mdatain, BusMuxInMDR);
 MAR MAR(clear, clock, MARin, BusMuxOut, MARAddrOut);
 
 // InPort register
-InPort InPort(clear, clock, Inportdata, BusMuxInInPort);
+InPort InPort(clear, clock, InPortdata, BusMuxInInPort);
 
 //OutPort register
 Register32bit OutPort(clock, clear, OutPortin, BusMuxOut, OutPortOut);

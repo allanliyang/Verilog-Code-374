@@ -1,7 +1,7 @@
 module InPort (
 	
 	input clear, clock,
-	input [31:0]InputUnit,
+	input [31:0]Inputdata,
 	output wire [31:0]BusMuxInInPort
 );
 
@@ -16,7 +16,7 @@ always @ (posedge clock) begin
 				q <= 32'h00000000;			
 			end
 			else begin
-				q = InputUnit;
+				q = Inputdata;
 			end
 	end
 

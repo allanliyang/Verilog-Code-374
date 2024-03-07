@@ -9,7 +9,57 @@ module RAM(
 	reg [31:0]data;
 
 	initial begin
-		$readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/512x0.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// uncomment the appropriate txt file to initialize ram for each testbench
+		
+		// default case
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/512x0.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_LD
+		$readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_LD.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_LDI
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_LDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_ST
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_ST.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_ADDI
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_ADDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_ANDI
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_ANDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_ORI
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_ORI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_BRZR
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRZR.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_BRNZ
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRNZ.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_BRPL
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRPL.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_BRMI
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRMI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_JR
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JR.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_JAL
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JAL.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_MFHILO
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_MFHILO.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_IN
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_IN.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
+		// datapath_tb_OUT
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_OUT.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		
 	end
 	
 	// output from ram when read == 1 and write == 0
