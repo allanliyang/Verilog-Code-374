@@ -26,3 +26,27 @@
 // 00001 0000 0010 0000000000000111000
 // op    r0   r2     C(0x38)
 // 08100038
+
+
+// ST instructions
+// Instruction: ldi R1, 0x43 (used for preloading R1)
+// stores 0x43 into R1
+// 00001 0001 0000 0000000000000111000
+// ldi    r1   r0    C(0x43)
+// 08800038
+
+// Instruction: st 0x87, R1
+// stores contents of R1 into ram at address 0x87
+// 00010 0001 0000 0000000000010000111
+// st    r1    r0     0x87
+// 10800087
+
+// Instruction: st 0x87(R1), R1
+// stores contents of R1 into ram at address 0x87+(R1)
+// 00010 0001 0001 0000000000010000111
+// st    r1    r1       0x87
+// 10880087
+
+
+// 
+
