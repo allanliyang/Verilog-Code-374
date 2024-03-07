@@ -12,4 +12,4 @@
 
 
 `timescale 1ns/10ps
-module datapath_tb_BR();
+module datapath_tb_BRZR();
