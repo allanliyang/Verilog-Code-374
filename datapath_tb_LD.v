@@ -13,7 +13,7 @@
 // functionality
 	// this tb performs ld R2,0x95 and then ld R0, 0x38(R2)
 	// 0x4 is stored at ram address 0x95
-	// after ld R2,0x95, R2 will hole 0x4
+	// after ld R2,0x95, R2 will hold 0x4
 	// 0xFFFF is stored at address 0x38+0x4
 	// after ld R0, 0x38(R2), 0xFFFF will be stored in R0
 	
