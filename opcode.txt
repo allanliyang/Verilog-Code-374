@@ -1,11 +1,11 @@
 // this files holds opcode for different test cases and instructions
 
+// LD instructions
 // Instruction: ld R2,0x95
 // stores contents at ram address 0x95 into R2
 // 00000 0010 0000 0000000000010010101
 // op		 r2   r0		      C(0x95)(d149)
 // 01000095
-
 
 // Instruction: ld R0, 0x38(R2)
 // stores contents at ram address 0x38+R2 into R0
@@ -13,3 +13,16 @@
 // op     r0   r2         C(0x38)(d56)
 // 00100038
 
+
+// LDI instructions
+// Instruction: ldi R2,0x95
+// stores 0x95 into R2
+// 00001 0010 0000 0000000000010010101
+// op    r2   r0       C(0x95)
+// 09000095
+
+// Instruction: ldi R0, 0x38(R2)
+// stores 0x38+R2 into R0
+// 00001 0000 0010 0000000000000111000
+// op    r0   r2     C(0x38)
+// 08100038
