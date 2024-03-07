@@ -39,7 +39,7 @@ module datapath_tb_LD();
 	reg RAMread, RAMwrite;
 
 	// outputs from datapath
-	reg [31:0]OutPortdata
+	reg [31:0]OutPortdata;
 	reg ConFFQ;
 
 	// parameter declarations
@@ -57,7 +57,7 @@ module datapath_tb_LD();
 		      IRin,
 		      MDMuxread,
 		      Yin,
-		      ADD, SUB, MUL, DIV
+		      ADD, SUB, MUL, DIV,
 		      AND, OR,
 		      SHR, SHRA, SHL,
 		      ROR, ROL,

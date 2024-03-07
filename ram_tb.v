@@ -1,53 +1,56 @@
 // temporary testbench used to verify functionality of ram separate from other components
-
+// ram is confirmed working
+`timescale 1ns/10ps
 module ram_tb();
 
   reg read, write;
   reg [8:0]address;
-  reg [31:0]BusMuxOut, Mdatain;
-
-  ram(read, write, address, BusMuxOut, Mdatain);
+  reg [31:0]BusMuxOut;
   
+  wire [31:0]Mdatain;
+
+  RAM RAM(read, write, address, BusMuxOut, Mdatain);
+  
+  
+  
+  reg clock;
+  reg [3:0]Present_state;
   integer i;
 
-  initial begin
 
-    read = 1;
-    write = 0;
-    address = 9'b0;
-  
-    // display first 40 entries of RAM
-    $display("First 40 RAM entries");
-    for (i = 0; i < 40; i = i+1) begin
-      $display("%h", Mdatain);
-      address = address + 1;
-      #10
-    end
-    
-    read = 0;
-    address = 0;
-    BusMuxOut = 32'h0;
-    write = 1;
-    // rewrite first 40 entries to 0x0
-    $display("Editing RAM");
-    for (i = 0; i < 40; i = i+1) begin
-      address = address + 1;
-      BusMuxOut = BusMuxOut + 1;
-      #10
-    end
+initial begin clock = 0; Present_state = 4'b0000; end
+always #10 clock = ~clock;
+always @ (negedge clock) Present_state = Present_state + 1;
 
-    write = 0;
-    read = 1;
-    address = 9'b0;
-    
-    // display first 40 entries of RAM
-    $display("Edited 40 RAM entries");
-    for (i = 0; i < 40; i = i+1) begin
-      $display("%h", Mdatain);
-      address = address + 1;
-      #10
-    end
-    
-  end
+always @ (Present_state) begin
+
+		case (Present_state)
+			4'b0001 : begin
+				read <= 1; write <= 0; address <= 9'b000000000;
+				#15 read <= 0;
+			end
+			
+			4'b0010 : begin
+				read <= 0; write <= 1; address <= 9'b000000001; BusMuxOut <= 32'hFFFFFFFF;
+				#15 write <= 0; BusMuxOut <= 32'b0;
+			end
+			
+			4'b0011 : begin
+				read <= 1; write <= 0; address <= 9'b000000001;
+				#15 read <= 0;
+			end
+			
+			4'b0100 : begin
+				read <= 1; write <= 0; address <= 9'b000000001;
+				#15 read <= 0;
+			end
+			
+			4'b0101 : begin
+				read <= 1; write <= 0; address <= 9'b000000000;
+				#15 read <= 0;
+			end
+		endcase
+			
+end
 
 endmodule
