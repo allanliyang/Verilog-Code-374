@@ -47,6 +47,19 @@
 // st    r1    r1       0x87
 // 10880087
 
+// ADDI instructions
+// Instruction: ldi R3, 0xA (used for preloading R4)
+// 00001 0100 0000 0000000000000001010
+// ldi    R1     R0    0xA
+// 0A00000A
 
+// Instruction: addi R3, R4, -5
+// 01100 0011 0100 1111111111111111011
+// addi  R3    R4    19-bit 2's CMP of -5
+// 61A7FFFB
+
+// ANDI instructions
 // 
+
+
 
