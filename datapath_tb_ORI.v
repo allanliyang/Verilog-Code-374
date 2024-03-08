@@ -128,7 +128,7 @@ module datapath_tb_ORI();
 						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 
-					// ori R3, R4, -5
+					// ori R3, R4, 0x53
 					5'b01000 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
