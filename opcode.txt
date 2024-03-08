@@ -33,7 +33,7 @@
 // stores 0x43 into R1
 // 00001 0001 0000 0000000000000111000
 // ldi    r1   r0    C(0x43)
-// 08800038
+// 08800043
 
 // Instruction: st 0x87, R1
 // stores contents of R1 into ram at address 0x87

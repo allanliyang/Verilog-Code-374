@@ -104,7 +104,7 @@ module datapath_tb_ST();
 						#15 clear <= 0;
 					end
 
-        // ldi R1, 0x43 to preload register R1
+					// ldi R1, 0x43 to preload register R1
 					5'b00010 : begin	// LDI T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
@@ -132,18 +132,18 @@ module datapath_tb_ST();
 					
 					5'b00111 : begin	// LDI T5: Zlowout, Gra, Rin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 1; Rin <= 1
+						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 
-          // ST control sequences start here
-          // st 0x87, R1
+					// ST control sequences start here
+					// st 0x87, R1
 					5'b01000 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
 					end
 					
 					5'b01001 : begin	// T1: Zlowout, PCin, MDMuxread, RAMread, Mdatain, MDRin 
-				    Zlowout <= 1; 		PCin <= 1; 	MDMuxread <= 1; RAMread <= 1; MDRin <= 1;
+						Zlowout <= 1; 		PCin <= 1; 	MDMuxread <= 1; RAMread <= 1; MDRin <= 1;
 						#15 Zlowout <= 0; PCin <= 0; 	MDMuxread <= 0; RAMread <= 0; MDRin <= 0;
 					end
 					
@@ -164,15 +164,15 @@ module datapath_tb_ST();
 					
 					5'b01101 : begin	// T5: Zlowout, MARin
 						Zlowout <= 1; MARin <= 1;
-            #15 Zlowout <= 0; MARin <= 0;
+						#15 Zlowout <= 0; MARin <= 0;
 					end
 					
 					5'b01110 : begin	// T6: Gra, Rout, RAMwrite
 						Gra <= 1; Rout <= 1; RAMwrite <= 1;
-            #15 Gra <= 0; Rout <= 0; RAMwrite <= 1;
+						#15 Gra <= 0; Rout <= 0; RAMwrite <= 0;
 					end
 
-          // st 0x87(R1), R1
+					// st 0x87(R1), R1
 					5'b01111 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
@@ -188,13 +188,13 @@ module datapath_tb_ST();
 						#15 MDRout <= 0; IRin <= 0;
 					end
 
-          5'b10010 : begin  // T3: Grb, BAout, Yin
-            Grb <= 1; BAout <= 1; Yin <= 1;
+					5'b10010 : begin  // T3: Grb, BAout, Yin
+						Grb <= 1; BAout <= 1; Yin <= 1;
 						#15 Grb <= 0; BAout <= 0; Yin <= 0;
           end
 
           5'b10011 : begin  // T4: CSEout, ADD, Zlowin
-            CSEout <= 1; ADD <= 1; Zlowin <= 1;
+						CSEout <= 1; ADD <= 1; Zlowin <= 1;
 						#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
           end
 
@@ -205,7 +205,7 @@ module datapath_tb_ST();
 
           5'b10101 : begin  // T6: Gra, Rout, RAMwrite
             Gra <= 1; Rout <= 1; RAMwrite <= 1;
-            #15 Gra <= 0; Rout <= 0; RAMwrite <= 1;
+            #15 Gra <= 0; Rout <= 0; RAMwrite <= 0;
           end
         
 			endcase

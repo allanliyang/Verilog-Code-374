@@ -123,7 +123,7 @@ module datapath_tb_LDI();
 					
 					5'b00111 : begin	// T5: Zlowout, Gra, Rin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 1; Rin <= 1
+						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 					
 					5'b01000 : begin	// T0: PCout, MARin, IncPC, Zlowin
@@ -153,11 +153,11 @@ module datapath_tb_LDI();
 					
 					5'b01101 : begin	// T5: Zlowout, Gra, Rin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 1; Rin <= 1
+						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
+					
 			endcase
+			
 	end
-
-
 	
 endmodule
