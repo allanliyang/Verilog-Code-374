@@ -98,7 +98,7 @@ module datapath_tb_ANDI();
 						#15 clear <= 0;
 					end
 
-					// ldi R4, 0xA, to preload R4
+					// ldi R4, 0x50, to preload R4
 					5'b00010 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
@@ -129,7 +129,7 @@ module datapath_tb_ANDI();
 						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 
-					// addi R3, R4, -5
+					// andi R3, R4, 0x53
 					5'b01000 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
