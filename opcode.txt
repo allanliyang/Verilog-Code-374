@@ -77,6 +77,7 @@
 // 69A00053
 
 
+
 // ----- ORI instructions -----//
 // Instruction: ldi R4, 0xFF00 (used for preloading R4)
 // 00001 0100 0000 0001111111100000000
@@ -87,6 +88,7 @@
 // 01110 0011 0100 0000000000001010011
 // ori   R3   R4       0x53
 // 71A00053
+
 
 
 // ----- BRANCH instructions -----//
@@ -105,10 +107,36 @@
 // JAL 	R6		R15		unused
 // AB780000
 
-
 // Instruction: JR R15
 // stores contents of R15 into PC
 // 10100 1111 0000 0000000000000000000
 // JR		R15	unused
 // A7800000
 
+
+
+// ----- MFHI and MFLO instructions -----//
+// Instruction: ldi R6, 0x7FFFF
+// 00001 0110 0000 1111111111111111111
+// ldi    R6   R0    0x7FFFF (-1)
+// 0B07FFFF
+
+// Instruction: ldi R7, 0x1
+// 00001 0111 0000 0000000000000000001
+// ldi   R7    R0     0x1
+// 0B800001
+
+// Instruction: mul R6, R7
+// 01111 0110 0111 0000000000000000000
+// mul    R6   R7    unused
+// 7B380000
+
+// Instruction: mfhi R6
+// 11000 0110 0000 0000000000000000000
+// mfhi  R6      --unused--
+// C3000000
+
+// Instruction: mflo R7
+// 11001 0111 0000 0000000000000000000
+// mflo  R7      --unused--
+// CB800000
