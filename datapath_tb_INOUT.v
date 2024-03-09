@@ -72,7 +72,7 @@ module datapath_tb_INOUT();
 						Rin, Rout, BAout,
 						InPortdata,
 						RAMread, RAMwrite,
-			 			CONin,
+			 			CONin, 
 						OutPortdata,
 						ConFFQ);
 
