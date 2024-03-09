@@ -24,6 +24,8 @@ module Datapath(
 	input wire [31:0]InPortdata,							// simulated signal from input unit
 	
 	input wire RAMread, RAMwrite,							// control signals for RAM module
+
+	input wire CONin,							// trigger for CONFF flip-flop
 	
 	output wire [31:0]OutPortdata,						// data from OutPort
 	output wire ConFFQ										// output from ConFF
