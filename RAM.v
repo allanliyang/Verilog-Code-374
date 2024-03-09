@@ -46,19 +46,13 @@ module RAM(
 		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRMI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_JUMP
-		$readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JUMP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
-		
-		// datapath_tb_JAL
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JAL.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JUMP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_MFHILO
 		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_MFHILO.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
-		// datapath_tb_IN
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_IN.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
-		
-		// datapath_tb_OUT
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_OUT.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// datapath_tb_INOUT
+		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_INOUT.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 	end
 	
