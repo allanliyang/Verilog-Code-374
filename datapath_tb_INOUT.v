@@ -19,7 +19,7 @@
 		
 		
 `timescale 1ns/10ps
-module datapath_tb_INO();
+module datapath_tb_INOUT();
 
 	// reg declarations
 	reg clear, clock;
