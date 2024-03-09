@@ -40,6 +40,7 @@ module datapath_tb_ANDI();
 	reg Rin, Rout, BAout;
 	reg [31:0]InPortdata;
 	reg RAMread, RAMwrite;
+	reg CONin;
 
 	// outputs from datapath
 	wire [31:0]OutPortdata;
@@ -69,6 +70,7 @@ module datapath_tb_ANDI();
 						Rin, Rout, BAout,
 						InPortdata,
 						RAMread, RAMwrite,
+			 			CONin,
 						OutPortdata,
 						ConFFQ);
 
