@@ -45,8 +45,8 @@ module RAM(
 		// datapath_tb_BRMI
 		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRMI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
-		// datapath_tb_JR
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JR.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// datapath_tb_JUMP
+		$readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JUMP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_JAL
 		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JAL.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING

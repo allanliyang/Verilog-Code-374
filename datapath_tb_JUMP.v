@@ -1,26 +1,42 @@
-// Control sequence for ADDI, same as LDI
+// JAL control sequence
 // T0: PCout, MARin, IncPC, Zlowin
-// T1: Zlowout, PCin, MDMuxread, RAMread, Mdatain, MDRin
+// T1: Zlowout, PCin, MDMuxread, Mdatain, MDRin
 // T2: MDRout, IRin
-// T3: Grb, Rout, Yin
-// T4: CSEout, ADD, Zlowin
-// T5: Zlowout, Gra, Rin
+// T3: PCout, Grb, Rin
+// T4: Gra, Rout, PCin
+
+// JR control sequence
+// T0: PCout, MARin, IncPC, Zlowin
+// T1: Zlowout, PCin, MDMuxread, Mdatain, MDRin
+// T2: MDRout, IRin
+// T3: Gra, Rout, PCin
+
+
+// testbench for JR and JAL instruction
+// NOTE: FIX TESTBENCH SETTINGS BEFORE RUNNING THIS
 
 // functionality
-  // this tb performs addi R3, R4, -5
-  // places result of (R4) + (-5) in R3
-  // +10 will be preloaded into R4
-  // after 'addi R3, R4, -5', +5 will be stored in R3
-
+	// this tb performs JAL R6 and then JR R15
+	// 0xF1 will be preloaded in R6
+	// JAL R6 will move contents of R6 into PC, and PC+1 into R15(return address)
+	// at ram address 0xF1(d241), opcode for JR R15 will be stored
+	// JR R15 will move contents of R15(return address) into PC
+	
 // equivalent asm code
-  // ldi R4, 0xA
-  // addi R3, R4, -5
-
-
+	// ldi 	R6, 0xF1
+	// JAL 	R6
+	// JR 	R15
+	
+// expected sequence of register contents
+	// PC: 	0x0, 0x2,	0xF1, 0x2
+	// R6: 	0x0, 0xF1
+	// R15:	0x0, 0x2
+		
+		
 `timescale 1ns/10ps
-module datapath_tb_ADDI();
+module datapath_tb_JUMP();
 
-   // reg declarations
+	// reg declarations
 	reg clear, clock;
 	reg HIin, LOin, HIout, LOout;
 	reg Zhighin, Zlowin, Zhighout, Zlowout;
@@ -99,7 +115,7 @@ module datapath_tb_ADDI();
 						#15 clear <= 0;
 					end
 
-					// ldi R4, 0xA, to preload R4
+					// ldi R6, 0xF1, to preload R6
 					5'b00010 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
@@ -130,15 +146,16 @@ module datapath_tb_ADDI();
 						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 
-					// addi R3, R4, -5
+								
+					// JAL R6
 					5'b01000 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
 					end
 					
 					5'b01001 : begin	// T1: Zlowout, PCin, MDMuxread, RAMread, Mdatain, MDRin
-						Zlowout <= 1; 		PCin <= 1; 	MDMuxread <= 1; RAMread <= 1; MDRin <= 1;
-						#15 Zlowout <= 0; PCin <= 0; 	MDMuxread <= 0; RAMread <= 0; MDRin <= 0;
+						Zlowout <= 1; 		PCin <= 1; MDMuxread <= 1; RAMread <= 1; MDRin <= 1;
+						#15 Zlowout <= 0; PCin <= 0; MDMuxread <= 0; RAMread <= 0; MDRin <= 0;
 					end
 					
 					5'b01010 : begin 	// T2: MDRout, IRin
@@ -146,19 +163,36 @@ module datapath_tb_ADDI();
 						#15 MDRout <= 0; IRin <= 0;
 					end
 					
-					5'b01011 : begin	// T3: Grb, Rout, Yin
-						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+					5'b01011 : begin	// T3: PCout, Grb, Rin
+						PCout <= 1; Grb <= 1; Rin <= 1;
+						#15 PCout <= 0; Grb <= 0; Rin <= 0;
 					end
 					
-					5'b01100 : begin	// T4: CSEout, ADD, Zlowin
-						CSEout <= 1; ADD <= 1; Zlowin <= 1;
-						#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
+					5'b01100 : begin	// T4: Gra, Rout, PCin
+						Gra <= 1; Rout <= 1; PCin <= 1;
+						#15 Gra <= 0; Rout <= 0; PCin <= 0;
 					end
 					
-					5'b01101 : begin	// T5: Zlowout, Gra, Rin
-						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+					
+					// JR R15
+					5'b01101 : begin	// T0: PCout, MARin, IncPC, Zlowin
+						PCout <= 1; MARin <= 1; IncPC <= 1; PCin <= 1;
+						#15 PCout <= 0; MARin <= 0; IncPC <= 0; PCin <= 0;
+					end
+					
+					5'b01110 : begin 	// T1: Zlowout, PCin, MDMuxread, RAMread, Mdatain, MDRin
+						Zlowout <= 1; PCin <= 1; MDMuxread <= 1; RAMread <= 1; MDRin <= 1;
+						#15 Zlowout <= 0; PCin <= 0; MDMuxread <= 0; RAMread <= 0; MDRin <= 0;
+					end
+					
+					5'b01111 : begin	// T2: MDRout, IRin
+						MDRout <= 1; IRin <= 1;
+						#15 MDRout <= 0; IRin <= 0;
+					end
+					
+					5'b10000 : begin	// T3: Gra, Rout, PCin
+						Gra <= 1; Rout <= 1; PCin <= 1;
+						#15 Gra <= 0; Rout <= 0; PCin <= 0;
 					end
 					
 			endcase
