@@ -2,7 +2,8 @@
 // T0: PCout, MARin, IncPC, Zlowin
 // T1: Zlowout, PCin, MDMuxread, RAMread, Mdatain, MDRin
 // T2: MDRout, IRin
-// T3: InPortdata, InPortout, Gra, Rin
+// T3: InPortdata
+// T4: InPortout, Gra, Rin
 
 // OUT control sequence
 // T0: PCout, MARin, IncPC, Zin
@@ -102,6 +103,7 @@ module datapath_tb_INOUT();
 					end
 
 
+					
 					// in R4
 					5'b00010 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
@@ -118,29 +120,34 @@ module datapath_tb_INOUT();
 						#15 MDRout <= 0; IRin <= 0;
 					end
 					
-					5'b00101 : begin	// T3: InPortdata, InPortout, Gra, Rin
-						InPortdata <= 0x12345678; InPortout <= 1; Gra <= 1; Rin <= 1;
-						#15 InPortout <= 0; Gra <= 0; Rin <= 0;
+					5'b00101 : begin	// T3: InPortdata
+						InPortdata <= 32'h12345678;
 					end
-
-
-					// out R4
-					5'b00110 : begin	// T0: PCout, MARin, IncPC, Zlowin
-						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
-						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
+					
+					5'b00110 : begin	// T4: InPortout, Gra, Rin
+						InPortout <= 1; Gra <= 1; Rin <= 1;
+						#15 InPortout <= 0; Gra <= 0; Rin <= 0;
 					end 
 					
-					5'b00111 : begin	// T1: Zlowout, PCin, MDMuxread, RAMread, Mdatain, MDRin
+					
+					
+					// out R4
+					5'b00111 : begin	// T0: PCout, MARin, IncPC, Zlowin
+						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
+						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
+					end
+
+					5'b01000 : begin	// T1: Zlowout, PCin, MDMuxread, RAMread, Mdatain, MDRin
 						Zlowout <= 1; 		PCin <= 1; 	MDMuxread <= 1; RAMread <= 1; MDRin <= 1;
 						#15 Zlowout <= 0; PCin <= 0; 	MDMuxread <= 0; RAMread <= 0; MDRin <= 0;
 					end
-
-					5'b01000 : begin	// T2: MDRout, IRin
+					
+					5'b01001 : begin	// T2: MDRout, IRin
 						MDRout <= 1; IRin <= 1;
 						#15 MDRout <= 0; IRin <= 0;
 					end
 					
-					5'b01001 : begin	// T3: Gra, Rout, OutPortin
+					5'b01010 : begin	// T3: Gra, Rout, OutPortin
 						Gra <= 1; Rout <= 1; OutPortin <= 1;
 						#15 Gra <= 0; Rout <= 0; OutPortin <= 0;
 					end

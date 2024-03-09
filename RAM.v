@@ -52,7 +52,7 @@ module RAM(
 		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_MFHILO.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_INOUT
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_INOUT.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		$readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_INOUT.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 	end
 	

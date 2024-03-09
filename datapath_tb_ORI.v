@@ -70,7 +70,7 @@ module datapath_tb_ORI();
 						Rin, Rout, BAout,
 						InPortdata,
 						RAMread, RAMwrite,
-			 			CONin;
+			 			CONin,
 						OutPortdata,
 						ConFFQ);
 

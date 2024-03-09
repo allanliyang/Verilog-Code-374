@@ -67,7 +67,7 @@ wire [31:0]IRout;									// internal signal connecting IR register to SelectEnc
 
 wire [8:0]MARAddrOut;							// internal signal for address from MAR
 
-wire [31:0]OutPortOut;
+wire [31:0]OutPortout;
 
 //other datapaths
 wire [31:0] Yout;
@@ -113,7 +113,7 @@ MAR MAR(clear, clock, MARin, BusMuxOut, MARAddrOut);
 InPort InPort(clear, clock, InPortdata, BusMuxInInPort);
 
 //OutPort register
-Register32bit OutPort(clock, clear, OutPortin, BusMuxOut, OutPortOut);
+Register32bit OutPort(clear, clock, OutPortin, BusMuxOut, OutPortout);
 
 // C Sign Extended register
 //Register32bit CSignExtended(clear, clock, CSEin, BusMuxOut, BusMuxInCSE);
@@ -184,7 +184,7 @@ SelectEncode SELogic 	(IRout, Gra, Grb, Grc,
 // ConFF logic
 ConFFLogic ConFF(ConIn, IRout, BusMuxOut, ConFFOut);
 
-assign OutPortdata = OutPortOut;
+assign OutPortdata = OutPortout;
 assign ConFFQ = ConFFOut;
 
 endmodule

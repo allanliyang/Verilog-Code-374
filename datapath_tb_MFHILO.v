@@ -15,8 +15,8 @@
 
 // functionality
 	// this tb performs mfhi R6 and then mflo R7
-  // preload hi and lo registers with values
-  // perform mfhi, then mflo
+	// preload hi and lo registers with values
+	// perform mfhi, then mflo
 
 // equivalent asm code
 	// ldi R6, 7FFFF (-1)
@@ -24,7 +24,9 @@
 	// mul R6, R7
 	// mfhi R6 (expected 0xFFFFFFFF)
 	// mflo R7 (expected 0xFFFFFFFF)
-		
+	
+
+// NOTE: This TB needs to run for 650 ns	
 `timescale 1ns/10ps
 module datapath_tb_MFHILO();
 	
