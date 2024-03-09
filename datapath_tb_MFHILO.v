@@ -14,16 +14,16 @@
 // NOTE: FIX TESTBENCH SETTINGS BEFORE RUNNING THIS
 
 // functionality
-	// this tb performs mfhi R6 and mflo R7
+	// this tb performs mfhi R6 and then mflo R7
   // preload hi and lo registers with values
   // perform mfhi, then mflo
 
 // equivalent asm code
-	// ldi R1, 7FFFF (-1)
-	// ldi R2, 0x1 (+1)
-	// mul R1, R2
-	// mfhi R1 (expected 0xFFFFFFFF)
-	// mflo R2 (expected 0xFFFFFFFF)
+	// ldi R6, 7FFFF (-1)
+	// ldi R7, 0x1 (+1)
+	// mul R6, R7
+	// mfhi R6 (expected 0xFFFFFFFF)
+	// mflo R7 (expected 0xFFFFFFFF)
 		
 `timescale 1ns/10ps
 module datapath_tb_MFHILO();
@@ -108,7 +108,7 @@ module datapath_tb_MFHILO();
 					end
 
 
-					// ldi R1, 0x3FFFF
+					// ldi R6, 0x3FFFF
 					5'b00010 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
@@ -140,7 +140,7 @@ module datapath_tb_MFHILO();
 					end
 
 
-					// ldi R2, 0x3FFFF
+					// ldi R7, 0x3FFFF
 					5'b01000 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
@@ -172,7 +172,7 @@ module datapath_tb_MFHILO();
 					end
 
 
-					// mul R1, R2
+					// mul R6, R7
 					5'b01110 : begin	// T0 : PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
@@ -209,7 +209,7 @@ module datapath_tb_MFHILO();
 					end
 
 
-					// mfhi R1
+					// mfhi R6
 					5'b10101 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
@@ -231,7 +231,7 @@ module datapath_tb_MFHILO();
 					end
 
 
-					// mflo R2
+					// mflo R7
 					5'b11001 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
 						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
