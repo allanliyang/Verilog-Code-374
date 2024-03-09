@@ -41,6 +41,7 @@ module datapath_tb_ADDI();
 	reg Rin, Rout, BAout;
 	reg [31:0]InPortdata;
 	reg RAMread, RAMwrite;
+	reg CONin;
 
 	// outputs from datapath
 	wire [31:0]OutPortdata;
@@ -70,6 +71,7 @@ module datapath_tb_ADDI();
 						Rin, Rout, BAout,
 						InPortdata,
 						RAMread, RAMwrite,
+			 			CONin,
 						OutPortdata,
 						ConFFQ);
 
@@ -94,7 +96,7 @@ module datapath_tb_ADDI();
 						IncPC <= 0;		ADD <= 0;
 						Gra <= 0; 		Grb <= 0; 		Grc <= 0;
 						Rin <= 0; 		Rout <= 0; 		BAout <= 0;
-						RAMread <= 0;	RAMwrite <= 0;
+						RAMread <= 0;		RAMwrite <= 0;
 
 						#15 clear <= 0;
 					end
