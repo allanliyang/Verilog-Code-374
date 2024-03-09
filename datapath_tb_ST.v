@@ -46,7 +46,8 @@ module datapath_tb_ST();
 	reg Rin, Rout, BAout;
 	reg [31:0]InPortdata;
 	reg RAMread, RAMwrite;
-
+	reg CONin;
+	
 	// outputs from datapath
 	wire [31:0]OutPortdata;
 	wire ConFFQ;
@@ -75,6 +76,7 @@ module datapath_tb_ST();
 						Rin, Rout, BAout,
 						InPortdata,
 						RAMread, RAMwrite,
+			 			CONin,
 						OutPortdata,
 						ConFFQ);
 
