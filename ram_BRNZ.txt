@@ -1,4 +1,6 @@
-9A80000E // brzr R5, 0xE(d14)
+9A88000E // brnz R5, 0xE	branch will not be taken bcz R5 is initially 0
+0A800001 // ldi R5, 0x1		preload R5 so next brnz branch will be taken
+9A88000E // brnz R5, 0xE	branch will be taken bcz R5 is preloaded with 0x1
 00000000
 00000000
 00000000
@@ -13,8 +15,6 @@
 00000000
 00000000
 00000000
-0A800001 // PC will branch here and do ldi R5, 0x1
-9A8000FF // brzr R5, 0xFF, this branch should not be taken
 00FADE00 // this 'opcode' will show in IR if branches are done correctly
 00000000
 00000000

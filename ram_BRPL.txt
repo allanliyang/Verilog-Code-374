@@ -1,4 +1,4 @@
-9A80000E // brzr R5, 0xE(d14)
+9A90000E // brzr R5, 0xE(d14)		this branch will be taken bcz R5 is initially 0
 00000000
 00000000
 00000000
@@ -13,8 +13,8 @@
 00000000
 00000000
 00000000
-0A800001 // PC will branch here and do ldi R5, 0x1
-9A8000FF // brzr R5, 0xFF, this branch should not be taken
+0A87FFFF // PC will branch here and do ldi R5, 0x7FFFF
+9A9000FF // brpl R5, 0xFF, this branch will not be taken because R5 == -1
 00FADE00 // this 'opcode' will show in IR if branches are done correctly
 00000000
 00000000

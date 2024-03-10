@@ -6,19 +6,24 @@
 // T5: CSEout, ADD, Zlowin
 // T6: Zlowout, if(ConFFQ) then PCin
 
+
 // functionality
-  // this tb performs
-  // case 1 : brzr R5, 14 (branch if zero)
-  // case 2 : brnz R5, 14 (branch if nonzero, i.e. positive or negative)
-  // case 3 : brpl R5, 14 (branch if positive)
-  // case 4 : brmi R5, 14 (branch if negative)
-
-
- // expected register values
+	// this tb performs
+	// br 	R5, 0xE(14) 
+	// ldi R5, X, 
+	// br 	R5, 0xE(14)
+  
+	// control sequence is the same for BRZR, BRNZ, BRPL, and BRMI
+	// therefore this testbench is used for testing all branch instructions
+	// only differnence between branch instructions is preloaded RAM opcode
+	// R5 is always initially 0, depending on the branch instruction, it will either be taken or not taken
+	// after first branch instruction, ldi opcode will be store at appropriate RAM address (branch either taken or not) 
+	// ldi will load R5 with new value so result of next branch instruction will be opposite of initial
+  
   
   
 `timescale 1ns/10ps
-module datapath_tb_BRZR();
+module datapath_tb_BR();
 
   // reg declarations
 	reg clear, clock;
@@ -214,6 +219,23 @@ module datapath_tb_BRZR();
 						end
             
 						#15 Zlowout <= 0; PCin <= 0;
+					end
+					
+					
+					// continued to see next PC value
+					5'b10110 : begin
+						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
+						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
+					end
+					
+					5'b10111 : begin
+						Zlowout <= 1; 		PCin <= 1; 	MDMuxread <= 1; RAMread <= 1; MDRin <= 1;
+						#15 Zlowout <= 0; PCin <= 0; 	MDMuxread <= 0; RAMread <= 0; MDRin <= 0;
+					end
+					
+					5'b11000 : begin
+						MDRout <= 1; IRin <= 1;
+						#15 MDRout <= 0; IRin <= 0;
 					end
 					
 			endcase

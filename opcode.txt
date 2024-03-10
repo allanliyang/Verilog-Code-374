@@ -16,6 +16,7 @@
 
 
 
+
 // ----- LDI instructions -----//
 // Instruction: ldi R2,0x95
 // stores 0x95 into R2
@@ -28,6 +29,7 @@
 // 00001 0000 0010 0000000000000111000
 // op    r0   r2     C(0x38)
 // 08100038
+
 
 
 
@@ -52,6 +54,7 @@
 
 
 
+
 // ----- ADDI instructions -----//
 // Instruction: ldi R3, 0xA (used for preloading R4)
 // 00001 0100 0000 0000000000000001010
@@ -62,6 +65,7 @@
 // 01100 0011 0100 1111111111111111011
 // addi  R3    R4    19-bit 2's CMP of -5
 // 61A7FFFB
+
 
 
 
@@ -78,6 +82,7 @@
 
 
 
+
 // ----- ORI instructions -----//
 // Instruction: ldi R4, 0xFF00 (used for preloading R4)
 // 00001 0100 0000 0001111111100000000
@@ -91,7 +96,98 @@
 
 
 
-// ----- BRANCH instructions -----//
+
+// ----- BRZR instructions -----//
+// Instruction: brzr R5, 0xE
+// sets PC to PC + 1 + 0xE if R5 == 0
+// this branch will be taken
+// 10011 0101 0000 0000000000000001110
+// br		R5		=0 	0xE(d14)
+// 9A80000E
+
+// Instruction: ldi, R5, 0x1
+// preloads R5 before next BRZR so branch will not be taken
+// 00001 0101 0000 0000000000000000001
+// ldi	R5		R0		0x1
+// 0A800001
+
+// Instruction: brzr R5, 0xFF
+// R5 == 0x1, so branch will not be taken
+// 10011 0101 0000 0000000000011111111
+// 9A8000FF
+
+
+
+
+// ----- BRNZ instructions -----//
+// Instruction: brnz R5, 0xE
+// sets PC to PC + 1 + 0xE if R5 != 0
+// this branch will not be taken because R5 is initially 0 in testbench
+// 10011 0101 0001 0000000000000001110
+// br		R5		!=0		0xE(d14)
+// 9A88000E
+
+// Instruction: ldi, R5, 0x1
+// preloads R5 before next BRZR so branch will be taken
+// 00001 0101 0000 0000000000000000001
+// ldi	R5		R0		0x1
+// 0A800001
+
+// Instruction: brnz R5, 0xE
+// sets PC to PC + 1 + 0xE if R5 != 0
+// this branch will be taken because R5 is preloaded with 0x1
+// 10011 0101 0001 0000000000000001110
+// br		R5		!=0		0xE(d14)
+// 9A88000E
+
+
+
+
+// ----- BRPL instructions -----//
+// Instruction: brpl R5, 0xE
+// sets PC to PC + 1 + 0xE if R5 >= 0
+// this branch will be taken bcz 0 is initially 0 in testbench
+// 10011 0101 0010 0000000000000001110
+// br		R5		>=0		0xE(d14)
+// 9A90000E
+
+// Instruction: ldi R5, 0x7FFFF
+// preloads R5 with -1 before next BRPL so branch will not be taken
+// 00001 0101 0000 1111111111111111111
+// ldi	R5		R0		0x7FFFF(-1)
+// 0A87FFFF
+
+// Instruction: brpl R5, 0xE
+// sets PC to PC + 1 + 0xE if R5 >= 0
+// this branch will not be taken bcz R5 is preloaded with -1
+// 10011 0101 0010 0000000000011111111
+// br		R5		>=0		0xFF
+// 9A9000FF
+
+
+
+
+// ----- BRMI instructions -----//
+// Instruction: brmi R5, 0xE
+// sets PC to PC + 1 + 0xE if R5 < 0
+// this branch will not be taken because R5 is initially 0 in testbench
+// 10011 0101 0011 0000000000000001110
+// br		R5		<0		0xE(d14)
+// 9A98000E
+
+// Instruction: ldi R5, 0x7FFFF
+// preloads R5 with -1 before next BRZR so branch will be taken
+// 00001 0101 0000 1111111111111111111
+// ldi	R5		R0		0x7FFFF(-1)
+// 0A87FFFF
+
+// Instruction: brmi R5, 0xE
+// sets PC to PC + 1 + 0xE if R5 <= 0
+// this branch will be taken because R5 is preloaded with -1
+// 10011 0101 0011 0000000000000001110
+// br		R5		<0		0xE(d14)
+// 9A98000E
+
 
 
 
