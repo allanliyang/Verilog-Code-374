@@ -101,6 +101,9 @@ module datapath_tb_ADDI();
 						#15 clear <= 0;
 					end
 
+					
+					
+					
 					// ldi R4, 0xA, to preload R4
 					5'b00010 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
@@ -131,7 +134,9 @@ module datapath_tb_ADDI();
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
 						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
-
+					
+					
+					
 					// addi R3, R4, -5
 					5'b01000 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;

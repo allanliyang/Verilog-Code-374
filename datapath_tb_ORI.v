@@ -99,6 +99,8 @@ module datapath_tb_ORI();
 						#15 clear <= 0;
 					end
 
+					
+					
 					// ldi R4, 0xFF00, to preload R4
 					5'b00010 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
@@ -130,6 +132,8 @@ module datapath_tb_ORI();
 						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 
+					
+					
 					// ori R3, R4, 0x53
 					5'b01000 : begin	// T0: PCout, MARin, IncPC, Zlowin
 						PCout <= 1;		MARin <= 1;		IncPC <= 1;		Zlowin <= 1;
