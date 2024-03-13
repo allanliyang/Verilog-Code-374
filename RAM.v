@@ -13,46 +13,46 @@ module RAM(
 		// uncomment the appropriate txt file to initialize ram for each testbench
 		
 		// default case
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/512x0.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/512x0.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_LD
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_LD.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_LD.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_LDI
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_LDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_LDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_ST
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_ST.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_ST.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_ADDI
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_ADDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_ADDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_ANDI
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_ANDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_ANDI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_ORI
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_ORI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_ORI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_BRZR
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRZR.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_BRZR.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_BRNZ
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRNZ.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_BRNZ.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_BRPL
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRPL.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_BRPL.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_BRMI
-		$readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_BRMI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_BRMI.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_JUMP
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_JUMP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_JUMP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_MFHILO
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_MFHILO.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_MFHILO.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// datapath_tb_INOUT
-		// $readmemh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/ram_INOUT.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		// $readmemh("D:/Verilog-Code-374/ram_INOUT.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 	end
 	
@@ -73,7 +73,7 @@ module RAM(
 			if (write) begin 
 				mem[address] = BusMuxOut;
 				// update text file to reflect ram contents
-				$writememh("C:/Users/Allan/Desktop/Verilog-Code-374 TEST/RAMoutput.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+				$writememh("D:/Verilog-Code-374/RAMoutput.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 			end
 			
 	end
