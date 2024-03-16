@@ -1,5 +1,5 @@
 
-'timescale 1ns/10ps
+`timescale 1ns/10ps
 module ControlUnit (
 
 	input clock, reset, stop, ConFFQ,
@@ -26,10 +26,7 @@ module ControlUnit (
 	output reg Zhighin, Zlowin, Zhighout, Zlowout,
 	output reg HIin, LOin, HIout, LOout,
 	output reg CSEout, 
-	output reg OutPortin, InPortout, 
-	
-	
-	output reg Zhighout, Zlowout, HIout, LOout,
+	output reg OutPortin, InPortout 
 
 	// NOTE: Check if all signals have been added
 );
@@ -39,7 +36,7 @@ module ControlUnit (
 	// definitions for various states and control sequences
 				
 					// reset and global T0-T2
-	parameter 	reset_state = 8'b00000000, T0 = 8'b00000001, T1: 8'b00000010, T2 = 8'b00000011,
+	parameter 	reset_state = 8'b00000000, T0 = 8'b00000001, T1 = 8'b00000010, T2 = 8'b00000011,
 					
 					// load and store
 					LD_T3  = 8'b00000011, 	LD_T4  = 8'b00000100, 	LD_T5  = 8'b00000101, 	LD_T6 = 8'b00000110, LD_T7 = 8'b00000111,
@@ -92,7 +89,7 @@ module ControlUnit (
 	always @ (posedge clock, posedge reset) begin
 		
 		
-		if (reset = 1'b1) begin
+		if (reset == 1'b1) begin
 			present_state = reset_state;
 		end
 		
@@ -164,7 +161,7 @@ module ControlUnit (
 				ST_T3 : present_state = ST_T4;
 				ST_T4 : present_state = ST_T5;
 				ST_T5 : present_state = ST_T6;
-				ST_T6 : present_state = T0
+				ST_T6 : present_state = T0;
 				
 				// ALU
 				ADD_T3 : present_state = ADD_T4;
@@ -254,7 +251,7 @@ module ControlUnit (
 				
 				// misc.
 				NOP_T3  : present_state = T0; 
-				HALT_T3 : // CHECK WHAT TO DO HERE
+				HALT_T3 : present_state = reset_state;// CHECK WHAT TO DO HERE
 				
 			endcase
 		end
@@ -287,11 +284,394 @@ module ControlUnit (
 				end
 				
 				
-			
-			
-			
-			
-			
+				// load and store instructions
+				// LD
+				LD_T3 : begin
+				
+				
+				end
+				
+				LD_T4 : begin
+				
+				
+				end
+				
+				LD_T5 : begin
+				
+				
+				end
+				
+				LD_T6 : begin
+				
+				
+				end
+				
+				LD_T7 : begin
+				
+				
+				end
+				
+				// LDI
+				LDI_T3 : begin
+				
+				
+				end
+				
+				LDI_T4 : begin
+				
+				
+				end
+				
+				LDI_T5 : begin
+				
+				
+				end
+				
+				// ST
+				ST_T3 : begin
+				
+				
+				end
+				
+				ST_T4 : begin
+				
+				
+				end
+				
+				ST_T5 : begin
+				
+				
+				end
+				
+				ST_T6 : begin
+				
+				
+				end
+				
+				
+				// ALU instructions
+				// ADD
+				ADD_T3 : begin 
+				
+				
+				end
+				
+				ADD_T4 : begin 
+				
+				
+				end
+				
+				ADD_T5 : begin 
+				
+				
+				end
+				
+				// ADDI
+				ADDI_T3 : begin 
+				
+				
+				end
+				
+				ADDI_T4 : begin 
+				
+				
+				end
+				
+				ADDI_T5 : begin 
+				
+				
+				end
+				
+				// SUB
+				SUB_T3 : begin 
+				
+				
+				end
+				
+				SUB_T4 : begin 
+				
+				
+				end
+				
+				SUB_T5 : begin 
+				
+				
+				end
+				
+				// MUL
+				MUL_T3 : begin
+				
+				
+				end
+				
+				MUL_T4 : begin
+				
+				
+				end
+				
+				MUL_T5 : begin
+				
+				
+				end
+				
+				MUL_T6 : begin
+				
+				
+				end
+				
+				// DIV
+				DIV_T3 : begin
+				
+				
+				end
+				
+				DIV_T4 : begin
+				
+				
+				end
+				
+				DIV_T5 : begin
+				
+				
+				end
+				
+				DIV_T6 : begin
+				
+				
+				end
+				
+				// AND
+				AND_T3 : begin
+				
+				
+				end
+				
+				AND_T4 : begin
+				
+				
+				end
+				
+				AND_T5 : begin
+				
+				
+				end
+				
+				// ANDI
+				ANDI_T3 : begin
+				
+				
+				end
+				
+				ANDI_T4 : begin
+				
+				
+				end
+				
+				ANDI_T5 : begin
+				
+				
+				end
+				
+				// OR
+				OR_T3 : begin
+				
+				
+				end
+				
+				OR_T4 : begin
+				
+				
+				end
+				
+				OR_T5 : begin
+				
+				
+				end
+				
+				// ORI
+				ORI_T3 : begin
+				
+				
+				end
+				
+				ORI_T4 : begin
+				
+				
+				end
+				
+				ORI_T5 : begin
+				
+				
+				end
+				
+				// SHR
+				SHR_T3 : begin
+				
+				
+				end
+				
+				SHR_T4 : begin
+				
+				
+				end
+				
+				SHR_T5 : begin
+				
+				
+				end
+				
+				// SHRA
+				SHRA_T3 : begin
+				
+				
+				end
+				
+				SHRA_T4 : begin
+				
+				
+				end
+				
+				SHRA_T5 : begin
+				
+				
+				end
+				
+				// SHL
+				SHL_T3 : begin
+				
+				
+				end
+				
+				SHL_T4 : begin
+				
+				
+				end
+				
+				SHL_T5 : begin
+				
+				
+				end
+				
+				// ROR
+				ROR_T3 : begin
+				
+				end
+				
+				ROR_T4 : begin
+				
+				
+				end
+				
+				ROR_T5 : begin
+				
+				
+				end
+				
+				// ROL
+				ROL_T3 : begin
+				
+				
+				end
+				
+				ROL_T4 : begin
+				
+				
+				end
+				
+				ROL_T5 : begin
+				
+				
+				end
+				
+				// NEG
+				NEG_T3 : begin
+				
+				end
+				
+				NEG_T4 : begin
+				
+				end
+				
+				// NOT
+				NOT_T3 : begin
+				
+				end
+				
+				NOT_T4 : begin
+				
+				end
+				
+				
+				// BRANCH instruction
+				BR_T3  : begin
+				
+				end
+				
+				BR_T4  : begin
+				
+				end
+				
+				BR_T5  : begin
+				
+				end
+				
+				BR_T6  : begin
+				
+				end
+				
+				
+				// JUMP instructions
+				JR_T3 : begin
+				
+				end
+				
+				// JAL
+				JAL_T3 : begin
+				
+				end
+				
+				JAL_T4 : begin
+				
+				end
+				
+				
+				// IN/OUT and MFHI/LO instructions
+				// IN
+				IN_T3 : begin
+				
+				end
+				
+				IN_T4 : begin
+				
+				end
+				
+				// OUT
+				OUT_T3 : begin
+				
+				end
+				
+				// MFHI
+				MFHI_T3 : begin
+				
+				end
+				
+				// MFLO
+				MFLO_T3 : begin
+				
+				end
+				
+				
+				// MISC. instructions
+				// NOP
+				NOP_T3 : begin
+				
+				end
+				
+				// HALT
+				HALT_T3 : begin
+				
+				end
+					
 			endcase
 			
 	end

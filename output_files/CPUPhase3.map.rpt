@@ -1,0 +1,680 @@
+Analysis & Elaboration report for CPUPhase3
+Sat Mar 16 19:28:11 2024
+Quartus Prime Version 18.1.1 Build 646 04/11/2019 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Elaboration Summary
+  3. Parallel Compilation
+  4. Parameter Settings for User Entity Instance: Register32bit:R1
+  5. Parameter Settings for User Entity Instance: Register32bit:R2
+  6. Parameter Settings for User Entity Instance: Register32bit:R3
+  7. Parameter Settings for User Entity Instance: Register32bit:R4
+  8. Parameter Settings for User Entity Instance: Register32bit:R5
+  9. Parameter Settings for User Entity Instance: Register32bit:R6
+ 10. Parameter Settings for User Entity Instance: Register32bit:R7
+ 11. Parameter Settings for User Entity Instance: Register32bit:R8
+ 12. Parameter Settings for User Entity Instance: Register32bit:R9
+ 13. Parameter Settings for User Entity Instance: Register32bit:R10
+ 14. Parameter Settings for User Entity Instance: Register32bit:R11
+ 15. Parameter Settings for User Entity Instance: Register32bit:R12
+ 16. Parameter Settings for User Entity Instance: Register32bit:R13
+ 17. Parameter Settings for User Entity Instance: Register32bit:R14
+ 18. Parameter Settings for User Entity Instance: Register32bit:R15
+ 19. Parameter Settings for User Entity Instance: Register32bit:HI
+ 20. Parameter Settings for User Entity Instance: Register32bit:LO
+ 21. Parameter Settings for User Entity Instance: Register32bit:Zhigh
+ 22. Parameter Settings for User Entity Instance: Register32bit:Zlow
+ 23. Parameter Settings for User Entity Instance: Register32bit:PC
+ 24. Parameter Settings for User Entity Instance: Register32bit:OutPort
+ 25. Parameter Settings for User Entity Instance: Register32bit:IR
+ 26. Parameter Settings for User Entity Instance: Register32bit:Y
+ 27. Parameter Settings for User Entity Instance: ConFFLogic:ConFF
+ 28. Analysis & Elaboration Settings
+ 29. Analysis & Elaboration Messages
+ 30. Analysis & Elaboration Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2019  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-----------------------------------------------------------------------------+
+; Analysis & Elaboration Summary                                              ;
++-------------------------------+---------------------------------------------+
+; Analysis & Elaboration Status ; Successful - Sat Mar 16 19:28:11 2024       ;
+; Quartus Prime Version         ; 18.1.1 Build 646 04/11/2019 SJ Lite Edition ;
+; Revision Name                 ; CPUPhase3                                   ;
+; Top-level Entity Name         ; Datapath                                    ;
+; Family                        ; Cyclone V                                   ;
+; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
+; Total registers               ; N/A until Partition Merge                   ;
+; Total pins                    ; N/A until Partition Merge                   ;
+; Total virtual pins            ; N/A until Partition Merge                   ;
+; Total block memory bits       ; N/A until Partition Merge                   ;
+; Total PLLs                    ; N/A until Partition Merge                   ;
+; Total DLLs                    ; N/A until Partition Merge                   ;
++-------------------------------+---------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R1 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R2 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R3 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R4 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R5 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R6 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R7 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R8 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R9 ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R10 ;
++----------------+----------+------------------------------------+
+; Parameter Name ; Value    ; Type                               ;
++----------------+----------+------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                     ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                     ;
+; INIT           ; 00000000 ; Unsigned Binary                    ;
++----------------+----------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R11 ;
++----------------+----------+------------------------------------+
+; Parameter Name ; Value    ; Type                               ;
++----------------+----------+------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                     ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                     ;
+; INIT           ; 00000000 ; Unsigned Binary                    ;
++----------------+----------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R12 ;
++----------------+----------+------------------------------------+
+; Parameter Name ; Value    ; Type                               ;
++----------------+----------+------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                     ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                     ;
+; INIT           ; 00000000 ; Unsigned Binary                    ;
++----------------+----------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R13 ;
++----------------+----------+------------------------------------+
+; Parameter Name ; Value    ; Type                               ;
++----------------+----------+------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                     ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                     ;
+; INIT           ; 00000000 ; Unsigned Binary                    ;
++----------------+----------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R14 ;
++----------------+----------+------------------------------------+
+; Parameter Name ; Value    ; Type                               ;
++----------------+----------+------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                     ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                     ;
+; INIT           ; 00000000 ; Unsigned Binary                    ;
++----------------+----------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:R15 ;
++----------------+----------+------------------------------------+
+; Parameter Name ; Value    ; Type                               ;
++----------------+----------+------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                     ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                     ;
+; INIT           ; 00000000 ; Unsigned Binary                    ;
++----------------+----------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:HI ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:LO ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:Zhigh ;
++----------------+----------+--------------------------------------+
+; Parameter Name ; Value    ; Type                                 ;
++----------------+----------+--------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                       ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                       ;
+; INIT           ; 00000000 ; Unsigned Binary                      ;
++----------------+----------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:Zlow ;
++----------------+----------+-------------------------------------+
+; Parameter Name ; Value    ; Type                                ;
++----------------+----------+-------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                      ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                      ;
+; INIT           ; 00000000 ; Unsigned Binary                     ;
++----------------+----------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:PC ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:OutPort ;
++----------------+----------+----------------------------------------+
+; Parameter Name ; Value    ; Type                                   ;
++----------------+----------+----------------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                         ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                         ;
+; INIT           ; 00000000 ; Unsigned Binary                        ;
++----------------+----------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:IR ;
++----------------+----------+-----------------------------------+
+; Parameter Name ; Value    ; Type                              ;
++----------------+----------+-----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                    ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                    ;
+; INIT           ; 00000000 ; Unsigned Binary                   ;
++----------------+----------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Register32bit:Y ;
++----------------+----------+----------------------------------+
+; Parameter Name ; Value    ; Type                             ;
++----------------+----------+----------------------------------+
+; DATA_WIDTH_IN  ; 32       ; Signed Integer                   ;
+; DATA_WIDTH_OUT ; 32       ; Signed Integer                   ;
+; INIT           ; 00000000 ; Unsigned Binary                  ;
++----------------+----------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ConFFLogic:ConFF ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; zero           ; 00    ; Unsigned Binary                      ;
+; nonZero        ; 01    ; Unsigned Binary                      ;
+; positive       ; 10    ; Unsigned Binary                      ;
+; negative       ; 11    ; Unsigned Binary                      ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Elaboration Settings                                                                                           ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CEBA4F23C7        ;                    ;
+; Top-level entity name                                                           ; Datapath           ; CPUPhase3          ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++---------------------------------+
+; Analysis & Elaboration Messages ;
++---------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Elaboration
+    Info: Version 18.1.1 Build 646 04/11/2019 SJ Lite Edition
+    Info: Processing started: Sat Mar 16 19:28:03 2024
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off CPUPhase3 -c CPUPhase3 --analysis_and_elaboration
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file register32bit.v
+    Info (12023): Found entity 1: Register32bit File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/register32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file r0.v
+    Info (12023): Found entity 1: R0 File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/R0.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file mdr.v
+    Info (12023): Found entity 1: MDR File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/MDR.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file mar.v
+    Info (12023): Found entity 1: MAR File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/MAR.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file inport.v
+    Info (12023): Found entity 1: InPort File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/InPort.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file alu.v
+    Info (12023): Found entity 1: ALU File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 20
+Info (12021): Found 1 design units, including 1 entities, in source file ram.v
+    Info (12023): Found entity 1: RAM File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/RAM.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file selectencode.v
+    Info (12023): Found entity 1: SelectEncode File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/SelectEncode.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file confflogic.v
+    Info (12023): Found entity 1: ConFFLogic File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ConFFLogic.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file datapath.v
+    Info (12023): Found entity 1: Datapath File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file controlunit.v
+    Info (12023): Found entity 1: ControlUnit File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ControlUnit.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file bus.v
+    Info (12023): Found entity 1: Bus File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at Datapath.v(185): created implicit net for "ConFFOut" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 185
+Info (12127): Elaborating entity "Datapath" for the top level hierarchy
+Info (12128): Elaborating entity "R0" for hierarchy "R0:R0" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 78
+Info (12128): Elaborating entity "Register32bit" for hierarchy "Register32bit:R1" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 79
+Info (12128): Elaborating entity "MDR" for hierarchy "MDR:MDR" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 107
+Info (12128): Elaborating entity "MAR" for hierarchy "MAR:MAR" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 110
+Info (12128): Elaborating entity "InPort" for hierarchy "InPort:InPort" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 113
+Info (12128): Elaborating entity "Bus" for hierarchy "Bus:BUS" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 154
+Warning (10240): Verilog HDL Always Construct warning at Bus.v(28): inferring latch(es) for variable "q", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 28
+Info (10041): Inferred latch for "q[0]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[1]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[2]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[3]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[4]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[5]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[6]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[7]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[8]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[9]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[10]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[11]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[12]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[13]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[14]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[15]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[16]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[17]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[18]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[19]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[20]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[21]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[22]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[23]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[24]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[25]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[26]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[27]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[28]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[29]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[30]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (10041): Inferred latch for "q[31]" at Bus.v(57) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v Line: 57
+Info (12128): Elaborating entity "ALU" for hierarchy "ALU:ALU" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 165
+Warning (10036): Verilog HDL or VHDL warning at ALU.v(39): object "ADD_cout" assigned a value but never read File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 39
+Warning (10230): Verilog HDL assignment warning at ALU.v(365): truncated value with size 32 to match size of target (5) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 365
+Warning (10230): Verilog HDL assignment warning at ALU.v(409): truncated value with size 32 to match size of target (5) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 409
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "C", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "j", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "FAs", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "FAc", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "ADD_sum", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "RCAc", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "i", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "ALU_Result", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "SUB_temp", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "MUL_X", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "DIV_A", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "Q", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "M", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Warning (10240): Verilog HDL Always Construct warning at ALU.v(68): inferring latch(es) for variable "Rotate", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 68
+Info (10041): Inferred latch for "MUL_X[32]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[33]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[34]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[35]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[36]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[37]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[38]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[39]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[40]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[41]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[42]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[43]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[44]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[45]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[46]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[47]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[48]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[49]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[50]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[51]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[52]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[53]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[54]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[55]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[56]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[57]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[58]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[59]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[60]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[61]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[62]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "MUL_X[63]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[0]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[1]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[2]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[3]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[4]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[5]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[6]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[7]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[8]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[9]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[10]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[11]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[12]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[13]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[14]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[15]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[16]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[17]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[18]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[19]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[20]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[21]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[22]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[23]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[24]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[25]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[26]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[27]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[28]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[29]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[30]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[31]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[32]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[33]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[34]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[35]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[36]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[37]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[38]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[39]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[40]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[41]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[42]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[43]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[44]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[45]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[46]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[47]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[48]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[49]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[50]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[51]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[52]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[53]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[54]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[55]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[56]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[57]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[58]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[59]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[60]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[61]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[62]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (10041): Inferred latch for "ALU_Result[63]" at ALU.v(95) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v Line: 95
+Info (12128): Elaborating entity "RAM" for hierarchy "RAM:RAM" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 170
+Warning (10175): Verilog HDL warning at RAM.v(42): ignoring unsupported system task File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/RAM.v Line: 42
+Info (12128): Elaborating entity "SelectEncode" for hierarchy "SelectEncode:SELogic" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 182
+Info (12128): Elaborating entity "ConFFLogic" for hierarchy "ConFFLogic:ConFF" File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v Line: 185
+Warning (10240): Verilog HDL Always Construct warning at ConFFLogic.v(32): inferring latch(es) for variable "Q", which holds its previous value in one or more paths through the always construct File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ConFFLogic.v Line: 32
+Info (10041): Inferred latch for "Q" at ConFFLogic.v(32) File: C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ConFFLogic.v Line: 32
+Info (144001): Generated suppressed messages file C:/Users/Allan/Desktop/Verilog-Code-374-TEST/output_files/CPUPhase3.map.smsg
+Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 22 warnings
+    Info: Peak virtual memory: 4780 megabytes
+    Info: Processing ended: Sat Mar 16 19:28:11 2024
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:16
+
+
++--------------------------------------------+
+; Analysis & Elaboration Suppressed Messages ;
++--------------------------------------------+
+The suppressed messages can be found in C:/Users/Allan/Desktop/Verilog-Code-374-TEST/output_files/CPUPhase3.map.smsg.
+
+
