@@ -10,3 +10,6 @@ Finished Phase 1 code and demoed successfully in the Week 6 Lab.
 
 ## Phase 2
 Finished Phase 2 code and demoed successfully in the Week 9 Lab.
+
+## Phase 3
+Cooking it up rn.
