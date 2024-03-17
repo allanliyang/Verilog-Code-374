@@ -271,7 +271,7 @@ module ControlUnit (
 					
 					// all others signals get reset to 0
 					MEMread <= 0; MEMwrite <= 0;
-					Rin <= 0; Rout <= 0; BAout <= 0; Gra <= 0; Grb ,= 0; Grc <= 0;
+					Rin <= 0; Rout <= 0; BAout <= 0; Gra <= 0; Grb <= 0; Grc <= 0;
 					
 					// ALU control signals
 					ADD <= 0; SUB <= 0; MUL <= 0; DIV <= 0;
