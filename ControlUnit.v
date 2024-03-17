@@ -20,12 +20,14 @@ module ControlUnit (
 	output reg NEG, NOT,
 	output reg IncPC,
 	
-	// Speciality register controls
+	// Specialty register controls
 	output reg PCin, PCout, IRin,
 	output reg MDRin, MDRout, MARin,
 	output reg Zhighin, Zlowin, Zhighout, Zlowout,
 	output reg HIin, LOin, HIout, LOout,
-	output reg CSEout, 
+	output reg CSEout,
+	output reg Yin,
+	output reg ConIn,
 	output reg OutPortin, InPortout 
 
 	// NOTE: Check if all signals have been added
@@ -88,18 +90,19 @@ module ControlUnit (
 					
 	always @ (posedge clock, posedge reset) begin
 		
-		
-		if (reset == 1'b1) begin
-			present_state = reset_state;
-		end
-		
-		else begin
+		if (run == 1'b1) begin // only change state if program is supposed to be running
 			
-			case (present_state)
-				reset_state : 	present_state = T0;
-				T0				:	present_state = T1;
-				T1				:	present_state = T2;
-				T2 : begin
+			if (reset == 1'b1) begin // check for reset case
+				present_state = reset_state;
+			end
+		
+			else begin // check other cases
+			
+				case (present_state)
+					reset_state : 	present_state = T0;
+					T0				:	present_state = T1;
+					T1				:	present_state = T2;
+					T2 : begin
 						
 						case (IR[31:27]) 
 							
@@ -145,117 +148,117 @@ module ControlUnit (
 							5'b11011 : present_state = HALT_T3;
 						
 						endcase
-				end
+					end
 				
-				// load and store
-				LD_T3 : present_state = LD_T4;
-				LD_T4 : present_state = LD_T5;
-				LD_T5 : present_state = LD_T6;
-				LD_T6 : present_state = LD_T7;
-				LD_T7 : present_state = T0;
+					// load and store
+					LD_T3 : present_state = LD_T4;
+					LD_T4 : present_state = LD_T5;
+					LD_T5 : present_state = LD_T6;
+					LD_T6 : present_state = LD_T7;
+					LD_T7 : present_state = T0;
 				
-				LDI_T3 : present_state = LDI_T4;
-				LDI_T4 : present_state = LDI_T5;
-				LDI_T5 : present_state = T0;
-				
-				ST_T3 : present_state = ST_T4;
-				ST_T4 : present_state = ST_T5;
-				ST_T5 : present_state = ST_T6;
-				ST_T6 : present_state = T0;
-				
-				// ALU
-				ADD_T3 : present_state = ADD_T4;
-				ADD_T4 : present_state = ADD_T5;
-				ADD_T5 : present_state = T0;
-				
-				ADDI_T3 : present_state = ADDI_T4;
-				ADDI_T4 : present_state = ADDI_T5;
-				ADDI_T5 : present_state = T0;
-				
-				SUB_T3 : present_state = SUB_T4;
-				SUB_T4 : present_state = SUB_T5;
-				SUB_T5 : present_state = T0;
-				
-				MUL_T3 : present_state = MUL_T4;
-				MUL_T4 : present_state = MUL_T5;
-				MUL_T5 : present_state = MUL_T6;
-				MUL_T6 : present_state = T0;
-				
-				DIV_T3 : present_state = DIV_T4;
-				DIV_T4 : present_state = DIV_T5;
-				DIV_T5 : present_state = DIV_T6;
-				DIV_T6 : present_state = T0;
-				
-				AND_T3 : present_state = AND_T4;
-				AND_T4 : present_state = AND_T5;
-				AND_T5 : present_state = T0;
-				
-				ANDI_T3 : present_state = ANDI_T4;
-				ANDI_T4 : present_state = ANDI_T5;
-				ANDI_T5 : present_state = T0;
-				
-				OR_T3 : present_state = OR_T4;
-				OR_T4 : present_state = OR_T5;
-				OR_T5 : present_state = T0;
-				
-				ORI_T3 : present_state = ORI_T4;
-				ORI_T4 : present_state = ORI_T5;
-				ORI_T5 : present_state = T0;
-				
-				SHR_T3 : present_state = SHR_T4;
-				SHR_T4 : present_state = SHR_T5;
-				SHR_T5 : present_state = T0;
-				
-				SHRA_T3 : present_state = SHRA_T4;
-				SHRA_T4 : present_state = SHRA_T5;
-				SHRA_T5 : present_state = T0;
-				
-				SHL_T3 : present_state = SHL_T4;
-				SHL_T4 : present_state = SHL_T5;
-				SHL_T5 : present_state = T0;
-				
-				ROR_T3 : present_state = ROR_T4;
-				ROR_T4 : present_state = ROR_T5;
-				ROR_T5 : present_state = T0;
-				
-				ROL_T3 : present_state = ROL_T4;
-				ROL_T4 : present_state = ROL_T5;
-				ROL_T5 : present_state = T0;
-				
-				NEG_T3 : present_state = NEG_T4;
-				NEG_T4 : present_state = T0;
-				
-				NOT_T3 : present_state = NOT_T4;
-				NOT_T3 : present_state = T0;
-				
-				// branch
-				BR_T3 : present_state = BR_T4;
-				BR_T4 : present_state = BR_T5;
-				BR_T5 : present_state = BR_T6;
-				BR_T6 : present_state = T0;
-				
-				// jump
-				JR_T3 : present_state = T0;
-				
-				JAL_T3 : present_state = JAL_T4;
-				JAL_T4 : present_state = T0;
-				
-				// in/out and mfhi/lo
-				IN_T3 : present_state = IN_T4;
-				IN_T4 : present_state = T0;
-				
-				OUT_T3 : present_state = T0;
-				
-				MFHI_T3 : present_state = T0;
-				MFLO_T3 : present_state = T0;
-				
-				// misc.
-				NOP_T3  : present_state = T0; 
-				HALT_T3 : present_state = reset_state;// CHECK WHAT TO DO HERE
-				
-			endcase
+					LDI_T3 : present_state = LDI_T4;
+					LDI_T4 : present_state = LDI_T5;
+					LDI_T5 : present_state = T0;
+					
+					ST_T3 : present_state = ST_T4;
+					ST_T4 : present_state = ST_T5;
+					ST_T5 : present_state = ST_T6;
+					ST_T6 : present_state = T0;
+					
+					// ALU
+					ADD_T3 : present_state = ADD_T4;
+					ADD_T4 : present_state = ADD_T5;
+					ADD_T5 : present_state = T0;
+					
+					ADDI_T3 : present_state = ADDI_T4;
+					ADDI_T4 : present_state = ADDI_T5;
+					ADDI_T5 : present_state = T0;
+					
+					SUB_T3 : present_state = SUB_T4;
+					SUB_T4 : present_state = SUB_T5;
+					SUB_T5 : present_state = T0;
+					
+					MUL_T3 : present_state = MUL_T4;
+					MUL_T4 : present_state = MUL_T5;
+					MUL_T5 : present_state = MUL_T6;
+					MUL_T6 : present_state = T0;
+					
+					DIV_T3 : present_state = DIV_T4;
+					DIV_T4 : present_state = DIV_T5;
+					DIV_T5 : present_state = DIV_T6;
+					DIV_T6 : present_state = T0;
+					
+					AND_T3 : present_state = AND_T4;
+					AND_T4 : present_state = AND_T5;
+					AND_T5 : present_state = T0;
+					
+					ANDI_T3 : present_state = ANDI_T4;
+					ANDI_T4 : present_state = ANDI_T5;
+					ANDI_T5 : present_state = T0;
+					
+					OR_T3 : present_state = OR_T4;
+					OR_T4 : present_state = OR_T5;
+					OR_T5 : present_state = T0;
+					
+					ORI_T3 : present_state = ORI_T4;
+					ORI_T4 : present_state = ORI_T5;
+					ORI_T5 : present_state = T0;
+					
+					SHR_T3 : present_state = SHR_T4;
+					SHR_T4 : present_state = SHR_T5;
+					SHR_T5 : present_state = T0;
+					
+					SHRA_T3 : present_state = SHRA_T4;
+					SHRA_T4 : present_state = SHRA_T5;
+					SHRA_T5 : present_state = T0;
+					
+					SHL_T3 : present_state = SHL_T4;
+					SHL_T4 : present_state = SHL_T5;
+					SHL_T5 : present_state = T0;
+					
+					ROR_T3 : present_state = ROR_T4;
+					ROR_T4 : present_state = ROR_T5;
+					ROR_T5 : present_state = T0;
+					
+					ROL_T3 : present_state = ROL_T4;
+					ROL_T4 : present_state = ROL_T5;
+					ROL_T5 : present_state = T0;
+					
+					NEG_T3 : present_state = NEG_T4;
+					NEG_T4 : present_state = T0;
+					
+					NOT_T3 : present_state = NOT_T4;
+					NOT_T3 : present_state = T0;
+					
+					// branch
+					BR_T3 : present_state = BR_T4;
+					BR_T4 : present_state = BR_T5;
+					BR_T5 : present_state = BR_T6;
+					BR_T6 : present_state = T0;
+					
+					// jump
+					JR_T3 : present_state = T0;
+					
+					JAL_T3 : present_state = JAL_T4;
+					JAL_T4 : present_state = T0;
+					
+					// in/out and mfhi/lo
+					IN_T3 : present_state = IN_T4;
+					IN_T4 : present_state = T0;
+					
+					OUT_T3 : present_state = T0;
+					
+					MFHI_T3 : present_state = T0;
+					MFLO_T3 : present_state = T0;
+					
+					// misc.
+					NOP_T3  : present_state = T0; 
+					HALT_T3 : present_state = reset_state;// CHECK WHAT TO DO HERE
+					
+				endcase
+			end
 		end
-		
 	end
 	
 	always @ (present_state) begin
@@ -263,14 +266,38 @@ module ControlUnit (
 			case (present_state) 
 				
 				reset_state : begin
-				
-				
+					// initially need to be set to 1
+					clear <= 1; run <= 1;
+					
+					// all others signals get reset to 0
+					MEMread <= 0; MEMwrite <= 0;
+					Rin <= 0; Rout <= 0; BAout <= 0; Gra <= 0; Grb ,= 0; Grc <= 0;
+					
+					// ALU control signals
+					ADD <= 0; SUB <= 0; MUL <= 0; DIV <= 0;
+					AND <= 0; OR<= 0;
+					SHR <= 0; SHRA <= 0; SHL <= 0;
+					ROR <= 0; ROL <= 0;
+					NEG <= 0; NOT <= 0;
+					IncPC <= 0;
+					
+					// specialty register control signals
+					PCin <= 0; PCout <= 0; IRin <= 0;
+					MDRin <= 0; MDRout <= 0; MARin <= 0; 
+					Zhighin <= 0; Zlowin <= 0; Zhighout <= 0; Zlowout <= 0;
+					HIin <= 0; LOin <= 0; HIout <= 0; LOout <= 0;
+					CSEout <= 0;
+					Yin <= 0;
+					ConIn <= 0;
+					OutPortin <= 0; InPortout <= 0;
+					
+					#15 clear <= 0;
+					
 				end
 				
 				T0 : begin
-				
-				
-				
+					
+					
 				end
 				
 				T1 : begin
