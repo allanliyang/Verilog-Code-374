@@ -85,8 +85,6 @@ module ControlUnit (
 	reg [7:0]present_state = reset_state;
 	
 	
-	
-	
 					
 	always @ (posedge clock, posedge reset) begin
 		
@@ -261,6 +259,8 @@ module ControlUnit (
 		end
 	end
 	
+	
+	
 	always @ (present_state) begin
 	
 			case (present_state) 
@@ -296,18 +296,18 @@ module ControlUnit (
 				end
 				
 				T0 : begin
-					
-					
+					PCout <= 1; MARin <= 1; IncPC <= 1;
+					#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
 				end
 				
 				T1 : begin
-				
-				
+					Zlowout <= 1; PCin <= 1; MEMread <= 1; MDRin <= 1;
+					#15 Zlowout <= 0; PCin <= 0; MEMread <= 0; MDRin <= 0;
 				end
 				
 				T2 : begin
-				
-				
+					MDRout <= 1; IRin <= 1;
+					#15 MDRout <= 0; IRin <= 0;
 				end
 				
 				
