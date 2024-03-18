@@ -71,23 +71,51 @@
 // 23. shr 	R2, R2, R3 						// R2 = 9; R2 == 0x49(line 9), R3 == 0x3(line 6) VERIFIED
 
 
-// 24. st 	0x8E, R2 						// addr(0x8E)(d142)(actually 143 due to indexing) = 9, new value in memory with address 0x58(should be 0x8E)
+// 24. st 	0x8E, R2 						   // addr(0x8E)(d142)(actually 143 due to indexing) = 9, new value in memory with address 0x58(should be 0x8E)
 
 
-// rol R2, R0, R3 ; R2 = 0x1A0
-// or R4, R3, R0 ; R4 = 0x37
-// and R1, R2, R0 ; R1 = 0x20
-// st 0x27(R1), R4 ; (0x47) = 0x37 new value in memory with address 0x47
-// sub R0, R2, R4 ; R0 = 0x169
-// shl R1, R2, R3 ; R1 = 0xD00
-// ldi R4, 6 ; R4 = 6
-// ldi R5, 0x1B ; R5 = 0x1B
-// mul R5, R4 ; HI = 0; LO = 0xA2
-// mfhi R7 ; R7 = 0
-// mflo R6 ; R6 = 0xA2
-// div R5, R4 ; HI = 3, LO = 4
-// ldi R10, 1(R4) ; R10 = 7 setting up argument registers
-// ldi R11, -2(R5) ; R11 = 0x19 R8, R9, R10, and R11
+// 25. rol R2, R0, R3        // R2 = 0x1A0, R0 = 0x34 (line 5), R3 = 3 (line 6), VERIFIEDs
+
+
+// 26. or R4, R3, R0         // R4 = 0x37, R3 = 3 (line 6), R0 = 0x34 (line 5), VERIFIEDs
+
+
+// 27. and R1, R2, R0           // R1 = 0x20, R2 = 0x1A0 (line 25), R0 = 0x34 (line 5), VERIFIEDs
+
+
+// 28. st 0x27(R1), R4          // addr(0x27 + 0x20)(d39 + d32)(is actually 72 due to indexing) = 0x37 new value in memory with address 0x47
+
+
+// 29. sub R0, R2, R4          // R0 = 0x169, R2 = 0x1A0 (line 25), R4 = 0x37 (line 26), VERIFIEDs
+
+
+// 30. shl R1, R2, R3          // R1 = 0xD00, R2 = 1A0 (line 25), R3 = 3 (line 5), VERIFIEDs
+
+
+// 31. ldi R4, 6               // R4 = 6
+
+
+// 32. ldi R5, 0x1B            // R5 = 0x1B
+
+
+// 33. mul R5, R4              // HI = 0; LO = 0xA2, R5 = 0x1B (line 32), R4 = 6 (line 31), 0x1B * 6 = 162, VERIFIEDs
+
+
+// 34. mfhi R7                  // R7 = 0
+
+
+// 35. mflo R6                 // R6 = 0xA2
+
+
+// 36. div R5, R4              // HI = 3, LO = 4, R5 = 0x1B (line 32), R4 = 6 (line 31), 0x1B / 6 = 4 Remainder 3, VERIFIEDs
+
+
+// 37. ldi R10, 1(R4)           // R10 = R4 + 1 = 7, R4 = 6 (line 31), VERIFIEDs, setting up argument registers for R8, R9, R10, and R11
+
+
+// ldi R11, -2(R5)              // R11 = R5 + -2 = 0x19, R5 = 0x1B (line 32), VERIFIEDs, setting up argument registers for R8, R9, R10, and R11
+
+
 // ldi R12, 0(R6) ; R12 = 0xA2
 // ldi R13, 3(R7) ; R13 = 3
 // jal R12 ; address of subroutine subA in R12 - return address in R15
