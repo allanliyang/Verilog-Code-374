@@ -2,12 +2,14 @@
 `timescale 1ns/10ps
 module ControlUnit (
 
+
+	// NOTE: Try switching order of ins and outs
 	input clock, reset, stop, ConFFQ,
 	input [31:0] IR,
 	// no other input for this control unit, i.e. no interrupt functionality
 	
 	// use output regs because they can be assigned values inside of always statements
-	output reg run, clear,
+	output reg clear,
 	output reg MEMread, MEMwrite,
 	output reg Rin, Rout, BAout, Gra, Grb, Grc,
 
@@ -83,7 +85,7 @@ module ControlUnit (
 
 					
 	reg [7:0]present_state = reset_state;
-	
+	reg run;
 	
 					
 	always @ (posedge clock, posedge reset) begin
@@ -252,14 +254,12 @@ module ControlUnit (
 					
 					// misc.
 					NOP_T3  : present_state = T0; 
-					HALT_T3 : present_state = reset_state;// CHECK WHAT TO DO HERE
+					HALT_T3 : present_state = HALT_T3 ;// CHECK WHAT TO DO HERE
 					
 				endcase
 			end
 		end
 	end
-	
-	
 	
 	always @ (present_state) begin
 	
@@ -314,389 +314,432 @@ module ControlUnit (
 				// load and store instructions
 				// LD
 				LD_T3 : begin
-				
-				
+					Grb <= 1; BAout <= 1; Yin <= 1;
+					#15 Grb <= 0; BAout <= 0; Yin <= 0;
 				end
 				
 				LD_T4 : begin
-				
-				
+					CSEout <= 1; ADD <= 1; Zlowin <= 1;
+					#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 				end
 				
 				LD_T5 : begin
-				
-				
+					Zlowout <= 1; MARin <= 1;
+					#15 Zlowout <= 0; MARin <= 0;
 				end
 				
 				LD_T6 : begin
-				
-				
+					MEMread <= 1; MDRin <= 1;
+					#15 MEMread <= 0; MDRin <= 0;
 				end
 				
 				LD_T7 : begin
-				
-				
+					MDRout <= 1; Gra <= 1; Rin <= 1;
+					#15 MDRout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// LDI
 				LDI_T3 : begin
-				
-				
+					Grb <= 1; BAout <= 1; Yin <= 1;
+					#15 Grb <= 0; BAout <= 0; Yin <= 0;
 				end
 				
 				LDI_T4 : begin
-				
-				
+					CSEout <= 1; ADD <= 1; Zlowin <= 1;
+					#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 				end
 				
 				LDI_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// ST
 				ST_T3 : begin
-				
-				
+					Grb <= 1; BAout <= 1; Yin <= 1;
+					#15 Grb <= 0; BAout <= 0; Yin <= 0;
 				end
 				
 				ST_T4 : begin
-				
-				
+					CSEout <= 1; ADD <= 1; Zlowin <= 1;
+					#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 				end
 				
 				ST_T5 : begin
-				
-				
+					Zlowout <= 1; MARin <= 1;
+					#15 Zlowout <= 0; MARin <= 0;
 				end
 				
 				ST_T6 : begin
-				
-				
+					Gra <= 1; Rout <= 1; MEMwrite <= 1;
+					#15 Gra <= 0; Rout <= 0; MEMwrite <= 0;
 				end
+				
 				
 				
 				// ALU instructions
 				// ADD
 				ADD_T3 : begin 
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				ADD_T4 : begin 
-				
-				
+					Grc <= 1; Rout <= 1; ADD <= 1; Zlowin <= 1;
+					#15 Grc <= 0; Rout <= 0; ADD <= 0; Zlowin <= 0;
 				end
 				
 				ADD_T5 : begin 
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// ADDI
 				ADDI_T3 : begin 
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				ADDI_T4 : begin 
-				
-				
+					CSEout <= 1; ADD <= 1; Zlowin <= 1;
+					#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 				end
 				
 				ADDI_T5 : begin 
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// SUB
 				SUB_T3 : begin 
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				SUB_T4 : begin 
-				
-				
+					Grc <= 1; SUB <= 1; Zlowin <= 1;
+					#15 Grc <= 0; SUB <= 0; Zlowin <= 0;
 				end
 				
 				SUB_T5 : begin 
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// MUL
 				MUL_T3 : begin
-				
-				
+					Gra <= 1; Rout <= 1; Yin <= 1;
+					#15 Gra <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				MUL_T4 : begin
-				
-				
+					Grb <= 1; Rout <= 1; MUL <= 1; Zlowin <= 1; Zhighin <= 1;
+					#15 Grb <= 0; Rout <= 0; MUL <= 0; Zlowin <= 0; Zhighin <= 0;
 				end
 				
 				MUL_T5 : begin
-				
-				
+					Zlowout <= 1; LOin <= 1;
+					#15 Zlowout <= 0; LOin <= 0;
 				end
 				
 				MUL_T6 : begin
-				
-				
+					Zhighout <= 1; HIin <= 1;
+					#15 Zhighout <= 0; HIin <= 0;
 				end
+				
 				
 				// DIV
 				DIV_T3 : begin
-				
-				
+					Gra <= 1; Rout <= 1; Yin <= 1;
+					#15 Gra <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				DIV_T4 : begin
-				
-				
+					Grb <= 1; Rout <= 1; DIV <= 1; Zlowin <= 1; Zlowout <= 1;
+					#15 Grb <= 0; Rout <= 0; DIV <= 0; Zlowin <= 0; Zlowout <= 0;
 				end
 				
 				DIV_T5 : begin
-				
-				
+					Zlowout <= 1; LOin <= 1;
+					#15 Zlowout <= 0; LOin <= 0;
 				end
 				
 				DIV_T6 : begin
-				
-				
+					Zhighout <= 1; HIin <= 1;
+					#15 Zhighout <= 0; HIin <= 0;
 				end
+				
 				
 				// AND
 				AND_T3 : begin
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				AND_T4 : begin
-				
-				
+					Grc <= 1; Rout <= 1; AND <= 1; Zlowin <= 1;
+					#15 Grc <= 0; Rout <= 0; AND <= 0; Zlowin <= 0;
 				end
 				
 				AND_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// ANDI
 				ANDI_T3 : begin
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				ANDI_T4 : begin
-				
-				
+					CSEout <= 1; AND <= 1; Zlowin <= 1;
+					#15 CSEout <= 0; AND <= 0; Zlowin <= 0;
 				end
 				
 				ANDI_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// OR
 				OR_T3 : begin
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				OR_T4 : begin
-				
-				
+					Grc <= 1; Rout <= 1; OR <= 1; Zlowin <= 1;
+					#15 Grc <= 0; Rout <= 0; OR <= 0; Zlowin <= 0;
 				end
 				
 				OR_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// ORI
 				ORI_T3 : begin
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				ORI_T4 : begin
-				
-				
+					CSEout <= 1; OR <= 1; Zlowin <= 1;
+					#15 CSEout <= 0; OR <= 0; Zlowin <= 0;
 				end
 				
 				ORI_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// SHR
 				SHR_T3 : begin
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				SHR_T4 : begin
-				
-				
+					Grc <= 1; Rout <= 1; SHR <= 1; Zlowin <= 1;
+					#15 Grc <= 0; Rout <= 0; SHR <= 0; Zlowin <= 0;
 				end
 				
 				SHR_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// SHRA
 				SHRA_T3 : begin
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				SHRA_T4 : begin
-				
-				
+					Grc <= 1; Rout <= 1; SHRA <= 1; Zlowin <= 1;
+					#15 Grc <= 0; Rout <= 0; SHRA <= 0; Zlowin <= 0;
 				end
 				
 				SHRA_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// SHL
 				SHL_T3 : begin
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				SHL_T4 : begin
-				
-				
+					Grc <= 1; Rout <= 1; SHL <= 1; Zlowin <= 1;
+					#15 Grc <= 0; Rout <= 0; SHL <= 0; Zlowin <= 0;
 				end
 				
 				SHL_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// ROR
 				ROR_T3 : begin
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				ROR_T4 : begin
-				
-				
+					Grc <= 1; Rout <= 1; ROR <= 1; Zlowin <= 1;
+					#15 Grc <= 0; Rout <= 0; ROR <= 0; Zlowin <= 0;
 				end
 				
 				ROR_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
 				end
+				
 				
 				// ROL
 				ROL_T3 : begin
-				
-				
+					Grb <= 1; Rout <= 1; Yin <= 1;
+					#15 Grb <= 0; Rout <= 0; Yin <= 0;
 				end
 				
 				ROL_T4 : begin
-				
-				
+					Grc <= 1; Rout <= 1; ROL <= 1; Zlowin <= 1;
+					#15 Grc <= 0; Rout <= 0; ROR <= 0; Zlowin <= 0;
 				end
 				
 				ROL_T5 : begin
-				
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
 				end
+				
 				
 				// NEG
 				NEG_T3 : begin
-				
+					Grb <= 1; Rout <= 1; NEG <= 1; Zlowin <= 1;
+					#15 Grb <= 0; Rout <= 0; NEG <= 0; Zlowin <= 0;
 				end
 				
 				NEG_T4 : begin
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// NOT
 				NOT_T3 : begin
-				
+					Grb <= 1; Rout <= 1; NOT <= 1; Zlowin <= 1;
+					#15 Grb <= 0; Rout <= 0; NOT <= 0; Zlowin <= 0;
 				end
 				
 				NOT_T4 : begin
-				
+					Zlowout <= 1; Gra <= 1; Rin <= 1;
+					#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				
 				// BRANCH instruction
 				BR_T3  : begin
-				
+					Gra <= 1; Rout <= 1; ConIn <= 1;
+					#15 Gra <= 0; Rout <= 0; ConIn <= 0;
 				end
 				
 				BR_T4  : begin
-				
+					PCout <= 1; Yin <= 1;
+					#15 PCout <= 0; Yin <= 0;
 				end
 				
 				BR_T5  : begin
-				
+					CSEout <= 1; ADD <= 1; Zlowin <= 1;
+					#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 				end
 				
 				BR_T6  : begin
-				
+					Zlowout <= 1;
+					
+					if (ConFFQ) begin
+						PCin <= 1;
+					end
+					
+					#15 Zlowout <= 0; PCin <= 0;
 				end
+				
 				
 				
 				// JUMP instructions
 				JR_T3 : begin
-				
+					Gra <= 1; Rout <= 1; PCin <= 1;
+					#15 Gra <= 0; Rout <= 0; PCin <= 0;
 				end
 				
 				// JAL
 				JAL_T3 : begin
-				
+					PCout <= 1; Grb <= 1; Rin <= 1;
+					#15 PCout <= 0; Grb <= 0; Rin <= 0;
 				end
 				
 				JAL_T4 : begin
-				
+					Gra <= 1; Rout <= 1; PCin <= 1;
+					#15 Gra <= 0; Rout <= 0; PCin <= 0;
 				end
+				
 				
 				
 				// IN/OUT and MFHI/LO instructions
 				// IN
 				IN_T3 : begin
-				
+					// do nothing here, inport is getting data here
 				end
 				
 				IN_T4 : begin
-				
+					InPortout <= 1; Gra <= 1; Rin <= 1;
+					#15 InPortout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				// OUT
 				OUT_T3 : begin
-				
+					Gra <= 1; Rout <= 1; OutPortin <= 1;
+					#15 Gra <= 0; Rout <= 0; OutPortin <= 0;
 				end
+				
 				
 				// MFHI
 				MFHI_T3 : begin
-				
+					HIout <= 1; Gra <= 1; Rin <= 1;
+					#15 HIout <= 0; Gra <= 0; Rin <= 0;
 				end
 				
 				// MFLO
 				MFLO_T3 : begin
-				
+					LOout <= 1; Gra <= 1; Rin <= 1;
+					#15 LOout <= 0; Gra <= 0; Rin <= 0;
 				end
+				
 				
 				
 				// MISC. instructions
 				// NOP
 				NOP_T3 : begin
-				
+					// do nothing, will change back to T0 on next clock cycle
 				end
 				
 				// HALT
 				HALT_T3 : begin
-				
+					run <= 0;
 				end
 					
 			endcase

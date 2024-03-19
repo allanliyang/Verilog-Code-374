@@ -16,7 +16,7 @@ module RAM(
 		// $readmemh("D:/Verilog-Code-374-TEST/512x0.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// test program
-		$readmemh("D:/Verilog-Code-374-TEST/ram_FP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		$readmemh("D:/Verilog-Code-374/ram_FP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		
 		

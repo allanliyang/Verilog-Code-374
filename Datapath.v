@@ -1,34 +1,8 @@
 module Datapath(
-	input wire clear, clock,
-	input wire HIin, LOin, HIout, LOout, 				// HI and LO in/out
-	input wire Zhighin, Zlowin, Zhighout, Zlowout, 	// Z high and low in/out
-	input wire PCin, PCout, 								// PC register in/out
-	input wire MDRin, MDRout, MARin,			 			// MDR and MAR in/out
-	input wire InPortout, 									// InPort in/out
-	input wire OutPortin,
-	input wire CSEout,										// C Sign Extended out
-	input wire IRin,											// IR in										
-	input wire MDMuxread,									// MDMux select signal
-	input wire Yin,
-	
-	input wire ADD, SUB, MUL, DIV,
-	input wire AND, OR,
-	input wire SHR, SHRA, SHL,
-	input wire ROR, ROL,
-	input wire NEG, NOT,
-	input wire IncPC,											// signal for PC++
-	
-	input wire Gra, Grb, Grc,								// signals for SelectEncode in Phase 2
-	input wire Rin, Rout, BAout,
-	
+	input wire clock, reset, stop,
 	input wire [31:0]InPortdata,							// simulated signal from input unit
-	
-	input wire RAMread, RAMwrite,							// control signals for RAM module
 
-	input wire ConIn,											// trigger for Con flip-flop
-	
-	output wire [31:0]OutPortdata,						// data from OutPort
-	output wire ConFFQ										// output from ConFF
+	output wire [31:0]OutPortdata							// data from OutPort
 );
 
 // declarations for bus connections
@@ -69,9 +43,44 @@ wire [8:0]MARAddrOut;							// internal signal for address from MAR
 
 wire [31:0]OutPortout;
 
-//other datapaths
+
+wire clear;
+
+wire HIin, LOin, HIout, LOout; 				// HI and LO in/out
+wire Zhighin, Zlowin, Zhighout, Zlowout; 	// Z high and low in/out
+wire PCin, PCout; 								// PC register in/out
+wire MDRin, MDRout, MARin;			 			// MDR and MAR in/out
+wire InPortout; 									// InPort in/out
+wire OutPortin;
+wire CSEout;										// C Sign Extended out
+wire IRin;											// IR in										
+wire Yin;
+
+
+// ALU control signals
+wire ADD, SUB, MUL, DIV;
+wire AND, OR;
+wire SHR, SHRA, SHL;
+wire ROR, ROL;
+wire NEG, NOT;
+wire IncPC;											// signal for PC++
+	
+// signal paths connecting ALU to Y and Z regs
 wire [31:0] Yout;
-wire [31:0] Chigh, Clow;
+wire [31:0] Chigh, Clow;	
+	
+wire Gra, Grb, Grc;								// signals for SelectEncode in Phase 2
+wire Rin, Rout, BAout;
+
+wire MEMread, MEMwrite;
+
+
+
+
+
+wire ConIn;										// trigger for Con flip-flop
+wire ConFFQ;										// output from ConFF
+
 
 // REGISTERS
 // R0 - R15
@@ -104,7 +113,7 @@ Register32bit Zlow(clear, clock, Zlowin, Clow, BusMuxInZlow);
 Register32bit PC(clear, clock, PCin, BusMuxOut, BusMuxInPC);
 
 // MDR register
-MDR MDR(clear, clock, MDRin, MDMuxread, BusMuxOut, Mdatain, BusMuxInMDR);
+MDR MDR(clear, clock, MDRin, MEMread, BusMuxOut, Mdatain, BusMuxInMDR);
 
 // MAR register
 MAR MAR(clear, clock, MARin, BusMuxOut, MARAddrOut);
@@ -123,10 +132,6 @@ Register32bit IR(clear, clock, IRin, BusMuxOut, IRout);	// NOTE: IRout connects 
 
 // Y register (for ALU)
 Register32bit Y(clear, clock, Yin, BusMuxOut, Yout);
-
-// NOTE: END OF REGISTER DECLARATIONS, CHECK THAT NONE WERE MISSED
-// 02/10/2024/4:21 AM, i spent 3 hours trying to figure out why MDR wasn't working when 'clear' and 'clock' were switched
-	// ^^ my 13th reason why
 
 
 
@@ -153,7 +158,8 @@ Bus BUS	(R0out, R1out, R2out, R3out,
 			BusMuxInCSE,
 			BusMuxOut); // BusMuxOut is only output from BUS
 		
-			
+		
+		
 // ALU
 ALU ALU	(Yout, BusMuxOut,
 			ADD, SUB, MUL, DIV,
@@ -165,9 +171,11 @@ ALU ALU	(Yout, BusMuxOut,
 			Chigh, Clow);
 			
 			
-//NOTE: Need to add RAM
+
 				
-RAM RAM (RAMread, RAMwrite, MARAddrOut, BusMuxOut, Mdatain);
+RAM RAM (MEMread, MEMwrite, MARAddrOut, BusMuxOut, Mdatain);
+
+
 
 SelectEncode SELogic 	(IRout, Gra, Grb, Grc,
 								Rin, Rout, BAout,
@@ -180,11 +188,37 @@ SelectEncode SELogic 	(IRout, Gra, Grb, Grc,
 								R8out, R9out, R10out, R11out,
 								R12out, R13out, R14out, R15out,
 								BusMuxInCSE);
+								
+								
+								
 
 // ConFF logic
-ConFFLogic ConFF(ConIn, IRout, BusMuxOut, ConFFOut);
+ConFFLogic ConFF(ConIn, IRout, BusMuxOut, ConFFQ);
+
+
+// NOTE: FIX CONTROL UNIT
+ControlUnit CU	(clock, reset, stop, ConFFQ,
+					IRout,
+					clear,
+					MEMread, MEMwrite,
+					Rin, Rout, BAout,
+					Gra, Grb, Grc,
+					ADD, SUB, MUL, DIV,
+					AND, OR,
+					SHR, SHRA, SHL,
+					ROR, ROL,
+					NEG, NOT,
+					IncPC,
+					PCin, PCout, IRin,
+					MDRin, MDRout, MARin,
+					Zhighin, Zlowin, Zhighout, Zlowout,
+					HIin, LOin, HIout, LOout,
+					CSEout,
+					Yin,
+					ConIn,
+					OutPortin, InPortout);
+
 
 assign OutPortdata = OutPortout;
-assign ConFFQ = ConFFOut;
 
 endmodule
