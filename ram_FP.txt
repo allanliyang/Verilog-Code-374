@@ -16,7 +16,7 @@ D0000000 // nop
 63B80003 // addi	R7, R7, 3
 8BB80000 // neg	R7, R7
 93B80000 // not	R7, R7
-63B8000F // andi	R7, R7, 0xF
+6BB8000F // andi	R7, R7, 0xF
 40818000 // ror	R1, R0, R3
 73880009 // ori	R7, R1, 9
 30B98000 // shra	R1, R7, R3
@@ -38,7 +38,7 @@ CB000000 // mflo	R6
 0DAFFFFE // ldi	R11, -2(R5)
 0E300000 // ldi	R12, 0(R6)
 0EB80003 // ldi	R13, 3(R7)
-AE000000 // jal R12
+AE780000 // jal R12
 D8000000 // halt
 00000000
 00000000

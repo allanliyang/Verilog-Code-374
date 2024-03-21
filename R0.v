@@ -15,6 +15,13 @@ initial begin
 	temp = 32'h00000000;	// temp register to hold result of AND with BAout so contents of q don't chang
 end
 
+always @ (BAout) begin
+		
+		if (BAout) temp <= 32'h00000000; // write zeros if BAout == 1
+		else temp <= q;						// write q is BAout == 0
+end
+
+
 always @ (posedge clock) 
 		begin
 			
@@ -24,9 +31,6 @@ always @ (posedge clock)
 			else if (enable) begin
 				q <= BusMuxOut;
 			end
-			
-			if (BAout) temp <= 32'h00000000; // write zeros if BAout == 1
-			else temp <= q;						// write q is BAout == 0
 	
 		end
 

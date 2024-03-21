@@ -44,17 +44,13 @@ wire [8:0]MARAddrOut;							// internal signal for address from MAR
 wire [31:0]OutPortout;
 
 
-wire clear;
 
-wire HIin, LOin, HIout, LOout; 				// HI and LO in/out
-wire Zhighin, Zlowin, Zhighout, Zlowout; 	// Z high and low in/out
-wire PCin, PCout; 								// PC register in/out
-wire MDRin, MDRout, MARin;			 			// MDR and MAR in/out
-wire InPortout; 									// InPort in/out
-wire OutPortin;
-wire CSEout;										// C Sign Extended out
-wire IRin;											// IR in										
-wire Yin;
+wire ConFFQ;										// output from ConFF
+
+wire clear;
+wire MEMread, MEMwrite;
+wire Rin, Rout, BAout;
+wire Gra, Grb, Grc;								// signals for SelectEncode in Phase 2
 
 
 // ALU control signals
@@ -64,22 +60,23 @@ wire SHR, SHRA, SHL;
 wire ROR, ROL;
 wire NEG, NOT;
 wire IncPC;											// signal for PC++
+
+wire PCin, PCout; 								// PC register in/out
+wire IRin;											// IR in	
+wire MDRin, MDRout, MARin;			 			// MDR and MAR in/out
+wire Zhighin, Zlowin, Zhighout, Zlowout; 	// Z high and low in/out
+wire HIin, LOin, HIout, LOout; 				// HI and LO in/out
+wire CSEout;										// C Sign Extended out
+wire Yin;
+wire ConIn;										// trigger for Con flip-flop
+wire InPortout; 									// InPort in/out
+wire OutPortin;
+
 	
 // signal paths connecting ALU to Y and Z regs
 wire [31:0] Yout;
-wire [31:0] Chigh, Clow;	
-	
-wire Gra, Grb, Grc;								// signals for SelectEncode in Phase 2
-wire Rin, Rout, BAout;
+wire [31:0] Chigh, Clow;
 
-wire MEMread, MEMwrite;
-
-
-
-
-
-wire ConIn;										// trigger for Con flip-flop
-wire ConFFQ;										// output from ConFF
 
 
 // REGISTERS
@@ -197,9 +194,7 @@ ConFFLogic ConFF(ConIn, IRout, BusMuxOut, ConFFQ);
 
 
 // NOTE: FIX CONTROL UNIT
-ControlUnit CU	(clock, reset, stop, ConFFQ,
-					IRout,
-					clear,
+ControlUnit CU	(clear,
 					MEMread, MEMwrite,
 					Rin, Rout, BAout,
 					Gra, Grb, Grc,
@@ -216,7 +211,10 @@ ControlUnit CU	(clock, reset, stop, ConFFQ,
 					CSEout,
 					Yin,
 					ConIn,
-					OutPortin, InPortout);
+					OutPortin, InPortout,
+					IRout,
+					clock, reset, stop, ConFFQ
+					);
 
 
 assign OutPortdata = OutPortout;

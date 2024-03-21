@@ -107,10 +107,10 @@
 // 93B80000
 
 
-// 19. andi R7, R7, 0xF 					// R7 = 6; R7 == 0x96(line 18)
-// 01100 0111 0111 0000000000000001111
+// 19. andi R7, R7, 0xF 					// R7 = 6; R7 == 0x96(line 18) 
+// 01101 0111 0111 0000000000000001111
 // andi	R7		R7		0xF
-// 63B8000F
+// 6BB8000F
 
 
 // 20. ror 	R1, R0, R3 						// R1 = 0x80000006; R0 == 0x34(line 5), R3 == 0x3(line 6) VERIFIED
@@ -143,7 +143,7 @@
 // 1100008E
 
 
-// 25. rol 	R2, R0, R3        			// R2 = 0x1A0, R0 = 0x34 (line 5), R3 = 3 (line 6), VERIFIEDs
+// 25. rol 	R2, R0, R3        			// R2 = 0x1A0, R0 = 0x34 (line 5), R3 = 3 (line 6), VERIFIEDs 
 // 01001 0010 0000 0011 000000000000000
 // rol	R2		R0		R3		--
 // 49018000
@@ -233,16 +233,16 @@
 // 0E300000
 
 
-// 40. ldi 	R13, 3(R7)            		// R13 = R7 + 3 = 3, R7 = 0 (line 34), VERIFIEDs
+// 40. ldi 	R13, 3(R7)            		// R13 = R7 + 3 = 3, R7 = 0 (line 34), VERIFIEDs  // CONFIRMED TO WORK UP TO HERE ------------------------
 // 00001 1101 0111 0000000000000000011
 // ldi	R13	R7		0x3
 // 0EB80003
 
 
 // 41. jal 	R12                  		// R12 = 0xA2 (line 39), address of subroutine subA in R12 - return address in R15
-// 10101 1100 0000 0000000000000000000
-// jal	R12	--		--
-// AE000000
+// 10101 1100 1111 0000000000000000000
+// jal	R12	R15		--
+// AE780000
 
 
 // 42. halt                     // upon return, the program halts
