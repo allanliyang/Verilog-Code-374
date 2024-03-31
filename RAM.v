@@ -16,7 +16,7 @@ module RAM(
 		// $readmemh("C:\Users\Allan\Desktop\Verilog-Code-374-TEST/512x0.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		// test program
-		$readmemh("D:/Verilog-Code-374/ram_FP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+		$readmemh("C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ram_FP.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 		
 		
 		
@@ -39,7 +39,7 @@ module RAM(
 			if (write) begin 
 				mem[address] = BusMuxOut;
 				// update text file to reflect ram contents
-				$writememh("D:/Verilog-Code-374/RAMoutput.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
+				$writememh("C:/Users/Allan/Desktop/Verilog-Code-374-TEST/RAMoutput.txt", mem, 0, 511); // WARNING: UPDATE PATH BEFORE RUNNING
 			end
 			
 	end

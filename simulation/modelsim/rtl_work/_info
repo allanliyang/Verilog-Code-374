@@ -1,0 +1,308 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Allan/Desktop/Verilog-Code-374-TEST/simulation/modelsim
+vALU
+Z1 !s110 1711918475
+!i10b 1
+!s100 o4=:8l`EgIhBAmjDB<`Mi3
+IM:zeJ`N[cdaHN0=^dQ]PB3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1711867545
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v
+L0 20
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1711918475.000000
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ALU.v|
+!i113 1
+Z5 o-vlog01compat -work work
+Z6 !s92 -vlog01compat -work work +incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST
+Z7 tCvgOpt 0
+n@a@l@u
+vBus
+R1
+!i10b 1
+!s100 jl>m6>^DK18=H_C1Lh<n:0
+IgKikYV5]ngcPV?eFaZY;`1
+R2
+R0
+w1711867539
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Bus.v|
+!i113 1
+R5
+R6
+R7
+n@bus
+vConFFLogic
+R1
+!i10b 1
+!s100 HJK8=_ciT72LVSHeHneYR2
+IV7bROjXV:6f7eoHQIHmQj3
+R2
+R0
+w1711867565
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ConFFLogic.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/ConFFLogic.v
+L0 2
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ConFFLogic.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ConFFLogic.v|
+!i113 1
+R5
+R6
+R7
+n@con@f@f@logic
+vControlUnit
+R1
+!i10b 1
+!s100 bRPchC3GT<=RmThmfZ[Gh2
+Iz=NCAZ]]CU>Ji?fk9>H730
+R2
+R0
+w1711867595
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ControlUnit.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/ControlUnit.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ControlUnit.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/ControlUnit.v|
+!i113 1
+R5
+R6
+R7
+n@control@unit
+vDatapath
+R1
+!i10b 1
+!s100 j:PSYaSJl4Z@_lJJiM@5R2
+IKEdF7_08JjL8kIO97Mkg30
+R2
+R0
+w1711867603
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/Datapath.v|
+!i113 1
+R5
+R6
+R7
+n@datapath
+vdatapath_tb
+Z8 !s110 1711918476
+!i10b 1
+!s100 ;kczZXzalJJhEkm_UlZB`0
+Iz>TK:AS8T=TFgCCzeHKH]3
+R2
+R0
+w1711918442
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/datapath_tb.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/datapath_tb.v
+L0 5
+R3
+r1
+!s85 0
+31
+!s108 1711918476.000000
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/datapath_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/datapath_tb.v|
+!i113 1
+R5
+R6
+R7
+vInPort
+R1
+!i10b 1
+!s100 iVP1F`XoJG52]dN^_TX:R1
+Id8a5YC_8a@zClN9FRXi>K0
+R2
+R0
+w1711867575
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/InPort.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/InPort.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/InPort.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/InPort.v|
+!i113 1
+R5
+R6
+R7
+n@in@port
+vMAR
+R1
+!i10b 1
+!s100 Z6KK=TjioX_[DI;e^BA@n1
+IEE>Dh^5;LKH3Am5[[Oiez3
+R2
+R0
+w1711867529
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/MAR.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/MAR.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/MAR.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/MAR.v|
+!i113 1
+R5
+R6
+R7
+n@m@a@r
+vMDR
+R1
+!i10b 1
+!s100 lfn8iOjoiR6kIM[TJ<5i:1
+ILRdkdG:MUI?^KRAa?g?hK2
+R2
+R0
+w1711867521
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/MDR.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/MDR.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/MDR.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/MDR.v|
+!i113 1
+R5
+R6
+R7
+n@m@d@r
+vR0
+R1
+!i10b 1
+!s100 MQh0[2VR317JfLjEGUPXB3
+I^?<KCb><D8Oo[I;Z2`:7`1
+R2
+R0
+w1711867502
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/R0.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/R0.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/R0.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/R0.v|
+!i113 1
+R5
+R6
+R7
+n@r0
+vRAM
+R8
+!i10b 1
+!s100 BkIA[DB@HidW0W^gaTiC13
+IzOLQDQ04AS=lg5Zb02S1>3
+R2
+R0
+w1711917886
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/RAM.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/RAM.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/RAM.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/RAM.v|
+!i113 1
+R5
+R6
+R7
+n@r@a@m
+vRegister32bit
+R1
+!i10b 1
+!s100 zfDT]Hd0M[1lS_Qn91mga3
+Ie@=7KeZFH@mWmjIe3P;Kl2
+R2
+R0
+w1711867493
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/register32bit.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/register32bit.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/register32bit.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/register32bit.v|
+!i113 1
+R5
+R6
+R7
+n@register32bit
+vSelectEncode
+R1
+!i10b 1
+!s100 mTzlK935iig;lDi9T>4Jo1
+IGmSE_9diRAfVU`:naKVi^0
+R2
+R0
+w1711867557
+8C:/Users/Allan/Desktop/Verilog-Code-374-TEST/SelectEncode.v
+FC:/Users/Allan/Desktop/Verilog-Code-374-TEST/SelectEncode.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Allan/Desktop/Verilog-Code-374-TEST/SelectEncode.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Allan/Desktop/Verilog-Code-374-TEST|C:/Users/Allan/Desktop/Verilog-Code-374-TEST/SelectEncode.v|
+!i113 1
+R5
+R6
+R7
+n@select@encode

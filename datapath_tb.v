@@ -16,7 +16,12 @@ module datapath_tb();
 						OutPortdata);
 						
 						
-	initial begin clock = 0; end
+	initial begin 
+		
+		clock = 0; 
+		InPortdata = 32'h80;
+		
+	end
 	always #10 clock = ~clock;
 
 endmodule
