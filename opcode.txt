@@ -1,0 +1,391 @@
+// this file holds opcode for different test cases and instructions
+
+// 1. ldi 	R2, 0x69 						// R2 = 0x69
+// 00001 0010 0000 0000000000001101001
+// ldi	R2		R0		0x69
+// 09000069
+
+// 2. ldi 	R2, 2(R2) 						// R2 = 0x6B
+// 00001 0010 0010 0000000000000000010
+// ldi	R2		R2		0x2
+// 09100002
+
+
+// 3. ld 	R1, 0x47 						// R1 = addr(0x47) = 0x94; preload 0x94 at addr 0x47(d71)(actually 72 due to indexing)
+// 00000 0001 0000 0000000000001000111
+// ld		R1		R0		0x47
+// 00800047
+
+
+// 4. ldi 	R1, 1(R1) 						// R1 = addr(0x47) + 1 = 0x95
+// 00001 0001 0001 0000000000000000001
+// ldi	R1		R1			0x1
+// 08880001
+
+
+// 5. ld 	R0, -7(R1) 						// R0 = addr(0x95 - 7) = 0x34; preload 0x34 at addr 0x8E(d142)(actually 143 due to indexing)
+// 00000 0000 0001 1111111111111111001
+// ld		R0		R1			-7
+// 000FFFF9
+
+// 6. ldi 	R3, 3 							// R3 = 3
+// 00001 0011 0000 0000000000000000011
+// ldi	R3		R0		0x3
+// 09800003
+
+
+// 7. ldi 	R2, 0x43 						// R2 = 0x43
+// 00001 0010 0000 0000000000001000011
+// ldi	R2		R0		0x43
+// 09000043
+
+
+// 8. brmi 	R2, 3 							// continue with the next instruction (will not branch)
+// 10011 0010 0011 0000000000000000011
+// br		R2		<0		0x3
+// 99180003
+
+
+// 9. ldi 	R2, 6(R2) 						// R2 = 0x49
+// 00001 0010 0010 0000000000000000110
+// ldi	R2		R2		0x6
+// 09100006
+
+
+// 10. ld 	R7, -2(R2) 						// R7 = addr(0x49 - 2) = addr(0x47) = 0x94; already preloaded initially
+// 00000 0111 0010 1111111111111111110
+// ld		R7		R2		-2
+// 0397FFFE
+
+
+// 11. nop
+// 11010 0000 0000 0000000000000000000
+// nop	--		--		--
+// D0000000
+
+
+// 12. brpl R7, 2 							// continue with the instruction at “target” (will branch); makes PC = PC+1+2 if R7 is positive
+// 10011 0111 0010 0000000000000000010
+// br		R7	  >=0		0x2
+// 9B900002
+
+
+// 13. ldi 	R5, 4(R2) 						// this instruction will not execute
+// 00001 0101 0010 0000000000000000100
+// ldi	R5		R2		0x4
+// 0A900004
+
+
+// 14. ldi 	R4, -3(R5) 						// this instruction will not execute
+// 00001 0100 0101 1111111111111111101
+// ldi	R4		R5		-3
+// 0A2FFFFD
+
+
+// target:
+// 15. add 	R2, R2, R3 						// R2 = 0x4C; R2 == 0x49(line 9), R3 == 0x3(line 6)
+// 00011 0010 0010 0011 000000000000000
+// add	R2		R2		R3		--
+// 19118000
+
+
+// 16. addi R7, R7, 3 						// R7 = 0x97; R7 == 0x94(line 10)
+// 01100 0111 0111 0000000000000000011
+// addi	R7		R7		0x3
+// 63B80003
+
+
+// 17. neg 	R7, R7 							// R7 = 0xFFFFFF69; R7 == 0x97(line 16)
+// 10001 0111 0111 0000000000000000000
+// neg	R7		R7		--
+// 8BB80000
+
+
+// 18. not 	R7, R7 							// R7 = 0x96; R7 == 0xFFFFFF69 (line 17)
+// 10010 0111 0111 0000000000000000000
+// not	R7		R7		--
+// 93B80000
+
+
+// 19. andi R7, R7, 0xF 					// R7 = 6; R7 == 0x96(line 18) 
+// 01101 0111 0111 0000000000000001111
+// andi	R7		R7		0xF
+// 6BB8000F
+
+
+// 20. ror 	R1, R0, R3 						// R1 = 0x80000006; R0 == 0x34(line 5), R3 == 0x3(line 6) VERIFIED
+// 01000 0001 0000 0011 000000000000000
+// ror	R1		R0		R3		--
+// 40818000
+
+
+// 21. ori 	R7, R1, 9 						// R7 = 0x8000000F; R1 == 0x80000006(line 20) VERIFIED
+// 01110 0111 0001 0000000000000001001
+// ori	R7		R1		0x9
+// 73880009
+
+
+// 22. shra R1, R7, R3 						// R1 = 0xF0000001; R7 == 0x8000000F(line 21), R3 == 0x3(line 6) VERIFIED
+// 00110 0001 0111 0011 000000000000000
+// shra	R1		R7		R3		--
+// 30B98000
+
+
+// 23. shr 	R2, R2, R3 						// R2 = 9; R2 == 0x49(line 9), R3 == 0x3(line 6) VERIFIED
+// 00101 0010 0010 0011 000000000000000 
+// shr	R2		R2		R3		--
+// 29118000
+
+
+// 24. st 	0x8E, R2 						 // addr(0x8E)(d142)(actually 143 due to indexing) = 9, new value in memory with address 0x58(should be 0x8E)
+// 00010 0010 0000 0000000000010001110
+// st		R2		R0		0x8E
+// 1100008E
+
+
+// 25. rol 	R2, R0, R3        			// R2 = 0x1A0, R0 = 0x34 (line 5), R3 = 3 (line 6), VERIFIEDs 
+// 01001 0010 0000 0011 000000000000000
+// rol	R2		R0		R3		--
+// 49018000
+
+
+// 26. or 	R4, R3, R0         			// R4 = 0x37, R3 = 3 (line 6), R0 = 0x34 (line 5), VERIFIEDs
+// 01011 0100 0011 0000 000000000000000
+// or		R4		R3		R0		--
+// 5A180000
+
+
+// 27. and 	R1, R2, R0           		// R1 = 0x20, R2 = 0x1A0 (line 25), R0 = 0x34 (line 5), VERIFIEDs
+// 01010 0001 0010 0000 000000000000000
+// and	R1		R2		R0		--
+// 50900000
+
+
+// 28. st 	0x27(R1), R4          		// addr(0x27 + 0x20)(d39 + d32)(is actually 72 due to indexing) = 0x37 new value in memory with address 0x47
+// 00010 0100 0001 0000000000000100111
+// st		R4		R1		0x27
+// 12080027
+
+
+// 29. sub 	R0, R2, R4          			// R0 = 0x169, R2 = 0x1A0 (line 25), R4 = 0x37 (line 26), VERIFIEDs
+// 00100 0000 0010 0100 000000000000000
+// sub	R0		R2		R4		--
+// 20120000
+
+
+// 30. shl 	R1, R2, R3          			// R1 = 0xD00, R2 = 1A0 (line 25), R3 = 3 (line 5), VERIFIEDs
+// 00111 0001 0010 0011 000000000000000
+// shl	R1		R2		R3		--
+// 38918000
+
+
+// 31. ldi 	R4, 6               			// R4 = 6
+// 00001 0100 0000 0000000000000000110
+// ldi	R4		R0		0x6
+// 0A000006
+
+
+// 32. ldi 	R5, 0x1B            			// R5 = 0x1B
+// 00001 0101 0000 0000000000000011011
+// ldi	R5		R0		0x1B
+// 0A80001B
+
+
+// 33. mul 	R5, R4             		 	// HI = 0; LO = 0xA2, R5 = 0x1B (line 32), R4 = 6 (line 31), 0x1B * 6 = 162, VERIFIEDs
+// 01111 0101 0100 0000000000000000000
+// mul	R5		R4		--
+// 7AA00000
+
+
+// 34. mfhi R7                  			// R7 = 0
+// 11000 0111 0000 0000000000000000000
+// mfhi	R7		--		--
+// C3800000
+
+
+// 35. mflo R6                 			// R6 = 0xA2
+// 11001 0110 0000 0000000000000000000
+// mdlo	R6		--		--
+// CB000000
+
+
+// 36. div 	R5, R4              			// HI = 3, LO = 4, R5 = 0x1B (line 32), R4 = 6 (line 31), 0x1B / 6 = 4 Remainder 3, VERIFIEDs
+// 10000 0101 0100 0000000000000000000
+// div	R5		R4		--
+// 82A00000
+
+
+// 37. ldi 	R10, 1(R4)           		// R10 = R4 + 1 = 7, R4 = 6 (line 31), VERIFIEDs, setting up argument registers for R8, R9, R10, and R11
+// 00001 1010 0100 0000000000000000001
+// ldi	R10	R4			0x1
+// 0D200001
+
+
+// 38. ldi 	R11, -2(R5)          		// R11 = R5 + -2 = 0x19, R5 = 0x1B (line 32), VERIFIEDs, setting up argument registers for R8, R9, R10, and R11
+// 00001 1011 0101 1111111111111111110
+// ldi	R11	R5		-2
+// 0DAFFFFE
+
+
+// 39. ldi 	R12, 0(R6)            		// R12 = R6 + 0 = 0xA2, R6 = 0xA2 (line 35), VERIFIEDs
+// 00001 1100 0110 0000000000000000000
+// ldi	R12	R6		0
+// 0E300000
+
+
+// 40. ldi 	R13, 3(R7)            		// R13 = R7 + 3 = 3, R7 = 0 (line 34), VERIFIEDs  // CONFIRMED TO WORK UP TO HERE ------------------------
+// 00001 1101 0111 0000000000000000011
+// ldi	R13	R7		0x3
+// 0EB80003
+
+
+// 41. jal 	R12                  		// R12 = 0xA2 (line 39), address of subroutine subA in R12 - return address in R15
+// 10101 1100 1111 0000000000000000000
+// jal	R12	R15		--
+// AE780000
+
+
+// 42. in	R4									// R4 = 0x80 (input is taken from hardware switches set to 0b1000 0000)
+// 10110 0100 0000 0000000000000000000
+// in		R4		--			--
+// B2000000
+
+
+// 43. st 	0xAA, R4							// stores switch pattern for future use
+// 00010 0100 0000 0000000000010101010
+// st		R4		R0		0xAA
+// 120000AA
+
+
+// 44. ldi	R1, 0x2E							// R1 = 0x2E(d46)(address of 'loop', actually 47 due to indexing)
+// 00001 0001 0000 0000000000000101110
+// ldi	R1		R0		0x2E
+// 0880002E
+
+
+// 45. ldi	R7, 1								// R7 = 0x1, used for future operations
+// 00001 0111 0000 0000000000000000001
+// ldi	R7		R0		1
+// 0B800001
+
+
+// 46. ldi	R5, 40							// counter of how many times to run both loops
+// 00001 0101 0000 0000000000000101000
+// ldi	R5		R0		40
+// 0A800028
+
+
+// loop: 										// code for 'loop'
+// 47. out	R4									// display to seven-seg displays
+// 10111	0100 0000 0000000000000000000
+// out	R4		--			--
+// BA000000
+
+
+// 48. ldi	R5, -1(R5)						// decrement loop counter
+// 00001 0101 0101 1111111111111111111
+// ldi	R5		R5		-1
+// 0AAFFFFF
+
+
+// 49. brzr	R5, 8								// branch to done if loop counter complete
+// 10011 0101 0000 0000000000000001000
+// br		R5		=0		8
+// 9A800008
+
+
+// 50. ld	R6, 0xF0							// R6 = 0xFFFF, 0xFFFF is stored at mem. addr. 0xF0(d240)(actually 241 due to indexing)
+// 00000 0110 0000 0000000000011110000
+// ld		R6		R0		0xF0
+// 030000F0
+
+
+// loop2:										// code for 'loop 2'
+// 51. ldi	R6, -1(R6)						// decrement R6
+// 00001 0110 0110 1111111111111111111
+// ldi	R6		R6		-1
+// 0B37FFFF
+
+
+// 52. nop										// do nothing so loop 2 takes longer to run, allowing for a longer delay before seven-seg display changes value
+// 11010 0000 0000 0000000000000000000
+// nop	--		--		--
+// D0000000
+
+
+
+// 53. brnz	R6, -3							// branch back to 'loop 2' if delay is not done yet
+// 10011 0110 0001 1111111111111111101
+// br		R6		!=0	-3
+// 9B0FFFFD
+
+
+// 54. shr	R4, R4, R7						// right-shift R4 by 1 to change value to be sent to seven-seg display
+// 00101 0100 0100 0111 000000000000000
+// shr	R4		R4		R7		--
+// 2A238000
+
+
+// 55. brnz	R4, -9							// branch back to display new shifted number unless it is zero
+// 10011 0100 0001 1111111111111110111
+// br		R4		!=0	-9
+// 9A0FFFF7
+
+
+// 56. ld	R4, 0xAA							// R4 = 0x80, restore original switch pattern for one more cycle
+// 00000 0100 0000 0000000000010101010
+// ld		R4		R0		0xAA
+// 020000AA
+
+
+// 57. jr	R1									// branch back to 'loop' for final cycle
+// 10100 0001 0000 0000000000000000000
+// jr		R1		--			--
+// A0800000
+
+
+// done:											// code will branch here from line 49 if loop counter is completed
+// 58. ldi	R4, 0x55							// R4 = 0x55, load final seven-seg pattern
+// 00001 0100 0000 0000000000001010101
+// ldi	R4		R0		0x55
+// 0A000055
+
+
+// 59. out	R4									// output 0x55 to seven-seg display
+// 10111 0100 0000 0000000000000000000
+// out	R4		--			--
+// BA000000
+
+
+// 60. halt                    			// program halts
+// 11011 0000 0000 0000000000000000000
+// halt	--		--		--
+// D8000000
+
+
+
+
+// subA: ORG 0xA2 procedure subA is at address 0xA2(d162)(actually 163 due to indexing)
+// 163. add 	R9, R10, R12        		// R9 = 0xA9, R10 = 7 (line 37), R12 = 0xA2 (line 39), VERIFIEDs, R9 value gets returned because R8 and R9 are return value registers
+// 00011 1001 1010 1100 000000000000000
+// add	R9	  R10	 R12		--
+// 1CD60000
+
+
+// 164. sub 	R8, R11, R13        		// R8 = 0x16, R11 = 0x19 (line 38), R13 = 3 (line 40), VERIFIEDs, R8 gets returned 
+// 00100 1000 1011 1101 000000000000000
+// sub	R8	  R11  R13		--
+// 245E8000
+
+
+// 165. sub 	R9, R9, R8          		// final R9 = 0x93, initial R9 = 0xA9 (line 43), R8 = 0x16 (line 44), VERIFIEDs
+// 00100 1001 1001 1000 000000000000000
+// sub	R9   R9	 R8		--
+// 24CC0000
+
+
+// 166. jr 		R15                 		// Return from procedure by jumping to return address at r15
+// 10100 1111 0000 0000000000000000000
+// jr		R15	--		--
+// A7800000
+

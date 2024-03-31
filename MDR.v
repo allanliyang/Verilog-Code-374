@@ -1,0 +1,26 @@
+// only used for MDR register due to extra inputs
+
+module MDR (
+	
+	input clear, clock, MDRin, read, // extra signal for MDMux select, see Phase 1 documentation
+	input [31:0]BusMuxOut,
+	input [31:0]Mdatain, 				//MDR register has extra Mdatain input
+	output wire [31:0]BusMuxIn
+);
+
+reg [31:0]q;
+
+initial q = 32'h00000000;
+
+always @ (posedge clock)
+		begin
+			if (MDRin) begin
+				if (read) q <= Mdatain;
+				else q <= BusMuxOut;
+			end
+			else if (clear) begin
+				q <= 32'h0000000;
+			end			
+		end
+	assign BusMuxIn = q;
+endmodule
