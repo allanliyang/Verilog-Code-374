@@ -1,0 +1,308 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Verilog-Code-374/simulation/modelsim
+vALU
+Z1 !s110 1711386832
+!i10b 1
+!s100 o4=:8l`EgIhBAmjDB<`Mi3
+IKQ7J]B:Mk4c@f5N9DgU`>2
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1710618128
+8D:/Verilog-Code-374/ALU.v
+FD:/Verilog-Code-374/ALU.v
+L0 20
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1711386832.000000
+!s107 D:/Verilog-Code-374/ALU.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/ALU.v|
+!i113 1
+Z5 o-vlog01compat -work work
+Z6 !s92 -vlog01compat -work work +incdir+D:/Verilog-Code-374
+Z7 tCvgOpt 0
+n@a@l@u
+vBus
+Z8 !s110 1711386834
+!i10b 1
+!s100 jl>m6>^DK18=H_C1Lh<n:0
+IWJZZ[0_`lBeK`V>4nEno82
+R2
+R0
+w1710631682
+8D:/Verilog-Code-374/Bus.v
+FD:/Verilog-Code-374/Bus.v
+L0 1
+R3
+r1
+!s85 0
+31
+Z9 !s108 1711386834.000000
+!s107 D:/Verilog-Code-374/Bus.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/Bus.v|
+!i113 1
+R5
+R6
+R7
+n@bus
+vConFFLogic
+Z10 !s110 1711386833
+!i10b 1
+!s100 HJK8=_ciT72LVSHeHneYR2
+Ig92ECdgbRX?=>hi4ZG3^W1
+R2
+R0
+w1710783678
+8D:/Verilog-Code-374/ConFFLogic.v
+FD:/Verilog-Code-374/ConFFLogic.v
+L0 2
+R3
+r1
+!s85 0
+31
+Z11 !s108 1711386833.000000
+!s107 D:/Verilog-Code-374/ConFFLogic.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/ConFFLogic.v|
+!i113 1
+R5
+R6
+R7
+n@con@f@f@logic
+vControlUnit
+R8
+!i10b 1
+!s100 bRPchC3GT<=RmThmfZ[Gh2
+IK^1_mQEcdI;ifCnYj;k852
+R2
+R0
+w1711002350
+8D:/Verilog-Code-374/ControlUnit.v
+FD:/Verilog-Code-374/ControlUnit.v
+L0 3
+R3
+r1
+!s85 0
+31
+R11
+!s107 D:/Verilog-Code-374/ControlUnit.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/ControlUnit.v|
+!i113 1
+R5
+R6
+R7
+n@control@unit
+vDatapath
+R10
+!i10b 1
+!s100 j:PSYaSJl4Z@_lJJiM@5R2
+ICd?9DHi4bSDAzE_YL6JZI3
+R2
+R0
+w1710995382
+8D:/Verilog-Code-374/Datapath.v
+FD:/Verilog-Code-374/Datapath.v
+L0 1
+R3
+r1
+!s85 0
+31
+R11
+!s107 D:/Verilog-Code-374/Datapath.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/Datapath.v|
+!i113 1
+R5
+R6
+R7
+n@datapath
+vdatapath_tb
+R8
+!i10b 1
+!s100 QonoV;6S6idU;MnNzUEK^3
+IDGKH:_XTM6IH3nJYX7L9`2
+R2
+R0
+w1710990780
+8D:/Verilog-Code-374/datapath_tb.v
+FD:/Verilog-Code-374/datapath_tb.v
+L0 5
+R3
+r1
+!s85 0
+31
+R9
+!s107 D:/Verilog-Code-374/datapath_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/datapath_tb.v|
+!i113 1
+R5
+R6
+R7
+vInPort
+R1
+!i10b 1
+!s100 iVP1F`XoJG52]dN^_TX:R1
+Io5gz[BONPVLYW<k0E<=zV1
+R2
+R0
+w1710618118
+8D:/Verilog-Code-374/InPort.v
+FD:/Verilog-Code-374/InPort.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Verilog-Code-374/InPort.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/InPort.v|
+!i113 1
+R5
+R6
+R7
+n@in@port
+vMAR
+R1
+!i10b 1
+!s100 Z6KK=TjioX_[DI;e^BA@n1
+I7HdjCK58WCGoc5nlEY45i2
+R2
+R0
+w1710618112
+8D:/Verilog-Code-374/MAR.v
+FD:/Verilog-Code-374/MAR.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Verilog-Code-374/MAR.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/MAR.v|
+!i113 1
+R5
+R6
+R7
+n@m@a@r
+vMDR
+R1
+!i10b 1
+!s100 lfn8iOjoiR6kIM[TJ<5i:1
+IDVhD7zz0X:`7:ZPngCeAi3
+R2
+R0
+w1710618100
+8D:/Verilog-Code-374/MDR.v
+FD:/Verilog-Code-374/MDR.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Verilog-Code-374/MDR.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/MDR.v|
+!i113 1
+R5
+R6
+R7
+n@m@d@r
+vR0
+Z12 !s110 1711386831
+!i10b 1
+!s100 MQh0[2VR317JfLjEGUPXB3
+IM[`oVOBTYFeKjJ>OZ7]863
+R2
+R0
+w1710996448
+8D:/Verilog-Code-374/R0.v
+FD:/Verilog-Code-374/R0.v
+L0 3
+R3
+r1
+!s85 0
+31
+Z13 !s108 1711386831.000000
+!s107 D:/Verilog-Code-374/R0.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/R0.v|
+!i113 1
+R5
+R6
+R7
+n@r0
+vRAM
+R8
+!i10b 1
+!s100 D;H<XFPh7Z?`:mEYUh3MS1
+IKXgUKS^f<Y4E3a>FSJ<ec2
+R2
+R0
+w1711381020
+8D:/Verilog-Code-374/RAM.v
+FD:/Verilog-Code-374/RAM.v
+L0 1
+R3
+r1
+!s85 0
+31
+R9
+!s107 D:/Verilog-Code-374/RAM.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/RAM.v|
+!i113 1
+R5
+R6
+R7
+n@r@a@m
+vRegister32bit
+R12
+!i10b 1
+!s100 zfDT]Hd0M[1lS_Qn91mga3
+IJQ0PT41o`PmfZ3Koe:_e`0
+R2
+R0
+w1710618072
+8D:/Verilog-Code-374/register32bit.v
+FD:/Verilog-Code-374/register32bit.v
+L0 1
+R3
+r1
+!s85 0
+31
+R13
+!s107 D:/Verilog-Code-374/register32bit.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/register32bit.v|
+!i113 1
+R5
+R6
+R7
+n@register32bit
+vSelectEncode
+R10
+!i10b 1
+!s100 mTzlK935iig;lDi9T>4Jo1
+I]OOeXhfa;a3PbNno56<303
+R2
+R0
+w1710618188
+8D:/Verilog-Code-374/SelectEncode.v
+FD:/Verilog-Code-374/SelectEncode.v
+L0 1
+R3
+r1
+!s85 0
+31
+R11
+!s107 D:/Verilog-Code-374/SelectEncode.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Verilog-Code-374|D:/Verilog-Code-374/SelectEncode.v|
+!i113 1
+R5
+R6
+R7
+n@select@encode
