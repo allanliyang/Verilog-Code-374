@@ -1,5 +1,5 @@
 Flow report for CPUPhase4
-Sun Mar 31 16:54:22 2024
+Wed Apr 03 23:01:12 2024
 Quartus Prime Version 18.1.1 Build 646 04/11/2019 SJ Lite Edition
 
 
@@ -41,7 +41,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Flow Summary                                                              ;
 +-----------------------------+---------------------------------------------+
-; Flow Status                 ; Successful - Sun Mar 31 16:54:22 2024       ;
+; Flow Status                 ; Successful - Wed Apr 03 23:01:12 2024       ;
 ; Quartus Prime Version       ; 18.1.1 Build 646 04/11/2019 SJ Lite Edition ;
 ; Revision Name               ; CPUPhase4                                   ;
 ; Top-level Entity Name       ; Datapath                                    ;
@@ -63,7 +63,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/31/2024 16:54:15 ;
+; Start date & time ; 04/03/2024 23:01:05 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; CPUPhase4           ;
 +-------------------+---------------------+
@@ -74,7 +74,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                      ; Value                                  ; Default Value ; Entity Name ; Section Id                        ;
 +--------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 233497588910532.171191845509708        ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID                ; 233497588910532.171219966529936        ; --            ; --          ; --                                ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --          ; datapath_tb                       ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --          ; eda_board_design_boundary_scan    ;
@@ -106,8 +106,8 @@ https://fpgasoftware.intel.com/eula.
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name            ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Elaboration ; 00:00:07     ; 1.0                     ; 4774 MB             ; 00:00:15                           ;
-; Total                  ; 00:00:07     ; --                      ; --                  ; 00:00:15                           ;
+; Analysis & Elaboration ; 00:00:08     ; 1.0                     ; 4773 MB             ; 00:00:16                           ;
+; Total                  ; 00:00:08     ; --                      ; --                  ; 00:00:16                           ;
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

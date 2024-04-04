@@ -77,7 +77,11 @@ wire OutPortin;
 wire [31:0] Yout;
 wire [31:0] Chigh, Clow;
 
+// interal divided clock connection
+//wire clock;
 
+// Clock Divider
+//ClockDivider CD(clock, clockUNDIV);
 
 // REGISTERS
 // R0 - R15
@@ -213,7 +217,8 @@ ControlUnit CU	(clear,
 					ConIn,
 					OutPortin, InPortout,
 					IRout,
-					clock, reset, stop, ConFFQ
+					clock, reset, stop, ConFFQ,
+					clearCU
 					);
 
 

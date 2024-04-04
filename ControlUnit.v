@@ -30,15 +30,11 @@ module ControlUnit (
 	
 	// NOTE: Try switching order of ins and outs
 	input [31:0] IR,
-	input clock, reset, stop, ConFFQ
+	input clock, reset, stop, ConFFQ,
+	input clearCU // newly added in Phase 4, used to reset control signals since delays are unsythesizable
 	
 	// no other input for this control unit, i.e. no interrupt functionality
-	
-	
-
-	// NOTE: Check if all signals have been added
 );
-
 
 
 	// definitions for various states and control sequences
@@ -92,15 +88,21 @@ module ControlUnit (
 	reg [7:0]present_state = 8'b11111111;
 	reg run = 1;
 	
-					
-	always @ (negedge clock, posedge reset) begin
+	
+	always @ (posedge reset, posedge stop) begin
 		
-			
+		
+		
+	end
+	
+	
+	always @ (negedge clock) begin
+		
 		if (reset == 1'b1) begin // check for reset case
 			present_state = reset_state;
 		end
 		
-		else begin // check other cases
+		else begin
 			
 			case (present_state)
 				8'b11111111 :	present_state = reset_state;
@@ -262,14 +264,43 @@ module ControlUnit (
 				HALT_T3 : present_state = HALT_T3 ;// CHECK WHAT TO DO HERE
 				
 			endcase
+		
 		end
+	
 	end
 	
 	
-	always @ (present_state) begin
+	always @ (present_state, clearCU) begin
 	
 	
 		if (run) begin // only change state if program is supposed to be running
+			
+			// initially reset all signals to 0
+			// all others signals get reset to 0
+			MEMread <= 0; MEMwrite <= 0;
+			Rin <= 0; Rout <= 0; BAout <= 0; Gra <= 0; Grb <= 0; Grc <= 0;
+						
+			// ALU control signals
+			ADD <= 0; SUB <= 0; MUL <= 0; DIV <= 0;
+			AND <= 0; OR <= 0;
+			SHR <= 0; SHRA <= 0; SHL <= 0;
+			ROR <= 0; ROL <= 0;
+			NEG <= 0; NOT <= 0;
+			IncPC <= 0;
+						
+			// specialty register control signals
+			PCin <= 0; PCout <= 0; IRin <= 0;
+			MDRin <= 0; MDRout <= 0; MARin <= 0; 
+			Zhighin <= 0; Zlowin <= 0; Zhighout <= 0; Zlowout <= 0;
+			HIin <= 0; LOin <= 0; HIout <= 0; LOout <= 0;
+			CSEout <= 0;
+			Yin <= 0;
+			ConIn <= 0;
+			OutPortin <= 0; InPortout <= 0;
+						
+			clear <= 0;
+				
+				
 				case (present_state) 
 				
 					reset_state : begin
@@ -298,23 +329,21 @@ module ControlUnit (
 						ConIn <= 0;
 						OutPortin <= 0; InPortout <= 0;
 						
-						#15 clear <= 0;
-						
 					end
 				
 					T0 : begin
 						PCout <= 1; MARin <= 1; IncPC <= 1; Zlowin <= 1;
-						#15 PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
+						//if (clearCU) PCout <= 0; MARin <= 0; IncPC <= 0; Zlowin <= 0;
 					end
 				
 					T1 : begin
 						Zlowout <= 1; PCin <= 1; MEMread <= 1; MDRin <= 1;
-						#15 Zlowout <= 0; PCin <= 0; MEMread <= 0; MDRin <= 0;
+						//#15 Zlowout <= 0; PCin <= 0; MEMread <= 0; MDRin <= 0;
 					end
 					
 					T2 : begin
 						MDRout <= 1; IRin <= 1;
-						#15 MDRout <= 0; IRin <= 0;
+						//#15 MDRout <= 0; IRin <= 0;
 					end
 				
 				
@@ -322,66 +351,66 @@ module ControlUnit (
 					// LD
 					LD_T3 : begin
 						Grb <= 1; BAout <= 1; Yin <= 1;
-						#15 Grb <= 0; BAout <= 0; Yin <= 0;
+						//#15 Grb <= 0; BAout <= 0; Yin <= 0;
 					end
 					
 					LD_T4 : begin
 						CSEout <= 1; ADD <= 1; Zlowin <= 1;
-						#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
+						//#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 					end
 					
 					LD_T5 : begin
 						Zlowout <= 1; MARin <= 1;
-						#15 Zlowout <= 0; MARin <= 0; 
+						//#15 Zlowout <= 0; MARin <= 0; 
 					end
 					
 					LD_T6 : begin
 						MEMread <= 1; MDRin <= 1;
-						#15 MEMread <= 0; MDRin <= 0;
+						//#15 MEMread <= 0; MDRin <= 0;
 					end
 					
 					LD_T7 : begin
 						MDRout <= 1; Gra <= 1; Rin <= 1;
-						#15 MDRout <= 0; Gra <= 0; Rin <= 0;
+						//#15 MDRout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// LDI
 					LDI_T3 : begin
 						Grb <= 1; BAout <= 1; Yin <= 1;
-						#15 Grb <= 0; BAout <= 0; Yin <= 0;
+						//#15 Grb <= 0; BAout <= 0; Yin <= 0;
 					end
 					
 					LDI_T4 : begin
 						CSEout <= 1; ADD <= 1; Zlowin <= 1;
-						#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
+						//#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 					end
 					
 					LDI_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 					
 				
 					// ST
 					ST_T3 : begin
 						Grb <= 1; BAout <= 1; Yin <= 1;
-						#15 Grb <= 0; BAout <= 0; Yin <= 0;
+						//#15 Grb <= 0; BAout <= 0; Yin <= 0;
 					end
 					
 					ST_T4 : begin
 						CSEout <= 1; ADD <= 1; Zlowin <= 1;
-						#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
+						//#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 					end
 					
 					ST_T5 : begin
 						Zlowout <= 1; MARin <= 1;
-						#15 Zlowout <= 0; MARin <= 0;
+						//#15 Zlowout <= 0; MARin <= 0;
 					end
 					
 					ST_T6 : begin
 						Gra <= 1; Rout <= 1; MEMwrite <= 1;
-						#15 Gra <= 0; Rout <= 0; MEMwrite <= 0;
+						//#15 Gra <= 0; Rout <= 0; MEMwrite <= 0;
 					end
 				
 				
@@ -390,272 +419,272 @@ module ControlUnit (
 					// ADD
 					ADD_T3 : begin 
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					ADD_T4 : begin 
 						Grc <= 1; Rout <= 1; ADD <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 0; ADD <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 0; ADD <= 0; Zlowin <= 0;
 					end
 					
 					ADD_T5 : begin 
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 					
 				
 					// ADDI
 					ADDI_T3 : begin 
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					ADDI_T4 : begin 
 						CSEout <= 1; ADD <= 1; Zlowin <= 1;
-						#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
+						//#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 					end
 					
 					ADDI_T5 : begin 
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// SUB
 					SUB_T3 : begin 
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					SUB_T4 : begin 
 						Grc <= 1; Rout <= 1; SUB <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 1; SUB <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 1; SUB <= 0; Zlowin <= 0;
 					end
 					
 					SUB_T5 : begin 
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 					
 					
 					// MUL
 					MUL_T3 : begin
 						Gra <= 1; Rout <= 1; Yin <= 1;
-						#15 Gra <= 0; Rout <= 0; Yin <= 0;
+						//#15 Gra <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					MUL_T4 : begin
 						Grb <= 1; Rout <= 1; MUL <= 1; Zlowin <= 1; Zhighin <= 1;
-						#15 Grb <= 0; Rout <= 0; MUL <= 0; Zlowin <= 0; Zhighin <= 0;
+						//#15 Grb <= 0; Rout <= 0; MUL <= 0; Zlowin <= 0; Zhighin <= 0;
 					end
 					
 					MUL_T5 : begin
 						Zlowout <= 1; LOin <= 1;
-						#15 Zlowout <= 0; LOin <= 0;
+						//#15 Zlowout <= 0; LOin <= 0;
 					end
 					
 					MUL_T6 : begin
 						Zhighout <= 1; HIin <= 1;
-						#15 Zhighout <= 0; HIin <= 0;
+						//#15 Zhighout <= 0; HIin <= 0;
 					end
 				
 				
 					// DIV
 					DIV_T3 : begin
 						Gra <= 1; Rout <= 1; Yin <= 1;
-						#15 Gra <= 0; Rout <= 0; Yin <= 0;
+						//#15 Gra <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					DIV_T4 : begin
 						Grb <= 1; Rout <= 1; DIV <= 1; Zhighin <= 1; Zlowin <= 1;
-						#15 Grb <= 0; Rout <= 0; DIV <= 0; Zhighin <= 1; Zlowin <= 0;
+						//#15 Grb <= 0; Rout <= 0; DIV <= 0; Zhighin <= 1; Zlowin <= 0;
 					end
 					
 					DIV_T5 : begin
 						Zlowout <= 1; LOin <= 1;
-						#15 Zlowout <= 0; LOin <= 0;
+						//#15 Zlowout <= 0; LOin <= 0;
 					end
 					
 					DIV_T6 : begin
 						Zhighout <= 1; HIin <= 1;
-						#15 Zhighout <= 0; HIin <= 0;
+						//#15 Zhighout <= 0; HIin <= 0;
 					end
 					
 					
 					// AND
 					AND_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					AND_T4 : begin
 						Grc <= 1; Rout <= 1; AND <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 0; AND <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 0; AND <= 0; Zlowin <= 0;
 					end
 					
 					AND_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// ANDI
 					ANDI_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					ANDI_T4 : begin
 						CSEout <= 1; AND <= 1; Zlowin <= 1;
-						#15 CSEout <= 0; AND <= 0; Zlowin <= 0;
+						//#15 CSEout <= 0; AND <= 0; Zlowin <= 0;
 					end
 					
 					ANDI_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// OR
 					OR_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					OR_T4 : begin
 						Grc <= 1; Rout <= 1; OR <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 0; OR <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 0; OR <= 0; Zlowin <= 0;
 					end
 					
 					OR_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// ORI
 					ORI_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					ORI_T4 : begin
 						CSEout <= 1; OR <= 1; Zlowin <= 1;
-						#15 CSEout <= 0; OR <= 0; Zlowin <= 0;
+						//#15 CSEout <= 0; OR <= 0; Zlowin <= 0;
 					end
 					
 					ORI_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// SHR
 					SHR_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					SHR_T4 : begin
 						Grc <= 1; Rout <= 1; SHR <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 0; SHR <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 0; SHR <= 0; Zlowin <= 0;
 					end
 					
 					SHR_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// SHRA
 					SHRA_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					SHRA_T4 : begin
 						Grc <= 1; Rout <= 1; SHRA <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 0; SHRA <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 0; SHRA <= 0; Zlowin <= 0;
 					end
 					
 					SHRA_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// SHL
 					SHL_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					SHL_T4 : begin
 						Grc <= 1; Rout <= 1; SHL <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 0; SHL <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 0; SHL <= 0; Zlowin <= 0;
 					end
 					
 					SHL_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// ROR
 					ROR_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					ROR_T4 : begin
 						Grc <= 1; Rout <= 1; ROR <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 0; ROR <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 0; ROR <= 0; Zlowin <= 0;
 					end
 					
 					ROR_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 					
 				
 					// ROL
 					ROL_T3 : begin
 						Grb <= 1; Rout <= 1; Yin <= 1;
-						#15 Grb <= 0; Rout <= 0; Yin <= 0;
+						//#15 Grb <= 0; Rout <= 0; Yin <= 0;
 					end
 					
 					ROL_T4 : begin
 						Grc <= 1; Rout <= 1; ROL <= 1; Zlowin <= 1;
-						#15 Grc <= 0; Rout <= 0; ROL <= 0; Zlowin <= 0;
+						//#15 Grc <= 0; Rout <= 0; ROL <= 0; Zlowin <= 0;
 					end
 					
 					ROL_T5 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// NEG
 					NEG_T3 : begin
 						Grb <= 1; Rout <= 1; NEG <= 1; Zlowin <= 1;
-						#15 Grb <= 0; Rout <= 0; NEG <= 0; Zlowin <= 0;
+						//#15 Grb <= 0; Rout <= 0; NEG <= 0; Zlowin <= 0;
 					end
 					
 					NEG_T4 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
 					// NOT
 					NOT_T3 : begin
 						Grb <= 1; Rout <= 1; NOT <= 1; Zlowin <= 1;
-						#15 Grb <= 0; Rout <= 0; NOT <= 0; Zlowin <= 0;
+						//#15 Grb <= 0; Rout <= 0; NOT <= 0; Zlowin <= 0;
 					end
 					
 					NOT_T4 : begin
 						Zlowout <= 1; Gra <= 1; Rin <= 1;
-						#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
+						//#15 Zlowout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
@@ -663,17 +692,17 @@ module ControlUnit (
 					// BRANCH instruction
 					BR_T3  : begin
 						Gra <= 1; Rout <= 1; ConIn <= 1;
-						#15 Gra <= 0; Rout <= 0; ConIn <= 0;
+						//#15 Gra <= 0; Rout <= 0; ConIn <= 0;
 					end
 					
 					BR_T4  : begin
 						PCout <= 1; Yin <= 1;
-						#15 PCout <= 0; Yin <= 0;
+						//#15 PCout <= 0; Yin <= 0;
 					end
 					
 					BR_T5  : begin
 						CSEout <= 1; ADD <= 1; Zlowin <= 1;
-						#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
+						//#15 CSEout <= 0; ADD <= 0; Zlowin <= 0;
 					end
 					
 					BR_T6  : begin
@@ -683,7 +712,7 @@ module ControlUnit (
 							PCin <= 1;
 						end
 						
-						#15 Zlowout <= 0; PCin <= 0;
+						//#15 Zlowout <= 0; PCin <= 0;
 					end
 				
 				
@@ -691,18 +720,18 @@ module ControlUnit (
 					// JUMP instructions
 					JR_T3 : begin
 						Gra <= 1; Rout <= 1; PCin <= 1;
-						#15 Gra <= 0; Rout <= 0; PCin <= 0;
+						//#15 Gra <= 0; Rout <= 0; PCin <= 0;
 					end
 					
 					// JAL
 					JAL_T3 : begin
 						PCout <= 1; Grb <= 1; Rin <= 1;
-						#15 PCout <= 0; Grb <= 0; Rin <= 0;
+						//#15 PCout <= 0; Grb <= 0; Rin <= 0;
 					end
 					
 					JAL_T4 : begin
 						Gra <= 1; Rout <= 1; PCin <= 1;
-						#15 Gra <= 0; Rout <= 0; PCin <= 0;
+						//#15 Gra <= 0; Rout <= 0; PCin <= 0;
 					end
 				
 				
@@ -715,27 +744,27 @@ module ControlUnit (
 					
 					IN_T4 : begin
 						InPortout <= 1; Gra <= 1; Rin <= 1;
-						#15 InPortout <= 0; Gra <= 0; Rin <= 0;
+						//#15 InPortout <= 0; Gra <= 0; Rin <= 0;
 					end
 					
 					
 					// OUT
 					OUT_T3 : begin
 						Gra <= 1; Rout <= 1; OutPortin <= 1;
-						#15 Gra <= 0; Rout <= 0; OutPortin <= 0;
+						//#15 Gra <= 0; Rout <= 0; OutPortin <= 0;
 					end
 					
 					
 					// MFHI
 					MFHI_T3 : begin
 						HIout <= 1; Gra <= 1; Rin <= 1;
-						#15 HIout <= 0; Gra <= 0; Rin <= 0;
+						//#15 HIout <= 0; Gra <= 0; Rin <= 0;
 					end
 					
 					// MFLO
 					MFLO_T3 : begin
 						LOout <= 1; Gra <= 1; Rin <= 1;
-						#15 LOout <= 0; Gra <= 0; Rin <= 0;
+						//#15 LOout <= 0; Gra <= 0; Rin <= 0;
 					end
 				
 				
@@ -752,8 +781,10 @@ module ControlUnit (
 					end
 						
 				endcase
+		
+		end		
 			
-			end
 	end
+	
 	
 endmodule
