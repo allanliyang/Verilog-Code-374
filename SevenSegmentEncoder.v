@@ -19,7 +19,7 @@ always @ (*) begin
 		8'h01 : encodedValue <= 16'b0000000000000110;
 		8'h55 : encodedValue <= 16'b0110110101101101;
 		
-		default : encodedValue <= 16'b0111011100111000; // only shows up in wrong c
+		default : encodedValue <= 16'b0111011100111000; // only shows up in wrong case (0xAL)
 	
 	endcase
 	
